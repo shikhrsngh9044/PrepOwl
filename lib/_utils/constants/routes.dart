@@ -1,7 +1,6 @@
 import 'package:get/get_navigation/get_navigation.dart';
-
-import '../../modules/home/view/home_page.dart';
-import '../../welcome.dart';
+import 'package:prepowl/modules/login/view/login_screen.dart';
+import '../../modules/welcome/welcome.dart';
 
 class RouteNames {
   static const String loginPage = "/login";
@@ -13,9 +12,9 @@ class RouteNames {
 
 final publicPages = [
   GetPage(name: '/', page: () => const Welcome()),
-  // GetPage(name: '/', page: () => const Login()),
+  GetPage(name: '/', page: () => const LoginPageScreen()),
 ];
 
 final authorizedPages = [
-  GetPage(name: RouteNames.homePage, page: () => const HomePage()),
+  GetPage(name: RouteNames.homePage, page: () => const Welcome()),
 ];
