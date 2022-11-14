@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:prepowl/_utils/configs/theme_config.dart';
+import '../../../../_utils/configs/theme_config.dart';
 
 class SocalIcon extends StatelessWidget {
   final String? iconSrc;

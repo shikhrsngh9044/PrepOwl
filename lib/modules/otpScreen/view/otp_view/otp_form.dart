@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:prepowl/modules/welcome/welcome.dart';
+import '../../../welcome/welcome.dart';
 
 import '../../../../_utils/configs/theme_config.dart';
 import '../../../../_utils/constants/string_constants.dart';

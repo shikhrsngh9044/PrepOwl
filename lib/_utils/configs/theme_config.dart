@@ -283,7 +283,7 @@ extension TextStyleX on TextStyle {
 }
 
 final otpInputDecoration = InputDecoration(
-  contentPadding: EdgeInsets.symmetric(vertical: 15),
+  contentPadding: const EdgeInsets.symmetric(vertical: 15),
   border: outlineInputBorder(),
   focusedBorder: outlineInputBorder(),
   enabledBorder: outlineInputBorder(),
@@ -292,6 +292,6 @@ final otpInputDecoration = InputDecoration(
 OutlineInputBorder outlineInputBorder() {
   return OutlineInputBorder(
     borderRadius: BorderRadius.circular(15),
-    borderSide: BorderSide(color: AppTheme.primaryColorLight),
+    borderSide: const BorderSide(color: AppTheme.primaryColorLight),
   );
 }

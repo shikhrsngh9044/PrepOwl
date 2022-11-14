@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'loginScreenUI/login_top_image.dart';
-import 'loginScreenUI/mobile_login_form.dart';
-import 'socialScreenUI/socal_sign_up.dart';
+import 'login_screen_ui/login_top_image.dart';
+import 'login_screen_ui/mobile_login_form.dart';
+import 'social_screen_ui/socal_sign_up.dart';
 
 class LoginPageScreen extends StatelessWidget {
   const LoginPageScreen({Key? key}) : super(key: key);
@@ -30,13 +30,13 @@ class MobileSignupScreen extends StatelessWidget {
         const LoginScreenTopImage(),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: const [
-            Spacer(),
+          children: [
+            const Spacer(),
             Expanded(
               flex: 8,
               child: LoginForm(),
             ),
-            Spacer(),
+            const Spacer(),
           ],
         ),
         const SocalLogin()

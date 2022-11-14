@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:prepowl/_utils/res/dimen.dart';
+import '../../../../_utils/res/dimen.dart';
 import '../../../../_utils/configs/theme_config.dart';
 import '../../../../_utils/constants/string_constants.dart';
 import '../../../login/view/login_screen.dart';

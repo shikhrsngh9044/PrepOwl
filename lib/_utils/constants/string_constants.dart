@@ -23,11 +23,13 @@ class AppConst {
   static const phoneNumberText = "Enter your Phone Number";
   static const verfivationCodeText =
       "We will send the 4-digit verification code.";
-  static const genrateOTP = "genrate otp";
+  static const generateOTP = "generate otp";
   static const otpScreen = "OTP Verification";
   static const codeLine = "We sent your code to +1 898 860 ***";
   static const validateOTP = "Verify & Continue";
   static const resendOTP = "Resend OTP Code";
   static const mobile = 'Mobile';
   static const hintText = "Enter Mobile Number";
+  static const emptyMobileNumber = "Please enter mobile number.";
+  static const mobileNumberCount = "Mobile number must be of 10 characters.";
 }

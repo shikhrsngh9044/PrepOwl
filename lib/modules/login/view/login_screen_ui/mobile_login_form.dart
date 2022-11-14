@@ -1,23 +1,52 @@
 import 'package:flutter/material.dart';
-import 'package:prepowl/_utils/configs/theme_config.dart';
-import 'package:prepowl/_utils/res/dimen.dart';
+import 'package:flutter/services.dart';
+import '../../../../_utils/configs/theme_config.dart';
+import '../../../../_utils/helpers/validation.dart';
+import '../../../../_utils/res/dimen.dart';
 import '../../../../_utils/constants/string_constants.dart';
 import '../../../otpScreen/view/otp_screen.dart';
 
 class LoginForm extends StatelessWidget {
-  const LoginForm({
+  LoginForm({
     Key? key,
   }) : super(key: key);
+
+  final _formKey = GlobalKey<FormState>();
+
+  void _onGenerateOTPPressed(BuildContext context) {
+    bool isValidated = _formKey.currentState?.validate() ?? false;
+    if (isValidated) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) {
+            return const OtpScreen();
+          },
+        ),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Form(
+      key: _formKey,
       child: Column(
         children: [
           Center(
-            child: TextField(
+            child: TextFormField(
+              validator: (value) {
+                return Validation.phoneNumberValidation(value);
+              },
+              inputFormatters: [
+                LengthLimitingTextInputFormatter(10),
+                FilteringTextInputFormatter.digitsOnly
+              ],
+              maxLength: 10,
+              keyboardType: TextInputType.number,
               cursorColor: AppTheme.primaryColorLight,
               decoration: InputDecoration(
+                counterText: "",
                 hintText: AppConst.hintText,
                 labelText: AppConst.mobile,
                 labelStyle: const TextStyle(color: AppTheme.primaryColorLight),
@@ -27,6 +56,16 @@ class LoginForm extends StatelessWidget {
                   borderRadius: BorderRadius.circular(AppDimen.size15),
                 ),
                 focusedBorder: OutlineInputBorder(
+                  borderSide: const BorderSide(
+                      width: 3, color: AppTheme.primaryColorLight),
+                  borderRadius: BorderRadius.circular(AppDimen.size15),
+                ),
+                errorBorder: OutlineInputBorder(
+                  borderSide: const BorderSide(
+                      width: 3, color: AppTheme.primaryColorLight),
+                  borderRadius: BorderRadius.circular(AppDimen.size15),
+                ),
+                focusedErrorBorder: OutlineInputBorder(
                   borderSide: const BorderSide(
                       width: 3, color: AppTheme.primaryColorLight),
                   borderRadius: BorderRadius.circular(AppDimen.size15),
@@ -43,7 +82,7 @@ class LoginForm extends StatelessWidget {
               shape: const StadiumBorder(),
             ),
             child: Text(
-              AppConst.genrateOTP.toUpperCase(),
+              AppConst.generateOTP.toUpperCase(),
               style: const TextStyle(
                 color: Colors.white,
                 fontSize: AppDimen.size16,
@@ -51,14 +90,7 @@ class LoginForm extends StatelessWidget {
               ),
             ),
             onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) {
-                    return const OtpScreen();
-                  },
-                ),
-              );
+              _onGenerateOTPPressed(context);
             },
           ),
           const SizedBox(height: AppDimen.size60),

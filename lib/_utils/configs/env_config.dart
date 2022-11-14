@@ -1,4 +1,4 @@
-import 'package:prepowl/_utils/constants/enums.dart';
+import '../constants/enums.dart';
 
 class EnvConfig {
   final String appTitle;

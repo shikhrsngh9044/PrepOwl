@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:prepowl/_utils/constants/asset_constants.dart';
+import '../../../../_utils/constants/asset_constants.dart';
 import 'or_divider.dart';
 import 'social_icon.dart';
 

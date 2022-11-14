@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'view/welcomeScrenUI/background.dart';
-import 'view/welcomeScrenUI/welcome_login_button.dart';
+import 'view/welcome_screen_ui/background.dart';
+import 'view/welcome_screen_ui/welcome_login_button.dart';
 
-import 'view/welcomeScrenUI/welcome_text_image.dart';
+import 'view/welcome_screen_ui/welcome_text_image.dart';
 
 class Welcome extends StatelessWidget {
   const Welcome({Key? key}) : super(key: key);
