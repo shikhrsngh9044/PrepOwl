@@ -281,3 +281,17 @@ extension TextStyleX on TextStyle {
     return copyWith(fontFamily: "Quicksand");
   }
 }
+
+final otpInputDecoration = InputDecoration(
+  contentPadding: const EdgeInsets.symmetric(vertical: 15),
+  border: outlineInputBorder(),
+  focusedBorder: outlineInputBorder(),
+  enabledBorder: outlineInputBorder(),
+);
+
+OutlineInputBorder outlineInputBorder() {
+  return OutlineInputBorder(
+    borderRadius: BorderRadius.circular(15),
+    borderSide: const BorderSide(color: AppTheme.primaryColorLight),
+  );
+}

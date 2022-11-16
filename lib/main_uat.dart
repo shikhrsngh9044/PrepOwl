@@ -13,8 +13,8 @@ import 'package:sentry_flutter/sentry_flutter.dart';
 
 import '_utils/configs/env_config.dart';
 import '_utils/constants/app_constants.dart';
-import 'app.dart';
 import '_utils/firebase/staging/firebase_options.dart';
+import 'app.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
