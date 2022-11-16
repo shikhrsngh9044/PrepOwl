@@ -35,30 +35,39 @@ class OTPScreenTopImage extends StatelessWidget {
           const SizedBox(height: defaultPadding),
           const Text(
             AppConst.codeLine,
+            textAlign: TextAlign.center,
             style: TextStyle(fontSize: AppDimen.size18),
           ),
           const SizedBox(height: defaultPadding),
-          buildTimer(),
-          const SizedBox(height: defaultPadding),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Expanded(
+                child: Text(
+                  AppConst.enterOTP,
+                  textAlign: TextAlign.start,
+                  style: TextStyle(
+                    fontSize: AppDimen.size18,
+                  ),
+                ),
+              ),
+              buildTimer(),
+              const SizedBox(height: defaultPadding),
+            ],
+          ),
         ],
       ),
     );
   }
 
   Widget buildTimer() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        const Text("This code will expired in "),
-        TweenAnimationBuilder(
-          tween: Tween(begin: 90.0, end: 0.0),
-          duration: const Duration(seconds: 90),
-          builder: (_, dynamic value, child) => Text(
-            "00:${value.toInt()}",
-            style: const TextStyle(color: AppTheme.primaryColorLight),
-          ),
-        ),
-      ],
+    return TweenAnimationBuilder(
+      tween: Tween(begin: 90.0, end: 0.0),
+      duration: const Duration(seconds: 90),
+      builder: (_, dynamic value, child) => Text(
+        "00:${value.toInt()}",
+        style: const TextStyle(color: AppTheme.primaryColorLight),
+      ),
     );
   }
 }

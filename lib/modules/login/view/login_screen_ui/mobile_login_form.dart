@@ -46,7 +46,6 @@ class LoginForm extends StatelessWidget {
               keyboardType: TextInputType.number,
               cursorColor: AppTheme.primaryColorLight,
               decoration: InputDecoration(
-                counterText: "",
                 hintText: AppConst.hintText,
                 labelText: AppConst.mobile,
                 labelStyle: const TextStyle(color: AppTheme.primaryColorLight),
@@ -57,7 +56,7 @@ class LoginForm extends StatelessWidget {
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderSide: const BorderSide(
-                      width: 3, color: AppTheme.primaryColorLight),
+                      width: 2, color: AppTheme.primaryColorLight),
                   borderRadius: BorderRadius.circular(AppDimen.size15),
                 ),
                 errorBorder: OutlineInputBorder(
@@ -69,6 +68,21 @@ class LoginForm extends StatelessWidget {
                   borderSide: const BorderSide(
                       width: 3, color: AppTheme.primaryColorLight),
                   borderRadius: BorderRadius.circular(AppDimen.size15),
+                ),
+                prefix: const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: AppDimen.size8),
+                  child: Text(
+                    '(+91)',
+                    style: TextStyle(
+                      fontSize: AppDimen.size20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                suffixIcon: const Icon(
+                  Icons.check_circle,
+                  color: AppTheme.primaryColorLight,
+                  size: AppDimen.size30,
                 ),
               ),
             ),

@@ -25,9 +25,12 @@ class AppConst {
       "We will send the 4-digit verification code.";
   static const generateOTP = "generate otp";
   static const otpScreen = "OTP Verification";
-  static const codeLine = "We sent your code to +1 898 860 ***";
+  static const codeLine =
+      "An OTP has been sent to your Mobile Number 9482912322";
   static const validateOTP = "Verify & Continue";
-  static const resendOTP = "Resend OTP Code";
+  static const enterOTP = "Enter OTP";
+  static const resendOTP = "Resend OTP";
+  static const changenNumber = "Change";
   static const mobile = 'Mobile';
   static const hintText = "Enter Mobile Number";
   static const emptyMobileNumber = "Please enter mobile number.";

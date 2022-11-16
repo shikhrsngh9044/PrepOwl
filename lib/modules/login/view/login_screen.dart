@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'login_screen_ui/login_top_image.dart';
 import 'login_screen_ui/mobile_login_form.dart';
 import 'social_screen_ui/socal_sign_up.dart';

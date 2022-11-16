@@ -125,7 +125,7 @@ class _OtpFormState extends State<OtpForm> {
             ),
           ],
         ),
-        const SizedBox(height: defaultPadding * 2),
+        const SizedBox(height: defaultPadding),
         ElevatedButton(
           style: ElevatedButton.styleFrom(
             padding: const EdgeInsets.symmetric(
