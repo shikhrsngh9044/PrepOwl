@@ -37,17 +37,25 @@ class LoginUI extends StatelessWidget {
                 Text(state.loginDTO?.name ?? ''),
                 Text(state.loginDTO?.email ?? ''),
                 Text(state.loginDTO?.uid ?? ''),
-                IconButton(
-                    onPressed: () {
-                      context.read<LoginBloc>().add(const FacebookLogout());
-                    },
-                    icon: const Icon(Icons.close))
+                Image.network(state.loginDTO?.photoUrl ?? ''),
+                ElevatedButton(
+                  onPressed: () {
+                    context.read<LoginBloc>().add(const FacebookLogout());
+                  },
+                  child: const Text(
+                    "Facebook logout",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                )
               ],
             );
           } else {
             return Center(
-              child: IconButton(
-                icon: const Icon(Icons.mail),
+              child: ElevatedButton(
+                child: const Text(
+                  "Facebook login",
+                  style: TextStyle(color: Colors.white),
+                ),
                 onPressed: () {
                   context.read<LoginBloc>().add(const FacebookLogin());
                 },
