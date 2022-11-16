@@ -12,7 +12,7 @@ class RouteNames {
 
 final publicPages = [
   GetPage(name: '/', page: () => const Welcome()),
-  GetPage(name: '/', page: () => const LoginPageScreen()),
+  GetPage(name: '/', page: () => const LoginUiScreen()),
 ];
 
 final authorizedPages = [

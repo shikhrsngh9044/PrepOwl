@@ -5,7 +5,7 @@ class Validation {
     String phoneNumber = text ?? '';
     if (phoneNumber.trim().isEmpty) {
       return AppConst.emptyMobileNumber;
-    } else if (phoneNumber.trim().length < 10) {
+    } else if (phoneNumber.trim().length < 13) {
       return AppConst.mobileNumberCount;
     }
     return null;
