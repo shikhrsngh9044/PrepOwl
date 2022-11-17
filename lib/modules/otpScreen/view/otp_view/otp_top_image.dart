@@ -2,14 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../../../_utils/constants/asset_constants.dart';
 import '../../../../_utils/res/dimen.dart';
-
 import '../../../../_utils/configs/theme_config.dart';
-import '../../../../_utils/constants/string_constants.dart';
 
+// ignore: must_be_immutable
 class OTPScreenTopImage extends StatelessWidget {
-  const OTPScreenTopImage({
+  OTPScreenTopImage({
     Key? key,
+    required this.phoneNumberController,
   }) : super(key: key);
+
+  TextEditingController phoneNumberController;
 
   @override
   Widget build(BuildContext context) {
@@ -27,16 +29,17 @@ class OTPScreenTopImage extends StatelessWidget {
               const Spacer(),
             ],
           ),
-          const Text(
-            AppConst.otpScreen,
-            style: TextStyle(
+          Text(
+            "We sent your code to ${phoneNumberController.text}",
+            style: const TextStyle(
                 fontSize: AppDimen.size20, fontWeight: FontWeight.bold),
           ),
+
           const SizedBox(height: defaultPadding),
-          const Text(
-            AppConst.codeLine,
-            style: TextStyle(fontSize: AppDimen.size18),
-          ),
+          // const Text(
+          //   AppConst.codeLine,
+          //   style: TextStyle(fontSize: AppDimen.size18),
+          // ),
           const SizedBox(height: defaultPadding),
           buildTimer(),
           const SizedBox(height: defaultPadding),

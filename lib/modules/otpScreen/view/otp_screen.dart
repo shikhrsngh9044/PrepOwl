@@ -8,9 +8,14 @@ import 'otp_view/otp_top_image.dart';
 import '../../../_utils/res/dimen.dart';
 import '../../login/view/social_screen_ui/socal_sign_up.dart';
 
+// ignore: must_be_immutable
 class OtpUIScreen extends StatelessWidget {
-  const OtpUIScreen({super.key});
+  OtpUIScreen({
+    super.key,
+    required this.phoneNumberController,
+  });
 
+  TextEditingController phoneNumberController;
   @override
   Widget build(BuildContext context) {
     return RepositoryProvider(
@@ -20,29 +25,41 @@ class OtpUIScreen extends StatelessWidget {
           phoneAuthRepository:
               RepositoryProvider.of<PhoneAuthRepository>(context),
         ),
-        child: const OtpScreen(),
+        child: OtpScreen(phoneController: phoneNumberController),
       ),
     );
   }
 }
 
+// ignore: must_be_immutable
 class OtpScreen extends StatelessWidget {
-  const OtpScreen({Key? key}) : super(key: key);
+  OtpScreen({Key? key, required this.phoneController}) : super(key: key);
+
+  TextEditingController phoneController;
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       body: SingleChildScrollView(
-        child: MobileSignupScreen(),
+        child: MobileSignupScreen(numberController: phoneController),
       ),
     );
   }
 }
 
+// ignore: must_be_immutable
 class MobileSignupScreen extends StatelessWidget {
-  const MobileSignupScreen({
+  MobileSignupScreen({
     Key? key,
+    required this.numberController,
   }) : super(key: key);
+  TextEditingController numberController;
+
+  void _sendOtp({required String phoneNumber, required BuildContext context}) {
+    context.read<PhoneAuthBloc>().add(SendOtpToPhoneEvent(
+          phoneNumber: phoneNumber,
+        ));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +67,7 @@ class MobileSignupScreen extends StatelessWidget {
         padding: const EdgeInsets.fromLTRB(8, 18, 8, 8),
         child: Column(
           children: [
-            const OTPScreenTopImage(),
+            OTPScreenTopImage(phoneNumberController: numberController),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: const [OtpForm()],
@@ -59,6 +76,7 @@ class MobileSignupScreen extends StatelessWidget {
             GestureDetector(
               onTap: () {
                 // OTP code resend
+                _sendOtp(phoneNumber: numberController.text, context: context);
               },
               child: const Text(
                 AppConst.resendOTP,

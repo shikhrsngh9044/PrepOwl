@@ -22,10 +22,10 @@ class AppConst {
   static const login = "Login";
   static const phoneNumberText = "Enter your Phone Number";
   static const verfivationCodeText =
-      "We will send the 4-digit verification code.";
+      "We will send the 6-digit verification code.";
   static const generateOTP = "generate otp";
   static const otpScreen = "OTP Verification";
-  static const codeLine = "We sent your code to +1 898 860 ***";
+  static const codeLine = "We sent your code to ";
   static const validateOTP = "Verify & Continue";
   static const resendOTP = "Resend OTP Code";
   static const mobile = 'Mobile';

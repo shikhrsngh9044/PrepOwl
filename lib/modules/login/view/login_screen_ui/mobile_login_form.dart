@@ -33,7 +33,7 @@ class LoginForm extends StatelessWidget {
       context,
       MaterialPageRoute(
         builder: (context) {
-          return const OtpUIScreen();
+          return OtpUIScreen(phoneNumberController: _phoneNumberController);
         },
       ),
     );
