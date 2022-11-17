@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-// ignore: must_be_immutable
 class Dashboard extends StatelessWidget {
-  Dashboard({Key? key, this.name, this.email, this.uid}) : super(key: key);
-
-  String? name, email, uid;
+  const Dashboard({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
         children: [
-          Text(name ?? ''),
-          Text(email ?? ''),
-          Text(uid ?? ''),
+          Text('${Get.arguments['name']}'),
+          Text('${Get.arguments['email']}'),
+          Text('${Get.arguments['uid']}'),
         ],
       ),
     );

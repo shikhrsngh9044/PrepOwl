@@ -14,10 +14,10 @@ class RouteNames {
 
 final publicPages = [
   GetPage(name: '/', page: () => const Welcome()),
-  GetPage(name: '/login', page: () => const Login()),
+  GetPage(name: RouteNames.loginPage, page: () => const Login()),
+  GetPage(name: RouteNames.dashboard, page: () => const Dashboard()),
 ];
 
 final authorizedPages = [
   GetPage(name: RouteNames.homePage, page: () => const Welcome()),
-  GetPage(name: RouteNames.dashboard, page: () => Dashboard()),
 ];

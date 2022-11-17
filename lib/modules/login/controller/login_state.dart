@@ -1,14 +1,14 @@
 part of 'login_bloc.dart';
 
 class LoginState {
-  final LoginDTO? loginDTO;
+  final UserDTO? userDTO;
   final String errorMessage;
   final bool isLoading;
   final bool isAuthenticated;
   final bool isUnauthenticated;
 
   LoginState({
-    this.loginDTO,
+    this.userDTO,
     this.errorMessage = '',
     this.isLoading = false,
     this.isAuthenticated = false,
@@ -16,14 +16,14 @@ class LoginState {
   });
 
   LoginState copyWith({
-    LoginDTO? loginDTO,
+    UserDTO? userDTO,
     String? errorMessage,
     bool? isLoading,
     bool? isAuthenticated,
     bool? isUnauthenticated,
   }) {
     return LoginState(
-      loginDTO: loginDTO ?? this.loginDTO,
+      userDTO: userDTO ?? this.userDTO,
       errorMessage: errorMessage ?? this.errorMessage,
       isLoading: isLoading ?? this.isLoading,
       isAuthenticated: isAuthenticated ?? this.isAuthenticated,
@@ -33,5 +33,5 @@ class LoginState {
 
   @override
   String toString() =>
-      'LoginState(loginDTO: $loginDTO, errorMessage: $errorMessage, isLoading: $isLoading, isAuthenticated: $isAuthenticated, isUnauthenticated: $isUnauthenticated,)';
+      'LoginState(userDTO: $userDTO, errorMessage: $errorMessage, isLoading: $isLoading, isAuthenticated: $isAuthenticated, isUnauthenticated: $isUnauthenticated,)';
 }

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:prepowl/modules/dashboard/view/dashboard.dart';
+import 'package:get/get.dart';
 
+import '../../../_utils/constants/routes.dart';
 import '../controller/login_bloc.dart';
 import 'login_screen_ui/login_top_image.dart';
 import 'login_screen_ui/mobile_login_form.dart';
@@ -25,7 +26,26 @@ class LoginPageScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocBuilder<LoginBloc, LoginState>(
+      body: BlocConsumer<LoginBloc, LoginState>(
+        listener: (context, state) {
+          if (state.isAuthenticated) {
+            var data = {
+              'name': state.userDTO?.name,
+              'email': state.userDTO?.email,
+              'uid': state.userDTO?.uid,
+              'photoUrl': state.userDTO?.photoUrl,
+            };
+
+            Get.offAndToNamed(
+              RouteNames.dashboard,
+              arguments: data,
+            );
+          } else if (state.isUnauthenticated) {
+            Get.offAndToNamed(
+              RouteNames.loginPage,
+            );
+          }
+        },
         builder: (context, state) {
           if (state.isLoading) {
             return const Center(
@@ -35,13 +55,6 @@ class LoginPageScreen extends StatelessWidget {
                 ),
               ),
             );
-          } else if (state.isAuthenticated) {
-            return Dashboard(
-              name: state.loginDTO?.name,
-              email: state.loginDTO?.email,
-              uid: state.loginDTO?.uid,
-            );
-            // Navigator.of(context).pushNamed(RouteNames.dashboard);
           } else {
             return const SingleChildScrollView(
               child: MobileSignupScreen(),

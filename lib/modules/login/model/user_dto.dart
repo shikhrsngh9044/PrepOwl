@@ -1,25 +1,25 @@
 import 'dart:convert';
 
-class LoginDTO {
+class UserDTO {
   final String? uid;
   final String? photoUrl;
   final String? email;
   final String? name;
 
-  LoginDTO({
+  UserDTO({
     this.uid,
     this.photoUrl,
     this.email,
     this.name,
   });
 
-  LoginDTO copyWith({
+  UserDTO copyWith({
     String? uid,
     String? photoUrl,
     String? email,
     String? name,
   }) {
-    return LoginDTO(
+    return UserDTO(
       uid: uid ?? this.uid,
       photoUrl: photoUrl ?? this.photoUrl,
       email: email ?? this.email,
@@ -36,8 +36,8 @@ class LoginDTO {
     };
   }
 
-  factory LoginDTO.fromMap(Map<String, dynamic> map) {
-    return LoginDTO(
+  factory UserDTO.fromMap(Map<String, dynamic> map) {
+    return UserDTO(
       uid: map['uid'] != null ? map['uid'] as String : null,
       photoUrl: map['photoUrl'] != null ? map['photoUrl'] as String : null,
       email: map['email'] != null ? map['email'] as String : null,
@@ -47,16 +47,16 @@ class LoginDTO {
 
   String toJson() => json.encode(toMap());
 
-  factory LoginDTO.fromJson(String source) =>
-      LoginDTO.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory UserDTO.fromJson(String source) =>
+      UserDTO.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() {
-    return 'LoginDTO(uid: $uid, photoUrl: $photoUrl, email: $email, name: $name)';
+    return 'UserDTO(uid: $uid, photoUrl: $photoUrl, email: $email, name: $name)';
   }
 
   @override
-  bool operator ==(covariant LoginDTO other) {
+  bool operator ==(covariant UserDTO other) {
     if (identical(this, other)) return true;
 
     return other.uid == uid &&
