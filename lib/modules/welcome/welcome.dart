@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'view/welcome_screen_ui/background.dart';
 import 'view/welcome_screen_ui/welcome_login_button.dart';
-
 import 'view/welcome_screen_ui/welcome_text_image.dart';
 
 class Welcome extends StatelessWidget {
@@ -10,13 +9,14 @@ class Welcome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-        body: Background(
-      child: SingleChildScrollView(
-        child: SafeArea(
-          child: WelcomeScreen(),
+      body: Background(
+        child: SingleChildScrollView(
+          child: SafeArea(
+            child: WelcomeScreen(),
+          ),
         ),
       ),
-    ));
+    );
   }
 }
 

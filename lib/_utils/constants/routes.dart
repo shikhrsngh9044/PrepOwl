@@ -1,4 +1,5 @@
 import 'package:get/get_navigation/get_navigation.dart';
+
 import '../../modules/login/view/login_screen.dart';
 import '../../modules/welcome/welcome.dart';
 
@@ -12,7 +13,7 @@ class RouteNames {
 
 final publicPages = [
   GetPage(name: '/', page: () => const Welcome()),
-  GetPage(name: '/', page: () => const LoginPageScreen()),
+  GetPage(name: RouteNames.loginPage, page: () => const Login()),
 ];
 
 final authorizedPages = [

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../controller/login_bloc.dart';
 import '../../../../_utils/configs/theme_config.dart';
 import '../../../../_utils/helpers/validation.dart';
 import '../../../../_utils/res/dimen.dart';
 import '../../../../_utils/constants/string_constants.dart';
-import '../../../otpScreen/view/otp_screen.dart';
 
 class LoginForm extends StatelessWidget {
   LoginForm({
@@ -16,14 +17,7 @@ class LoginForm extends StatelessWidget {
   void _onGenerateOTPPressed(BuildContext context) {
     bool isValidated = _formKey.currentState?.validate() ?? false;
     if (isValidated) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) {
-            return const OtpScreen();
-          },
-        ),
-      );
+      context.read<LoginBloc>().add(const GenerateOtp());
     }
   }
 
@@ -46,6 +40,7 @@ class LoginForm extends StatelessWidget {
               keyboardType: TextInputType.number,
               cursorColor: AppTheme.primaryColorLight,
               decoration: InputDecoration(
+                counterText: '',
                 hintText: AppConst.hintText,
                 labelText: AppConst.mobile,
                 labelStyle: const TextStyle(color: AppTheme.primaryColorLight),
@@ -79,15 +74,10 @@ class LoginForm extends StatelessWidget {
                     ),
                   ),
                 ),
-                suffixIcon: const Icon(
-                  Icons.check_circle,
-                  color: AppTheme.primaryColorLight,
-                  size: AppDimen.size30,
-                ),
               ),
             ),
           ),
-          const SizedBox(height: AppDimen.size60),
+          const SizedBox(height: AppDimen.size50),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
               padding: const EdgeInsets.symmetric(
@@ -107,7 +97,7 @@ class LoginForm extends StatelessWidget {
               _onGenerateOTPPressed(context);
             },
           ),
-          const SizedBox(height: AppDimen.size60),
+          const SizedBox(height: AppDimen.size30),
         ],
       ),
     );

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
 import '../../../../_utils/configs/theme_config.dart';
 import '../../../../_utils/constants/asset_constants.dart';
 import 'or_divider.dart';
