@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+
 import 'view/welcome_screen_ui/background.dart';
 import 'view/welcome_screen_ui/welcome_login_button.dart';
-
 import 'view/welcome_screen_ui/welcome_text_image.dart';
 
 class Welcome extends StatelessWidget {
