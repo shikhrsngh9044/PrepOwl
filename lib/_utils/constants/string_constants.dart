@@ -16,3 +16,23 @@ class AlertMassages {
   static const areYouSure = "Are you sure ?";
   static const porgressWillLost = "Your progress will be lost!";
 }
+
+class AppConst {
+  static const appThemeName = "Welocme To PrepOwl";
+  static const login = "Login";
+  static const phoneNumberText = "Enter your Phone Number";
+  static const verfivationCodeText =
+      "We will send the 6-digit verification code.";
+  static const generateOTP = "generate otp";
+  static const otpScreen = "OTP Verification";
+  static const codeLine =
+      "An OTP has been sent to your Mobile Number 9482912322";
+  static const validateOTP = "Verify & Continue";
+  static const enterOTP = "Enter OTP";
+  static const resendOTP = "Resend OTP";
+  static const changenNumber = "Change";
+  static const mobile = 'Mobile';
+  static const hintText = "Enter Mobile Number";
+  static const emptyMobileNumber = "Please enter mobile number.";
+  static const mobileNumberCount = "Mobile number must be of 10 characters.";
+}

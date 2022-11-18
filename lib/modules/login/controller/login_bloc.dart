@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../model/login_dto.dart';
+import '../model/user_dto.dart';
 import '../repo/login_repo.dart';
 
 part 'login_event.dart';
@@ -23,7 +23,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         (r) {
           return state.copyWith(
             isLoading: false,
-            loginDTO: r,
+            userDTO: r,
             isUnauthenticated: false,
             isAuthenticated: true,
           );
@@ -50,6 +50,69 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
           );
         },
       );
+      emit(updatedState);
+    });
+
+    on<GenerateOtp>(
+      (event, emit) {
+        emit(state.copyWith(isOtpGenerated: true));
+      },
+    );
+
+    on<ShowHideResendOTP>(
+      (event, emit) {
+        emit(state.copyWith(showResendOtp: true));
+      },
+    );
+
+    on<GoogleLogin>((event, emit) async {
+      emit(state.copyWith(
+        isLoading: true,
+      ));
+
+      final result = await LoginRepoImp().googleLogin();
+
+      final updatedState = result.fold(
+        (l) => state.copyWith(
+          isLoading: false,
+          errorMessage: l.response.toString(),
+          isUnauthenticated: true,
+          isAuthenticated: false,
+        ),
+        (r) {
+          return state.copyWith(
+            isLoading: false,
+            userDTO: r,
+            isUnauthenticated: false,
+            isAuthenticated: true,
+          );
+        },
+      );
+
+      emit(updatedState);
+    });
+
+    on<GoogleLogout>((event, emit) async {
+      emit(state.copyWith(
+        isLoading: true,
+      ));
+
+      final result = await LoginRepoImp().googleLogout();
+
+      final updatedState = result.fold(
+        (l) => state.copyWith(
+            isLoading: false,
+            errorMessage: l.response.toString(),
+            isUnauthenticated: true),
+        (r) {
+          return state.copyWith(
+            isLoading: false,
+            isUnauthenticated: true,
+            isAuthenticated: false,
+          );
+        },
+      );
+
       emit(updatedState);
     });
   }

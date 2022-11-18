@@ -11,3 +11,11 @@ class FacebookLogin extends LoginEvent {
 class FacebookLogout extends LoginEvent {
   const FacebookLogout();
 }
+
+class GoogleLogin extends LoginEvent {}
+
+class GoogleLogout extends LoginEvent {}
+
+class GenerateOtp extends LoginEvent {}
+
+class ShowHideResendOTP extends LoginEvent {}

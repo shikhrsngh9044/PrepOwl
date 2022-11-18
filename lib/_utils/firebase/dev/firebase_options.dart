@@ -67,7 +67,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '701131617654',
     projectId: 'prepowl-dev',
     storageBucket: 'prepowl-dev.appspot.com',
-    iosClientId: '701131617654-p7m2v05iuk3g9biqebsdn9clvtqlrbn4.apps.googleusercontent.com',
+    iosClientId:
+        '701131617654-p7m2v05iuk3g9biqebsdn9clvtqlrbn4.apps.googleusercontent.com',
     iosBundleId: 'com.shikhar.prepowl.dev',
   );
 
@@ -77,7 +78,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '701131617654',
     projectId: 'prepowl-dev',
     storageBucket: 'prepowl-dev.appspot.com',
-    iosClientId: '701131617654-rtvh5gfh9n6mptmpgkfv4hvglknofsr2.apps.googleusercontent.com',
+    iosClientId:
+        '701131617654-rtvh5gfh9n6mptmpgkfv4hvglknofsr2.apps.googleusercontent.com',
     iosBundleId: 'com.shikhar.prepowl',
   );
 }
