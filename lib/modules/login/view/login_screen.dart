@@ -3,9 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 
 import '../../../_utils/constants/routes.dart';
+import '../../../_utils/res/dimen.dart';
 import '../controller/login_bloc.dart';
 import 'login_screen_ui/login_top_image.dart';
 import 'login_screen_ui/mobile_login_form.dart';
+import 'otp_screen_ui/otp_form.dart';
+import 'otp_screen_ui/otp_top_image.dart';
 import 'social_screen_ui/socal_sign_up.dart';
 
 class Login extends StatelessWidget {
@@ -56,8 +59,8 @@ class LoginPageScreen extends StatelessWidget {
               ),
             );
           } else {
-            return const SingleChildScrollView(
-              child: MobileSignupScreen(),
+            return SingleChildScrollView(
+              child: MobileSignupScreen(state: state),
             );
           }
         },
@@ -69,23 +72,31 @@ class LoginPageScreen extends StatelessWidget {
 class MobileSignupScreen extends StatelessWidget {
   const MobileSignupScreen({
     Key? key,
+    required this.state,
   }) : super(key: key);
 
+  final LoginState state;
   @override
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        const LoginScreenTopImage(),
+        state.isOtpGenerated
+            ? const OTPScreenTopImage()
+            : const LoginScreenTopImage(),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            const Spacer(),
+            const SizedBox(
+              width: AppDimen.size30,
+            ),
             Expanded(
               flex: 8,
-              child: LoginForm(),
+              child: state.isOtpGenerated ? OtpForm(state: state) : LoginForm(),
             ),
-            const Spacer(),
+            const SizedBox(
+              width: AppDimen.size30,
+            ),
           ],
         ),
         const SocalLogin()

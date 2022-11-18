@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import '../../../../_utils/constants/asset_constants.dart';
-import '../../../../_utils/res/dimen.dart';
 
-import '../../../../_utils/configs/theme_config.dart';
+import '../../../../_utils/constants/asset_constants.dart';
 import '../../../../_utils/constants/string_constants.dart';
+import '../../../../_utils/res/dimen.dart';
 
 class OTPScreenTopImage extends StatelessWidget {
   const OTPScreenTopImage({
@@ -14,7 +13,7 @@ class OTPScreenTopImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(3, 25, 6, 8),
+      padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 30),
       child: Column(
         children: [
           Row(
@@ -35,30 +34,11 @@ class OTPScreenTopImage extends StatelessWidget {
           const SizedBox(height: defaultPadding),
           const Text(
             AppConst.codeLine,
+            textAlign: TextAlign.center,
             style: TextStyle(fontSize: AppDimen.size18),
           ),
-          const SizedBox(height: defaultPadding),
-          buildTimer(),
-          const SizedBox(height: defaultPadding),
         ],
       ),
-    );
-  }
-
-  Widget buildTimer() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        const Text("This code will expired in "),
-        TweenAnimationBuilder(
-          tween: Tween(begin: 90.0, end: 0.0),
-          duration: const Duration(seconds: 90),
-          builder: (_, dynamic value, child) => Text(
-            "00:${value.toInt()}",
-            style: const TextStyle(color: AppTheme.primaryColorLight),
-          ),
-        ),
-      ],
     );
   }
 }

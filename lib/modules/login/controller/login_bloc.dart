@@ -8,6 +8,17 @@ part 'login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   LoginBloc() : super(LoginState()) {
+    on<GenerateOtp>(
+      (event, emit) {
+        emit(state.copyWith(isOtpGenerated: true));
+      },
+    );
+    on<ShowHideResendOTP>(
+      (event, emit) {
+        emit(state.copyWith(showResendOtp: true));
+      },
+    );
+
     on<GoogleLogin>((event, emit) async {
       emit(state.copyWith(
         isLoading: true,

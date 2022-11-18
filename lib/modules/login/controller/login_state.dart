@@ -6,6 +6,8 @@ class LoginState {
   final bool isLoading;
   final bool isAuthenticated;
   final bool isUnauthenticated;
+  final bool isOtpGenerated;
+  final bool showResendOtp;
 
   LoginState({
     this.userDTO,
@@ -13,6 +15,8 @@ class LoginState {
     this.isLoading = false,
     this.isAuthenticated = false,
     this.isUnauthenticated = false,
+    this.isOtpGenerated = false,
+    this.showResendOtp = false,
   });
 
   LoginState copyWith({
@@ -21,6 +25,8 @@ class LoginState {
     bool? isLoading,
     bool? isAuthenticated,
     bool? isUnauthenticated,
+    bool? isOtpGenerated,
+    bool? showResendOtp,
   }) {
     return LoginState(
       userDTO: userDTO ?? this.userDTO,
@@ -28,10 +34,13 @@ class LoginState {
       isLoading: isLoading ?? this.isLoading,
       isAuthenticated: isAuthenticated ?? this.isAuthenticated,
       isUnauthenticated: isUnauthenticated ?? this.isUnauthenticated,
+      isOtpGenerated: isOtpGenerated ?? this.isOtpGenerated,
+      showResendOtp: showResendOtp ?? this.showResendOtp,
     );
   }
 
   @override
-  String toString() =>
-      'LoginState(userDTO: $userDTO, errorMessage: $errorMessage, isLoading: $isLoading, isAuthenticated: $isAuthenticated, isUnauthenticated: $isUnauthenticated,)';
+  String toString() {
+    return 'LoginState(userDTO: $userDTO, errorMessage: $errorMessage, isLoading: $isLoading, isAuthenticated: $isAuthenticated, isUnauthenticated: $isUnauthenticated, isOtpGenerated: $isOtpGenerated, showResendOtp: $showResendOtp)';
+  }
 }

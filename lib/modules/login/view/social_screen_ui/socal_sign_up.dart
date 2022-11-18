@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:prepowl/modules/login/view/social_screen_ui/social_icon.dart';
 import '../../../../_utils/constants/asset_constants.dart';
 import '../../controller/login_bloc.dart';
 import 'or_divider.dart';
-import 'social_icon.dart';
 
 class SocalLogin extends StatelessWidget {
   const SocalLogin({
@@ -25,7 +25,7 @@ class SocalLogin extends StatelessWidget {
             SocalIcon(
               iconSrc: Assets.gmailLogin,
               press: () {
-                context.read<LoginBloc>().add(const GoogleLogin());
+                context.read<LoginBloc>().add(GoogleLogin());
               },
             ),
           ],
