@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+
 import '../../../_utils/constants/string_constants.dart';
-import 'otp_view/otp_form.dart';
-import 'otp_view/otp_top_image.dart';
 import '../../../_utils/res/dimen.dart';
 import '../../login/view/social_screen_ui/socal_sign_up.dart';
+import 'otp_view/otp_form.dart';
+import 'otp_view/otp_top_image.dart';
 
 class OtpScreen extends StatelessWidget {
   const OtpScreen({Key? key}) : super(key: key);

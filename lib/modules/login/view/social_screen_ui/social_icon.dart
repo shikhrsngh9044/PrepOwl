@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-
 import 'package:flutter_svg/flutter_svg.dart';
+
 import '../../../../_utils/configs/theme_config.dart';
 
 class SocalIcon extends StatelessWidget {
@@ -15,7 +15,9 @@ class SocalIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: press!(),
+      onTap: () {
+        press!();
+      },
       child: Container(
         margin: const EdgeInsets.symmetric(horizontal: 10),
         padding: const EdgeInsets.all(20),

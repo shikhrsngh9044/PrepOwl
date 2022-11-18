@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../../../_utils/configs/theme_config.dart';
-
 import '../../../../_utils/res/dimen.dart';
 
 class OrDivider extends StatelessWidget {
