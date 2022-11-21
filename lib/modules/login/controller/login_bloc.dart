@@ -7,11 +7,10 @@ import 'package:prepowl/modules/login/repo/login_repo.dart';
 part 'login_event.dart';
 part 'login_state.dart';
 
-class PhoneAuthBloc extends Bloc<PhoneAuthEvent, PhoneAuthState> {
-  final PhoneAuthRepository phoneAuthRepository;
+class LoginBloc extends Bloc<LoginEvent, LoginState> {
+  final LoginRepository loginRepository;
   final auth = FirebaseAuth.instance;
-  PhoneAuthBloc({required this.phoneAuthRepository})
-      : super(PhoneAuthInitial()) {
+  LoginBloc({required this.loginRepository}) : super(PhoneAuthInitial()) {
     on<SendOtpToPhoneEvent>(_onSendOtp);
 
     on<VerifySentOtpEvent>(_onVerifyOtp);
@@ -26,10 +25,10 @@ class PhoneAuthBloc extends Bloc<PhoneAuthEvent, PhoneAuthState> {
   }
 
   FutureOr<void> _onSendOtp(
-      SendOtpToPhoneEvent event, Emitter<PhoneAuthState> emit) async {
+      SendOtpToPhoneEvent event, Emitter<LoginState> emit) async {
     emit(PhoneAuthLoading());
     try {
-      await phoneAuthRepository.verifyPhone(
+      await loginRepository.verifyPhone(
         phoneNumber: event.phoneNumber,
         verificationCompleted: (PhoneAuthCredential credential) async {
           add(OnPhoneAuthVerificationCompleteEvent(credential: credential));
@@ -49,7 +48,7 @@ class PhoneAuthBloc extends Bloc<PhoneAuthEvent, PhoneAuthState> {
   }
 
   FutureOr<void> _onVerifyOtp(
-      VerifySentOtpEvent event, Emitter<PhoneAuthState> emit) async {
+      VerifySentOtpEvent event, Emitter<LoginState> emit) async {
     try {
       emit(PhoneAuthLoading());
 
@@ -65,7 +64,7 @@ class PhoneAuthBloc extends Bloc<PhoneAuthEvent, PhoneAuthState> {
 
   FutureOr<void> _loginWithCredential(
       OnPhoneAuthVerificationCompleteEvent event,
-      Emitter<PhoneAuthState> emit) async {
+      Emitter<LoginState> emit) async {
     try {
       await auth.signInWithCredential(event.credential).then((user) {
         if (user.user != null) {

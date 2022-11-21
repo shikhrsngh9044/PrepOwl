@@ -1,18 +1,18 @@
 part of 'login_bloc.dart';
 
-abstract class PhoneAuthState {
-  const PhoneAuthState();
+abstract class LoginState {
+  const LoginState();
 
   @override
   // ignore: override_on_non_overriding_member
   List<Object> get props => [];
 }
 
-class PhoneAuthInitial extends PhoneAuthState {}
+class PhoneAuthInitial extends LoginState {}
 
-class PhoneAuthLoading extends PhoneAuthState {}
+class PhoneAuthLoading extends LoginState {}
 
-class PhoneAuthError extends PhoneAuthState {
+class PhoneAuthError extends LoginState {
   final String error;
 
   const PhoneAuthError({required this.error});
@@ -21,9 +21,9 @@ class PhoneAuthError extends PhoneAuthState {
   List<Object> get props => [error];
 }
 
-class PhoneAuthVerified extends PhoneAuthState {}
+class PhoneAuthVerified extends LoginState {}
 
-class PhoneAuthCodeSentSuccess extends PhoneAuthState {
+class PhoneAuthCodeSentSuccess extends LoginState {
   final String verificationId;
   const PhoneAuthCodeSentSuccess({
     required this.verificationId,

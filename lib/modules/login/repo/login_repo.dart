@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 
-class PhoneAuthRepository {
+class LoginRepository {
   FirebaseAuth auth = FirebaseAuth.instance;
 
   Future<void> verifyPhone({

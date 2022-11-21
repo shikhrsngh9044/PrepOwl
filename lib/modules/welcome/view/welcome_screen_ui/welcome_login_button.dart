@@ -15,6 +15,7 @@ class LoginButton extends StatelessWidget {
       style: ElevatedButton.styleFrom(
         padding: const EdgeInsets.symmetric(
             horizontal: AppDimen.size10, vertical: AppDimen.size15),
+        // ignore: deprecated_member_use
         primary: AppTheme.primaryColorLight,
         shape: const StadiumBorder(),
       ),

@@ -1,14 +1,14 @@
 part of 'login_bloc.dart';
 
-abstract class PhoneAuthEvent {
-  const PhoneAuthEvent();
+abstract class LoginEvent {
+  const LoginEvent();
 
   @override
   // ignore: override_on_non_overriding_member
   List<Object> get props => [];
 }
 
-class SendOtpToPhoneEvent extends PhoneAuthEvent {
+class SendOtpToPhoneEvent extends LoginEvent {
   final String phoneNumber;
 
   const SendOtpToPhoneEvent({required this.phoneNumber});
@@ -17,7 +17,7 @@ class SendOtpToPhoneEvent extends PhoneAuthEvent {
   List<Object> get props => [phoneNumber];
 }
 
-class VerifySentOtpEvent extends PhoneAuthEvent {
+class VerifySentOtpEvent extends LoginEvent {
   final String otpCode;
   final String verificationId;
 
@@ -28,7 +28,7 @@ class VerifySentOtpEvent extends PhoneAuthEvent {
   List<Object> get props => [otpCode, verificationId];
 }
 
-class OnPhoneOtpSent extends PhoneAuthEvent {
+class OnPhoneOtpSent extends LoginEvent {
   final String verificationId;
   final int? token;
   const OnPhoneOtpSent({
@@ -40,7 +40,7 @@ class OnPhoneOtpSent extends PhoneAuthEvent {
   List<Object> get props => [verificationId];
 }
 
-class OnPhoneAuthErrorEvent extends PhoneAuthEvent {
+class OnPhoneAuthErrorEvent extends LoginEvent {
   final String error;
   const OnPhoneAuthErrorEvent({required this.error});
 
@@ -48,7 +48,7 @@ class OnPhoneAuthErrorEvent extends PhoneAuthEvent {
   List<Object> get props => [error];
 }
 
-class OnPhoneAuthVerificationCompleteEvent extends PhoneAuthEvent {
+class OnPhoneAuthVerificationCompleteEvent extends LoginEvent {
   final AuthCredential credential;
   const OnPhoneAuthVerificationCompleteEvent({
     required this.credential,

@@ -13,11 +13,10 @@ class LoginUiScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return RepositoryProvider(
-      create: (context) => PhoneAuthRepository(),
+      create: (context) => LoginRepository(),
       child: BlocProvider(
-        create: (context) => PhoneAuthBloc(
-          phoneAuthRepository:
-              RepositoryProvider.of<PhoneAuthRepository>(context),
+        create: (context) => LoginBloc(
+          loginRepository: RepositoryProvider.of<LoginRepository>(context),
         ),
         child: const LoginPageScreen(),
       ),

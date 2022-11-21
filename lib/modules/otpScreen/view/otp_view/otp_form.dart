@@ -54,15 +54,14 @@ class _OtpFormState extends State<OtpForm> {
   }
 
   void _verifyOtp(BuildContext context, String verificationId) {
-    context.read<PhoneAuthBloc>().add(VerifySentOtpEvent(
+    context.read<LoginBloc>().add(VerifySentOtpEvent(
         otpCode: _codeController.text, verificationId: verificationId));
     // codeController.clear();
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<PhoneAuthBloc, PhoneAuthState>(
-        builder: (context, state) {
+    return BlocBuilder<LoginBloc, LoginState>(builder: (context, state) {
       return Column(
         children: [
           Form(
@@ -188,6 +187,7 @@ class _OtpFormState extends State<OtpForm> {
             style: ElevatedButton.styleFrom(
               padding: const EdgeInsets.symmetric(
                   horizontal: AppDimen.size40, vertical: AppDimen.size15),
+              // ignore: deprecated_member_use
               primary: AppTheme.primaryColorLight,
               shape: const StadiumBorder(),
             ),

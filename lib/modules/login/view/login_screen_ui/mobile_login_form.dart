@@ -40,7 +40,7 @@ class LoginForm extends StatelessWidget {
   }
 
   void _sendOtp({required String phoneNumber, required BuildContext context}) {
-    context.read<PhoneAuthBloc>().add(
+    context.read<LoginBloc>().add(
           SendOtpToPhoneEvent(
             phoneNumber: phoneNumber,
           ),
@@ -49,7 +49,7 @@ class LoginForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<PhoneAuthBloc, PhoneAuthState>(
+    return BlocListener<LoginBloc, LoginState>(
       listener: (context, state) {
         if (state is PhoneAuthVerified) {
           Navigator.of(context).pushReplacement(
@@ -67,8 +67,7 @@ class LoginForm extends StatelessWidget {
           );
         }
       },
-      child:
-          BlocBuilder<PhoneAuthBloc, PhoneAuthState>(builder: (context, state) {
+      child: BlocBuilder<LoginBloc, LoginState>(builder: (context, state) {
         if (state is PhoneAuthLoading) {
           return const Center(
             child: CircularProgressIndicator(),
@@ -125,6 +124,7 @@ class LoginForm extends StatelessWidget {
                 style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.symmetric(
                       horizontal: AppDimen.size40, vertical: AppDimen.size16),
+                  // ignore: deprecated_member_use
                   primary: AppTheme.primaryColorLight,
                   shape: const StadiumBorder(),
                 ),
