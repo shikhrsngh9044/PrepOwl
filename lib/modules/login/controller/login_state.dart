@@ -1,33 +1,51 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 part of 'login_bloc.dart';
 
-abstract class LoginState {
-  const LoginState();
-
-  @override
-  // ignore: override_on_non_overriding_member
-  List<Object> get props => [];
-}
-
-class PhoneAuthInitial extends LoginState {}
-
-class PhoneAuthLoading extends LoginState {}
-
-class PhoneAuthError extends LoginState {
-  final String error;
-
-  const PhoneAuthError({required this.error});
-
-  @override
-  List<Object> get props => [error];
-}
-
-class PhoneAuthVerified extends LoginState {}
-
-class PhoneAuthCodeSentSuccess extends LoginState {
+class LoginState {
+  final UserDTO? userDTO;
+  final bool isOtpGenerated;
+  final bool showResendOtp;
+  final String errorMessage;
+  final bool isLoading;
+  final bool isAuthenticated;
+  final bool isUnauthenticated;
   final String verificationId;
-  const PhoneAuthCodeSentSuccess({
-    required this.verificationId,
+
+  LoginState({
+    this.userDTO,
+    this.isOtpGenerated = false,
+    this.showResendOtp = false,
+    this.errorMessage = "",
+    this.isLoading = false,
+    this.isAuthenticated = false,
+    this.isUnauthenticated = false,
+    this.verificationId = '',
   });
+
+  LoginState copyWith({
+    UserDTO? userDTO,
+    bool? isOtpGenerated,
+    bool? showResendOtp,
+    String? errorMessage,
+    bool? isLoading,
+    bool? isAuthenticated,
+    bool? isUnauthenticated,
+    String? verificationId,
+  }) {
+    return LoginState(
+      userDTO: userDTO ?? this.userDTO,
+      isOtpGenerated: isOtpGenerated ?? this.isOtpGenerated,
+      showResendOtp: showResendOtp ?? this.showResendOtp,
+      errorMessage: errorMessage ?? this.errorMessage,
+      isLoading: isLoading ?? this.isLoading,
+      isAuthenticated: isAuthenticated ?? this.isAuthenticated,
+      isUnauthenticated: isUnauthenticated ?? this.isUnauthenticated,
+      verificationId: verificationId ?? this.verificationId,
+    );
+  }
+
   @override
-  List<Object> get props => [verificationId];
+  String toString() {
+    return 'LoginState(userDTO: $userDTO, isOtpGenerated: $isOtpGenerated, showResendOtp: $showResendOtp, errorMessage: $errorMessage, isLoading: $isLoading, isAuthenticated: $isAuthenticated, isUnauthenticated: $isUnauthenticated,verificationId:$verificationId)';
+  }
 }

@@ -1,80 +1,180 @@
-import 'dart:async';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:prepowl/modules/login/repo/login_repo.dart';
+
+import '../model/user_dto.dart';
+import '../repo/login_repo.dart';
 
 part 'login_event.dart';
 part 'login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
-  final LoginRepository loginRepository;
-  final auth = FirebaseAuth.instance;
-  LoginBloc({required this.loginRepository}) : super(PhoneAuthInitial()) {
-    on<SendOtpToPhoneEvent>(_onSendOtp);
+  LoginBloc() : super(LoginState()) {
+    FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
-    on<VerifySentOtpEvent>(_onVerifyOtp);
+    on<SendOtpToPhoneEvent>((event, emit) async {
+      emit(state.copyWith(isLoading: true));
+      try {
+        await LoginRepoImp().verifyPhone(
+          phoneNumber: event.phoneNumber,
+          verificationCompleted: (PhoneAuthCredential credential) async {
+            add(OnPhoneAuthVerificationCompleteEvent(credential: credential));
+          },
+          codeSent: (String verificationId, int? resendToken) {
+            add(OnPhoneOtpSent(
+                verificationId: verificationId, token: resendToken));
+          },
+          verificationFailed: (FirebaseAuthException e) {
+            add(OnPhoneAuthErrorEvent(error: e.code));
+          },
+          codeAutoRetrievalTimeout: (String verificationId) {},
+        );
+        emit(state.copyWith(isLoading: false));
+      } catch (e) {
+        emit(state.copyWith(errorMessage: e.toString(), isLoading: false));
+      }
+    });
+
+    on<VerifySentOtpEvent>((event, emit) {
+      try {
+        emit(state.copyWith(isLoading: true));
+
+        PhoneAuthCredential credential = PhoneAuthProvider.credential(
+          verificationId: event.verificationId,
+          smsCode: event.otpCode,
+        );
+        add(OnPhoneAuthVerificationCompleteEvent(credential: credential));
+        emit(state.copyWith(isLoading: false, isAuthenticated: true));
+      } catch (e) {
+        emit(state.copyWith(errorMessage: e.toString(), isLoading: false));
+      }
+    });
 
     on<OnPhoneOtpSent>((event, emit) =>
-        emit(PhoneAuthCodeSentSuccess(verificationId: event.verificationId)));
+        emit(state.copyWith(verificationId: event.verificationId)));
 
     on<OnPhoneAuthErrorEvent>(
-        (event, emit) => emit(PhoneAuthError(error: event.error)));
+        (event, emit) => emit(state.copyWith(errorMessage: event.error)));
 
-    on<OnPhoneAuthVerificationCompleteEvent>(_loginWithCredential);
-  }
+    on<OnPhoneAuthVerificationCompleteEvent>((event, emit) async {
+      try {
+        await _firebaseAuth.signInWithCredential(event.credential).then((user) {
+          if (user.user != null) {
+            emit(state.copyWith(isAuthenticated: true));
+          }
+        });
+      } on FirebaseAuthException catch (e) {
+        emit(state.copyWith(errorMessage: e.code));
+      } catch (e) {
+        emit(state.copyWith(errorMessage: e.toString()));
+      }
+    });
 
-  FutureOr<void> _onSendOtp(
-      SendOtpToPhoneEvent event, Emitter<LoginState> emit) async {
-    emit(PhoneAuthLoading());
-    try {
-      await loginRepository.verifyPhone(
-        phoneNumber: event.phoneNumber,
-        verificationCompleted: (PhoneAuthCredential credential) async {
-          add(OnPhoneAuthVerificationCompleteEvent(credential: credential));
+    on<FacebookLogin>((event, emit) async {
+      emit(state.copyWith(
+        isLoading: true,
+      ));
+      final result = await LoginRepoImp().facebookLogin();
+      final updatedState = result.fold(
+        (l) => state.copyWith(
+          isLoading: false,
+          errorMessage: l.response.toString(),
+          isUnauthenticated: true,
+          isAuthenticated: false,
+        ),
+        (r) {
+          return state.copyWith(
+            isLoading: false,
+            userDTO: r,
+            isUnauthenticated: false,
+            isAuthenticated: true,
+          );
         },
-        codeSent: (String verificationId, int? resendToken) {
-          add(OnPhoneOtpSent(
-              verificationId: verificationId, token: resendToken));
-        },
-        verificationFailed: (FirebaseAuthException e) {
-          add(OnPhoneAuthErrorEvent(error: e.code));
-        },
-        codeAutoRetrievalTimeout: (String verificationId) {},
       );
-    } catch (e) {
-      emit(PhoneAuthError(error: e.toString()));
-    }
-  }
+      emit(updatedState);
+    });
 
-  FutureOr<void> _onVerifyOtp(
-      VerifySentOtpEvent event, Emitter<LoginState> emit) async {
-    try {
-      emit(PhoneAuthLoading());
-
-      PhoneAuthCredential credential = PhoneAuthProvider.credential(
-        verificationId: event.verificationId,
-        smsCode: event.otpCode,
+    on<FacebookLogout>((event, emit) async {
+      emit(state.copyWith(
+        isLoading: true,
+      ));
+      final result = await LoginRepoImp().facebookLogout();
+      final updatedState = result.fold(
+        (l) => state.copyWith(
+            isLoading: false,
+            errorMessage: l.response.toString(),
+            isUnauthenticated: true),
+        (r) {
+          return state.copyWith(
+            isLoading: false,
+            isUnauthenticated: true,
+            isAuthenticated: false,
+          );
+        },
       );
-      add(OnPhoneAuthVerificationCompleteEvent(credential: credential));
-    } catch (e) {
-      emit(PhoneAuthError(error: e.toString()));
-    }
-  }
+      emit(updatedState);
+    });
 
-  FutureOr<void> _loginWithCredential(
-      OnPhoneAuthVerificationCompleteEvent event,
-      Emitter<LoginState> emit) async {
-    try {
-      await auth.signInWithCredential(event.credential).then((user) {
-        if (user.user != null) {
-          emit(PhoneAuthVerified());
-        }
-      });
-    } on FirebaseAuthException catch (e) {
-      emit(PhoneAuthError(error: e.code));
-    } catch (e) {
-      emit(PhoneAuthError(error: e.toString()));
-    }
+    on<GenerateOtp>(
+      (event, emit) {
+        emit(state.copyWith(isOtpGenerated: true));
+      },
+    );
+
+    on<ShowHideResendOTP>(
+      (event, emit) {
+        emit(state.copyWith(showResendOtp: true));
+      },
+    );
+
+    on<GoogleLogin>((event, emit) async {
+      emit(state.copyWith(
+        isLoading: true,
+      ));
+
+      final result = await LoginRepoImp().googleLogin();
+
+      final updatedState = result.fold(
+        (l) => state.copyWith(
+          isLoading: false,
+          errorMessage: l.response.toString(),
+          isUnauthenticated: true,
+          isAuthenticated: false,
+        ),
+        (r) {
+          return state.copyWith(
+            isLoading: false,
+            userDTO: r,
+            isUnauthenticated: false,
+            isAuthenticated: true,
+          );
+        },
+      );
+
+      emit(updatedState);
+    });
+
+    on<GoogleLogout>((event, emit) async {
+      emit(state.copyWith(
+        isLoading: true,
+      ));
+
+      final result = await LoginRepoImp().googleLogout();
+
+      final updatedState = result.fold(
+        (l) => state.copyWith(
+            isLoading: false,
+            errorMessage: l.response.toString(),
+            isUnauthenticated: true),
+        (r) {
+          return state.copyWith(
+            isLoading: false,
+            isUnauthenticated: true,
+            isAuthenticated: false,
+          );
+        },
+      );
+
+      emit(updatedState);
+    });
   }
 }

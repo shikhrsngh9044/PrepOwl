@@ -2,19 +2,28 @@ part of 'login_bloc.dart';
 
 abstract class LoginEvent {
   const LoginEvent();
-
-  @override
-  // ignore: override_on_non_overriding_member
-  List<Object> get props => [];
 }
+
+class FacebookLogin extends LoginEvent {
+  const FacebookLogin();
+}
+
+class FacebookLogout extends LoginEvent {
+  const FacebookLogout();
+}
+
+class GoogleLogin extends LoginEvent {}
+
+class GoogleLogout extends LoginEvent {}
+
+class GenerateOtp extends LoginEvent {}
+
+class ShowHideResendOTP extends LoginEvent {}
 
 class SendOtpToPhoneEvent extends LoginEvent {
   final String phoneNumber;
 
   const SendOtpToPhoneEvent({required this.phoneNumber});
-
-  @override
-  List<Object> get props => [phoneNumber];
 }
 
 class VerifySentOtpEvent extends LoginEvent {
@@ -24,7 +33,6 @@ class VerifySentOtpEvent extends LoginEvent {
   const VerifySentOtpEvent(
       {required this.otpCode, required this.verificationId});
 
-  @override
   List<Object> get props => [otpCode, verificationId];
 }
 
@@ -36,7 +44,6 @@ class OnPhoneOtpSent extends LoginEvent {
     required this.token,
   });
 
-  @override
   List<Object> get props => [verificationId];
 }
 
@@ -44,7 +51,6 @@ class OnPhoneAuthErrorEvent extends LoginEvent {
   final String error;
   const OnPhoneAuthErrorEvent({required this.error});
 
-  @override
   List<Object> get props => [error];
 }
 

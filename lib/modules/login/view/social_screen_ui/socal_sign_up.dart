@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import '../../../../_utils/constants/asset_constants.dart';
-import 'or_divider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'social_icon.dart';
+import '../../../../_utils/constants/asset_constants.dart';
+import '../../controller/login_bloc.dart';
+import 'or_divider.dart';
 
 class SocalLogin extends StatelessWidget {
   const SocalLogin({
@@ -18,11 +20,15 @@ class SocalLogin extends StatelessWidget {
           children: [
             SocalIcon(
               iconSrc: Assets.facebookLogin,
-              press: () {},
+              press: () {
+                context.read<LoginBloc>().add(const FacebookLogin());
+              },
             ),
             SocalIcon(
               iconSrc: Assets.gmailLogin,
-              press: () {},
+              press: () {
+                context.read<LoginBloc>().add(GoogleLogin());
+              },
             ),
           ],
         ),

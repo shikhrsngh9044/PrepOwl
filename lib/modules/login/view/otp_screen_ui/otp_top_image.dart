@@ -5,15 +5,16 @@ import '../../../../_utils/constants/asset_constants.dart';
 import '../../../../_utils/constants/string_constants.dart';
 import '../../../../_utils/res/dimen.dart';
 
-class LoginScreenTopImage extends StatelessWidget {
-  const LoginScreenTopImage({
+// ignore: must_be_immutable
+class OTPScreenTopImage extends StatelessWidget {
+  const OTPScreenTopImage({
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(3, 25, 6, 8),
+      padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 30),
       child: Column(
         children: [
           Row(
@@ -27,16 +28,16 @@ class LoginScreenTopImage extends StatelessWidget {
             ],
           ),
           const Text(
-            AppConst.phoneNumberText,
+            "We sent your code to ",
             style: TextStyle(
                 fontSize: AppDimen.size20, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: defaultPadding),
           const Text(
-            AppConst.verfivationCodeText,
+            AppConst.codeLine,
+            textAlign: TextAlign.center,
             style: TextStyle(fontSize: AppDimen.size18),
           ),
-          const SizedBox(height: defaultPadding),
         ],
       ),
     );

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import '../../../../_utils/res/dimen.dart';
+import 'package:get/get.dart';
+
 import '../../../../_utils/configs/theme_config.dart';
+import '../../../../_utils/constants/routes.dart';
 import '../../../../_utils/constants/string_constants.dart';
-import '../../../login/view/login_screen.dart';
+import '../../../../_utils/res/dimen.dart';
 
 class LoginButton extends StatelessWidget {
   const LoginButton({
@@ -15,8 +17,7 @@ class LoginButton extends StatelessWidget {
       style: ElevatedButton.styleFrom(
         padding: const EdgeInsets.symmetric(
             horizontal: AppDimen.size10, vertical: AppDimen.size15),
-        // ignore: deprecated_member_use
-        primary: AppTheme.primaryColorLight,
+        backgroundColor: AppTheme.primaryColorLight,
         shape: const StadiumBorder(),
       ),
       child: Text(
@@ -28,14 +29,7 @@ class LoginButton extends StatelessWidget {
         ),
       ),
       onPressed: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) {
-              return const LoginUiScreen();
-            },
-          ),
-        );
+        Get.offAndToNamed(RouteNames.loginPage);
       },
     );
   }

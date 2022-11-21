@@ -1,25 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:prepowl/modules/login/controller/login_bloc.dart';
-import 'package:prepowl/modules/login/repo/login_repo.dart';
+import 'package:get/get.dart';
 
+import '../../../_utils/constants/routes.dart';
+import '../../../_utils/res/dimen.dart';
+import '../controller/login_bloc.dart';
 import 'login_screen_ui/login_top_image.dart';
 import 'login_screen_ui/mobile_login_form.dart';
+import 'otp_screen_ui/otp_form.dart';
+import 'otp_screen_ui/otp_top_image.dart';
 import 'social_screen_ui/socal_sign_up.dart';
 
-class LoginUiScreen extends StatelessWidget {
-  const LoginUiScreen({super.key});
+class Login extends StatelessWidget {
+  const Login({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return RepositoryProvider(
-      create: (context) => LoginRepository(),
-      child: BlocProvider(
-        create: (context) => LoginBloc(
-          loginRepository: RepositoryProvider.of<LoginRepository>(context),
-        ),
-        child: const LoginPageScreen(),
-      ),
+    return BlocProvider(
+      create: (context) => LoginBloc(),
+      child: const LoginPageScreen(),
     );
   }
 }
@@ -29,9 +28,42 @@ class LoginPageScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: SingleChildScrollView(
-        child: MobileSignupScreen(),
+    return Scaffold(
+      body: BlocConsumer<LoginBloc, LoginState>(
+        listener: (context, state) {
+          if (state.isAuthenticated) {
+            var data = {
+              'name': state.userDTO?.name,
+              'email': state.userDTO?.email,
+              'uid': state.userDTO?.uid,
+              'photoUrl': state.userDTO?.photoUrl,
+            };
+
+            Get.offAndToNamed(
+              RouteNames.dashboard,
+              arguments: data,
+            );
+          } else if (state.isUnauthenticated) {
+            Get.offAndToNamed(
+              RouteNames.loginPage,
+            );
+          }
+        },
+        builder: (context, state) {
+          if (state.isLoading) {
+            return const Center(
+              child: CircularProgressIndicator(
+                valueColor: AlwaysStoppedAnimation<Color>(
+                  Colors.red,
+                ),
+              ),
+            );
+          } else {
+            return SingleChildScrollView(
+              child: MobileSignupScreen(state: state),
+            );
+          }
+        },
       ),
     );
   }
@@ -40,23 +72,31 @@ class LoginPageScreen extends StatelessWidget {
 class MobileSignupScreen extends StatelessWidget {
   const MobileSignupScreen({
     Key? key,
+    required this.state,
   }) : super(key: key);
 
+  final LoginState state;
   @override
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        const LoginScreenTopImage(),
+        state.isOtpGenerated
+            ? const OTPScreenTopImage()
+            : const LoginScreenTopImage(),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            const Spacer(),
+            const SizedBox(
+              width: AppDimen.size30,
+            ),
             Expanded(
               flex: 8,
-              child: LoginForm(),
+              child: state.isOtpGenerated ? OtpForm(state: state) : LoginForm(),
             ),
-            const Spacer(),
+            const SizedBox(
+              width: AppDimen.size30,
+            ),
           ],
         ),
         const SocalLogin()
