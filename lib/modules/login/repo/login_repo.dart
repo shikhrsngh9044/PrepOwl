@@ -1,17 +1,47 @@
 import 'package:dartz/dartz.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:google_sign_in/google_sign_in.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 
 import '../../../_utils/entities/api_response.dart';
 import '../model/user_dto.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 abstract class LoginRepo {
+  Future<APIResponse<UserDTO>> facebookLogin();
+  Future<APIResponse<Unit>> facebookLogout();
   Future<APIResponse<UserDTO>> googleLogin();
   Future<APIResponse<Unit>> googleLogout();
 }
 
 class LoginRepoImp implements LoginRepo {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+
+  @override
+  Future<APIResponse<UserDTO>> facebookLogin() async {
+    try {
+      final LoginResult result = await FacebookAuth.instance
+          .login(permissions: ['public_profile', 'email']);
+      final userData = await FacebookAuth.i.getUserData();
+      if (result.status == LoginStatus.success) {
+        UserDTO userDTO = UserDTO(
+            email: userData["email"].toString(),
+            photoUrl: userData["picture"]["data"]["url"].toString(),
+            name: userData["name"].toString(),
+            uid: userData["id"].toString());
+        return right(userDTO);
+      } else {
+        return left(Failure(code: 500, response: 'Something went wrong'));
+      }
+    } catch (e) {
+      return left(Failure(code: 500, response: 'Something went wrong'));
+    }
+  }
+
+  @override
+  Future<APIResponse<Unit>> facebookLogout() async {
+    await _firebaseAuth.signOut();
+    return right(unit);
+  }
 
   @override
   Future<APIResponse<UserDTO>> googleLogin() async {

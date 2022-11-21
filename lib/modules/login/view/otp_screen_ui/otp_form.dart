@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
-import 'package:prepowl/_utils/helpers/global.dart';
+import '../../../../_utils/helpers/global.dart';
 import '../../controller/login_bloc.dart';
 import '../../../welcome/welcome.dart';
 import '../../../../_utils/configs/theme_config.dart';
@@ -186,7 +186,7 @@ class _OtpFormState extends State<OtpForm> {
           style: ElevatedButton.styleFrom(
             padding: const EdgeInsets.symmetric(
                 horizontal: AppDimen.size40, vertical: AppDimen.size15),
-            primary: AppTheme.primaryColorLight,
+            backgroundColor: AppTheme.primaryColorLight,
             shape: const StadiumBorder(),
           ),
           child: Text(

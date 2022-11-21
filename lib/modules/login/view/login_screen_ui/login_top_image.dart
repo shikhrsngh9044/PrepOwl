@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import '../../../../_utils/constants/asset_constants.dart';
-import '../../../../_utils/res/dimen.dart';
 
+import '../../../../_utils/constants/asset_constants.dart';
 import '../../../../_utils/constants/string_constants.dart';
+import '../../../../_utils/res/dimen.dart';
 
 class LoginScreenTopImage extends StatelessWidget {
   const LoginScreenTopImage({

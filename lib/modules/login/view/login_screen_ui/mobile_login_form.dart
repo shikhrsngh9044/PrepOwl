@@ -82,7 +82,7 @@ class LoginForm extends StatelessWidget {
             style: ElevatedButton.styleFrom(
               padding: const EdgeInsets.symmetric(
                   horizontal: AppDimen.size40, vertical: AppDimen.size16),
-              primary: AppTheme.primaryColorLight,
+              backgroundColor: AppTheme.primaryColorLight,
               shape: const StadiumBorder(),
             ),
             child: Text(
