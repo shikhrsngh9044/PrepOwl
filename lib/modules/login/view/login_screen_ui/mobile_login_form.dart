@@ -14,11 +14,23 @@ class LoginForm extends StatelessWidget {
 
   final _formKey = GlobalKey<FormState>();
 
+  final TextEditingController _phoneNumberController = TextEditingController();
+
   void _onGenerateOTPPressed(BuildContext context) {
-    bool isValidated = _formKey.currentState?.validate() ?? false;
+    bool isValidated = _formKey.currentState!.validate();
     if (isValidated) {
       context.read<LoginBloc>().add(GenerateOtp());
+
+      _sendOtp(phoneNumber: _phoneNumberController.text, context: context);
     }
+  }
+
+  void _sendOtp({required String phoneNumber, required BuildContext context}) {
+    context.read<LoginBloc>().add(
+          SendOtpToPhoneEvent(
+            phoneNumber: "+91$phoneNumber",
+          ),
+        );
   }
 
   @override
@@ -29,6 +41,7 @@ class LoginForm extends StatelessWidget {
         children: [
           Center(
             child: TextFormField(
+              controller: _phoneNumberController,
               validator: (value) {
                 return Validation.phoneNumberValidation(value);
               },

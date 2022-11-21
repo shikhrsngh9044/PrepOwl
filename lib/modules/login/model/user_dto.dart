@@ -52,7 +52,7 @@ class UserDTO {
 
   @override
   String toString() {
-    return 'UserDTO(uid: $uid, photoUrl: $photoUrl, email: $email, name: $name)';
+    return 'UserDTO(uid: $uid, photoUrl: $photoUrl, email: $email, name: $name,)';
   }
 
   @override

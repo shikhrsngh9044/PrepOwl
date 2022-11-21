@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get.dart';
+
 import '../../../../_utils/helpers/global.dart';
 import '../../controller/login_bloc.dart';
-import '../../../welcome/welcome.dart';
+
 import '../../../../_utils/configs/theme_config.dart';
 import '../../../../_utils/constants/string_constants.dart';
 import '../../../../_utils/res/dimen.dart';
@@ -26,6 +26,9 @@ class _OtpFormState extends State<OtpForm> {
   FocusNode? pin5FocusNode;
   FocusNode? pin6FocusNode;
 
+  final _formKey = GlobalKey<FormState>();
+
+  final TextEditingController _codeController = TextEditingController();
   @override
   void initState() {
     super.initState();
@@ -52,134 +55,143 @@ class _OtpFormState extends State<OtpForm> {
     }
   }
 
+  void _verifyOtp(BuildContext context, String verificationId) {
+    context.read<LoginBloc>().add(VerifySentOtpEvent(
+        otpCode: _codeController.text, verificationId: verificationId));
+    // codeController.clear();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Row(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            Container(
-              alignment: Alignment.center,
-              height: AppDimen.size50,
-              width: AppDimen.size50,
-              child: TextFormField(
-                cursorColor: AppTheme.primaryColorLight,
-                obscureText: true,
-                style: const TextStyle(fontSize: AppDimen.size24),
-                keyboardType: TextInputType.number,
-                textAlign: TextAlign.center,
-                decoration: otpInputDecoration,
-                onChanged: (value) => nextField(value, pin2FocusNode),
+        Form(
+          key: _formKey,
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+              Container(
+                alignment: Alignment.center,
+                height: AppDimen.size50,
+                width: AppDimen.size50,
+                child: TextFormField(
+                  cursorColor: AppTheme.primaryColorLight,
+                  obscureText: true,
+                  style: const TextStyle(fontSize: AppDimen.size24),
+                  keyboardType: TextInputType.number,
+                  textAlign: TextAlign.center,
+                  decoration: otpInputDecoration,
+                  onChanged: (value) => nextField(value, pin2FocusNode),
+                ),
               ),
-            ),
-            const SizedBox(
-              width: AppDimen.size10,
-            ),
-            Container(
-              alignment: Alignment.center,
-              height: AppDimen.size50,
-              width: AppDimen.size50,
-              child: TextFormField(
-                cursorColor: AppTheme.primaryColorLight,
-                focusNode: pin2FocusNode,
-                obscureText: true,
-                style: const TextStyle(fontSize: AppDimen.size24),
-                keyboardType: TextInputType.number,
-                textAlign: TextAlign.center,
-                decoration: otpInputDecoration,
-                onChanged: (value) => nextField(value, pin3FocusNode),
+              const SizedBox(
+                width: AppDimen.size5,
               ),
-            ),
-            const SizedBox(
-              width: AppDimen.size10,
-            ),
-            Container(
-              alignment: Alignment.center,
-              height: AppDimen.size50,
-              width: AppDimen.size50,
-              child: TextFormField(
-                cursorColor: AppTheme.primaryColorLight,
-                focusNode: pin3FocusNode,
-                obscureText: true,
-                style: const TextStyle(fontSize: AppDimen.size24),
-                keyboardType: TextInputType.number,
-                textAlign: TextAlign.center,
-                decoration: otpInputDecoration,
-                onChanged: (value) => nextField(value, pin4FocusNode),
+              Container(
+                alignment: Alignment.center,
+                height: AppDimen.size50,
+                width: AppDimen.size50,
+                child: TextFormField(
+                  cursorColor: AppTheme.primaryColorLight,
+                  focusNode: pin2FocusNode,
+                  obscureText: true,
+                  style: const TextStyle(fontSize: AppDimen.size24),
+                  keyboardType: TextInputType.number,
+                  textAlign: TextAlign.center,
+                  decoration: otpInputDecoration,
+                  onChanged: (value) => nextField(value, pin3FocusNode),
+                ),
               ),
-            ),
-            const SizedBox(
-              width: AppDimen.size10,
-            ),
-            Container(
-              alignment: Alignment.center,
-              height: AppDimen.size50,
-              width: AppDimen.size50,
-              child: TextFormField(
-                cursorColor: AppTheme.primaryColorLight,
-                focusNode: pin4FocusNode,
-                obscureText: true,
-                style: const TextStyle(fontSize: AppDimen.size24),
-                keyboardType: TextInputType.number,
-                textAlign: TextAlign.center,
-                decoration: otpInputDecoration,
-                onChanged: (value) {
-                  if (value.length == 1) {
-                    pin4FocusNode!.unfocus();
-                    // Then you need to check is the code is correct or not
-                  }
-                },
+              const SizedBox(
+                width: AppDimen.size5,
               ),
-            ),
-            const SizedBox(
-              width: AppDimen.size10,
-            ),
-            Container(
-              alignment: Alignment.center,
-              height: AppDimen.size50,
-              width: AppDimen.size50,
-              child: TextFormField(
-                cursorColor: AppTheme.primaryColorLight,
-                focusNode: pin5FocusNode,
-                obscureText: true,
-                style: const TextStyle(fontSize: AppDimen.size24),
-                keyboardType: TextInputType.number,
-                textAlign: TextAlign.center,
-                decoration: otpInputDecoration,
-                onChanged: (value) {
-                  if (value.length == 1) {
-                    pin5FocusNode!.unfocus();
-                    // Then you need to check is the code is correct or not
-                  }
-                },
+              Container(
+                alignment: Alignment.center,
+                height: AppDimen.size50,
+                width: AppDimen.size50,
+                child: TextFormField(
+                  cursorColor: AppTheme.primaryColorLight,
+                  focusNode: pin3FocusNode,
+                  obscureText: true,
+                  style: const TextStyle(fontSize: AppDimen.size24),
+                  keyboardType: TextInputType.number,
+                  textAlign: TextAlign.center,
+                  decoration: otpInputDecoration,
+                  onChanged: (value) => nextField(value, pin4FocusNode),
+                ),
               ),
-            ),
-            const SizedBox(
-              width: AppDimen.size10,
-            ),
-            Container(
-              alignment: Alignment.center,
-              height: AppDimen.size50,
-              width: AppDimen.size50,
-              child: TextFormField(
-                cursorColor: AppTheme.primaryColorLight,
-                focusNode: pin6FocusNode,
-                obscureText: true,
-                style: const TextStyle(fontSize: AppDimen.size24),
-                keyboardType: TextInputType.number,
-                textAlign: TextAlign.center,
-                decoration: otpInputDecoration,
-                onChanged: (value) {
-                  if (value.length == 1) {
-                    pin6FocusNode!.unfocus();
-                    // Then you need to check is the code is correct or not
-                  }
-                },
+              const SizedBox(
+                width: AppDimen.size5,
               ),
-            ),
-          ],
+              Container(
+                alignment: Alignment.center,
+                height: AppDimen.size50,
+                width: AppDimen.size50,
+                child: TextFormField(
+                  cursorColor: AppTheme.primaryColorLight,
+                  focusNode: pin4FocusNode,
+                  obscureText: true,
+                  style: const TextStyle(fontSize: AppDimen.size24),
+                  keyboardType: TextInputType.number,
+                  textAlign: TextAlign.center,
+                  decoration: otpInputDecoration,
+                  onChanged: (value) {
+                    if (value.length == 1) {
+                      pin4FocusNode!.unfocus();
+                      // Then you need to check is the code is correct or not
+                    }
+                  },
+                ),
+              ),
+              const SizedBox(
+                width: AppDimen.size5,
+              ),
+              Container(
+                alignment: Alignment.center,
+                height: AppDimen.size50,
+                width: AppDimen.size50,
+                child: TextFormField(
+                  cursorColor: AppTheme.primaryColorLight,
+                  focusNode: pin5FocusNode,
+                  obscureText: true,
+                  style: const TextStyle(fontSize: AppDimen.size24),
+                  keyboardType: TextInputType.number,
+                  textAlign: TextAlign.center,
+                  decoration: otpInputDecoration,
+                  onChanged: (value) {
+                    if (value.length == 1) {
+                      pin5FocusNode!.unfocus();
+                      // Then you need to check is the code is correct or not
+                    }
+                  },
+                ),
+              ),
+              const SizedBox(
+                width: AppDimen.size5,
+              ),
+              Container(
+                alignment: Alignment.center,
+                height: AppDimen.size50,
+                width: AppDimen.size50,
+                child: TextFormField(
+                  cursorColor: AppTheme.primaryColorLight,
+                  focusNode: pin6FocusNode,
+                  obscureText: true,
+                  style: const TextStyle(fontSize: AppDimen.size24),
+                  keyboardType: TextInputType.number,
+                  textAlign: TextAlign.center,
+                  decoration: otpInputDecoration,
+                  onChanged: (value) {
+                    if (value.length == 1) {
+                      pin6FocusNode!.unfocus();
+                      // Then you need to check is the code is correct or not
+                    }
+                  },
+                ),
+              ),
+            ],
+          ),
         ),
         const SizedBox(height: AppDimen.size30),
         ElevatedButton(
@@ -198,7 +210,9 @@ class _OtpFormState extends State<OtpForm> {
             ),
           ),
           onPressed: () {
-            Get.to(() => const Welcome());
+            if (_formKey.currentState!.validate()) {
+              _verifyOtp(context, widget.state.verificationId);
+            }
           },
         ),
         const SizedBox(height: AppDimen.size30),
@@ -209,7 +223,7 @@ class _OtpFormState extends State<OtpForm> {
 
   Widget buildTimer(BuildContext context) {
     return TweenAnimationBuilder(
-      tween: Tween(begin: 10.0, end: 0.0),
+      tween: Tween(begin: 90.0, end: 0.0),
       duration: const Duration(seconds: 10),
       builder: (_, dynamic value, child) {
         if (value.toInt() == 0) {

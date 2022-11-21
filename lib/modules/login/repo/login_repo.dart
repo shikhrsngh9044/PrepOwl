@@ -1,9 +1,9 @@
 import 'package:dartz/dartz.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:prepowl/_utils/entities/api_response.dart';
+import 'package:prepowl/modules/login/model/user_dto.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 
-import '../../../_utils/entities/api_response.dart';
-import '../model/user_dto.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 abstract class LoginRepo {
@@ -80,5 +80,21 @@ class LoginRepoImp implements LoginRepo {
   Future<APIResponse<Unit>> googleLogout() async {
     await _firebaseAuth.signOut();
     return right(unit);
+  }
+
+  Future<void> verifyPhone({
+    required String phoneNumber,
+    required Function(PhoneAuthCredential) verificationCompleted,
+    required Function(FirebaseAuthException) verificationFailed,
+    required Function(String, int?) codeSent,
+    required Function(String) codeAutoRetrievalTimeout,
+  }) async {
+    await _firebaseAuth.verifyPhoneNumber(
+      phoneNumber: phoneNumber,
+      verificationCompleted: verificationCompleted,
+      verificationFailed: verificationFailed,
+      codeSent: codeSent,
+      codeAutoRetrievalTimeout: codeAutoRetrievalTimeout,
+    );
   }
 }
