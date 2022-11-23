@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:701131617654:android:629682735ff4623e18b657",
+        "mobilesdk_app_id": "1:701131617654:android:8161f46ae7a672ab18b657",
         "android_client_info": {
-          "package_name": "com.shikhar.prepowl"
+          "package_name": "com.shikhar.prepowl.dev"
         }
       },
       "oauth_client": [
@@ -29,6 +29,13 @@
             {
               "client_id": "701131617654-91he5nbaummgpuu6qkjkcuvdg07g3atl.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "701131617654-p7m2v05iuk3g9biqebsdn9clvtqlrbn4.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.shikhar.prepowl.dev"
+              }
             }
           ]
         }

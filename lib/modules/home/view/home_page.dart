@@ -9,7 +9,7 @@ class HomePage extends StatelessWidget {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: const [
-          Text("Home Page"),
+          Center(child: Text("Home Page")),
         ],
       ),
     );
