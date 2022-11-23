@@ -3,11 +3,15 @@ import 'package:prepowl/_utils/helpers/global.dart';
 import 'dart:math';
 
 import '../../../_utils/res/dimen.dart';
+import '../model/onboarding_dto.dart';
 
 class OnboardingItem extends StatelessWidget {
-  const OnboardingItem({Key? key, required this.index}) : super(key: key);
+  const OnboardingItem(
+      {Key? key, required this.index, required this.onboardingList})
+      : super(key: key);
 
   final int index;
+  final OnboardingDTO onboardingList;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -19,17 +23,15 @@ class OnboardingItem extends StatelessWidget {
             .primaries[Random().nextInt(Colors.primaries.length)]
             .withOpacity(0.6),
         label: Text(
-          index % 3 == 0
-              ? 'Exam Category ${index + 1}'
-              : ' Category ${index + 1}',
+          onboardingList.title,
           style: const TextStyle(
             fontSize: AppDimen.size16,
           ),
         ),
-        shape: StadiumBorder(
+        shape: const StadiumBorder(
           side: BorderSide(
             width: 1,
-            color: index % 2 == 0 ? Colors.black : Colors.white,
+            color: Colors.white,
           ),
         ),
         onSelected: (bool value) {
