@@ -1,10 +1,10 @@
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:prepowl/_utils/entities/api_response.dart';
-import 'package:prepowl/modules/login/model/user_dto.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
-
 import 'package:google_sign_in/google_sign_in.dart';
+
+import '../../../_utils/entities/api_response.dart';
+import '../model/user_dto.dart';
 
 abstract class LoginRepo {
   Future<APIResponse<UserDTO>> facebookLogin();

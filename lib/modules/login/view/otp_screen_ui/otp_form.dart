@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../_utils/helpers/global.dart';
-import '../../controller/login_bloc.dart';
-
 import '../../../../_utils/configs/theme_config.dart';
 import '../../../../_utils/constants/string_constants.dart';
+import '../../../../_utils/helpers/global.dart';
 import '../../../../_utils/res/dimen.dart';
+import '../../controller/login_bloc.dart';
 
 class OtpForm extends StatefulWidget {
   const OtpForm({
