@@ -38,11 +38,11 @@ class Onboarding extends StatelessWidget {
               ),
               SizedBox(
                 height: MediaQuery.of(context).size.height - 175,
-                child: ListView.builder(
-                  itemBuilder: (context, index) {
-                    return OnboardingItem(index: index);
-                  },
-                  itemCount: 10,
+                child: Wrap(
+                  children: List<Widget>.generate(
+                    15,
+                    (index) => OnboardingItem(index: index),
+                  ).toList(),
                 ),
               ),
               PrimaryButton(btnText: AppConst.submit, onPressed: () {})
