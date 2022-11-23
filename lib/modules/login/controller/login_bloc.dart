@@ -9,6 +9,7 @@ part 'login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   LoginBloc() : super(LoginState()) {
+    // ignore: no_leading_underscores_for_local_identifiers
     FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
     on<SendOtpToPhoneEvent>((event, emit) async {
