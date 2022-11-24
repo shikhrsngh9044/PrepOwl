@@ -15,7 +15,9 @@ class Validation {
     String name = text ?? '';
 
     if (name.trim().isEmpty) {
-      return AppConst.nameempty;
+      return AppConst.nameEmpty;
+    } else if (name.trim().length < 2) {
+      return AppConst.nameLength;
     }
 
     return null;
@@ -25,7 +27,7 @@ class Validation {
     String email = text ?? '';
 
     if (email.trim().isEmpty) {
-      return AppConst.emailempty;
+      return AppConst.emailEmpty;
     }
 
     return null;

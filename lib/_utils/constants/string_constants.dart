@@ -40,10 +40,11 @@ class AppConst {
   static const completeProfileHeading = "Complete Profile";
   static const secondHeading =
       "Complete your details and continue  \nwith Plateform";
-  static const nameempty = 'Please enter name.';
-  static const emailempty = 'Please enter email.';
-  static const emailhint = "Email";
+  static const nameEmpty = 'Please enter name.';
+  static const emailEmpty = 'Please enter email.';
+  static const emailHint = "Email";
   static const nameHint = 'Name';
+  static const nameLength = "Name should not less than 2 characters.";
   static const continuePage = "Continue";
   static const camera = "Camera";
   static const gallary = "Gallery";
