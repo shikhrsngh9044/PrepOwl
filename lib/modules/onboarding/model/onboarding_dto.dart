@@ -1,18 +1,18 @@
 import 'dart:convert';
 
-class OnboardingDTO {
+class ExamCategoryDTO {
   final String id;
   final String title;
-  OnboardingDTO({
+  ExamCategoryDTO({
     required this.id,
     required this.title,
   });
 
-  OnboardingDTO copyWith({
+  ExamCategoryDTO copyWith({
     String? id,
     String? title,
   }) {
-    return OnboardingDTO(
+    return ExamCategoryDTO(
       id: id ?? this.id,
       title: title ?? this.title,
     );
@@ -25,8 +25,8 @@ class OnboardingDTO {
     };
   }
 
-  factory OnboardingDTO.fromMap(Map<String, dynamic> map) {
-    return OnboardingDTO(
+  factory ExamCategoryDTO.fromMap(Map<String, dynamic> map) {
+    return ExamCategoryDTO(
       id: map['id'] as String,
       title: map['title'] as String,
     );
@@ -34,11 +34,12 @@ class OnboardingDTO {
 
   String toJson() => json.encode(toMap());
 
-  factory OnboardingDTO.fromJson(Map<String, dynamic> json) => OnboardingDTO(
+  factory ExamCategoryDTO.fromJson(Map<String, dynamic> json) =>
+      ExamCategoryDTO(
         id: json['id'],
         title: json['title'],
       );
 
   // @override
-  // String toString() => 'OnboardingDTO(id: $id, title: $title)';
+  // String toString() => 'ExamCategoryDTO(id: $id, title: $title)';
 }

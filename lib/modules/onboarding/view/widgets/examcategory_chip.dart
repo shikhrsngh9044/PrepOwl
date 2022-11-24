@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:prepowl/_utils/helpers/global.dart';
 import 'dart:math';
+import '../../../../_utils/res/dimen.dart';
+import '../../model/onboarding_dto.dart';
 
-import '../../../_utils/res/dimen.dart';
-import '../model/onboarding_dto.dart';
-
-class OnboardingItem extends StatelessWidget {
-  const OnboardingItem(
-      {Key? key, required this.index, required this.onboardingList})
+class ExamCategoryItemChip extends StatelessWidget {
+  const ExamCategoryItemChip({Key? key, required this.examCategoryList})
       : super(key: key);
 
-  final int index;
-  final OnboardingDTO onboardingList;
+  final ExamCategoryDTO examCategoryList;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -23,7 +21,7 @@ class OnboardingItem extends StatelessWidget {
             .primaries[Random().nextInt(Colors.primaries.length)]
             .withOpacity(0.6),
         label: Text(
-          onboardingList.title,
+          examCategoryList.title,
           style: const TextStyle(
             fontSize: AppDimen.size16,
           ),
@@ -35,7 +33,7 @@ class OnboardingItem extends StatelessWidget {
           ),
         ),
         onSelected: (bool value) {
-          printDebug("${index + 1}");
+          printDebug(value);
         },
       ),
     );

@@ -4,7 +4,7 @@ import 'package:prepowl/_utils/constants/string_constants.dart';
 import 'package:prepowl/_utils/res/dimen.dart';
 import 'package:prepowl/_utils/ui_components/buttons.dart';
 import '../controller/onboarding_bloc.dart';
-import 'onboarding_item.dart';
+import 'widgets/examcategory_chip.dart';
 
 class Onboarding extends StatelessWidget {
   const Onboarding({Key? key}) : super(key: key);
@@ -65,10 +65,9 @@ class OnboardingUI extends StatelessWidget {
                       height: MediaQuery.of(context).size.height - 175,
                       child: Wrap(
                         children: List<Widget>.generate(
-                          state.onboardingList.length,
-                          (index) => OnboardingItem(
-                              index: index,
-                              onboardingList: state.onboardingList[index]),
+                          state.examCategoryList.length,
+                          (index) => ExamCategoryItemChip(
+                              examCategoryList: state.examCategoryList[index]),
                         ).toList(),
                       ),
                     ),

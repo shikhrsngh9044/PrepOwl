@@ -16,7 +16,7 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
             isLoading: false, errorMessage: l.response.toString()),
         (r) => state.copyWith(
           isLoading: false,
-          onboardingList: r,
+          examCategoryList: r,
         ),
       );
       emit(updatedState);

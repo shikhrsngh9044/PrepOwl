@@ -6,19 +6,20 @@ import '../../../_utils/entities/api_response.dart';
 import '../model/onboarding_dto.dart';
 
 abstract class OnboardingRepository {
-  Future<APIResponse<List<OnboardingDTO>>> getAllExamList();
+  Future<APIResponse<List<ExamCategoryDTO>>> getAllExamList();
 }
 
 class OnboardingRepositotyImpl implements OnboardingRepository {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
 
   @override
-  Future<APIResponse<List<OnboardingDTO>>> getAllExamList() async {
-    List<OnboardingDTO> onboarding = [];
+  Future<APIResponse<List<ExamCategoryDTO>>> getAllExamList() async {
+    List<ExamCategoryDTO> onboarding = [];
     try {
       final results = await firestore.collection(AppConst.collectionName).get();
       for (var snapshot in results.docs) {
-        OnboardingDTO newOnboarding = OnboardingDTO.fromJson(snapshot.data());
+        ExamCategoryDTO newOnboarding =
+            ExamCategoryDTO.fromJson(snapshot.data());
 
         onboarding.add(newOnboarding);
       }

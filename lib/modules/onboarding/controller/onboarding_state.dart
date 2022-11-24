@@ -1,22 +1,23 @@
 part of 'onboarding_bloc.dart';
 
 class OnboardingState {
-  final List<OnboardingDTO> onboardingList;
+  final List<ExamCategoryDTO> examCategoryList;
   final bool isLoading;
   final String errorMessage;
+
   OnboardingState({
-    this.onboardingList = const [],
+    this.examCategoryList = const [],
     this.isLoading = false,
     this.errorMessage = '',
   });
 
   OnboardingState copyWith({
-    List<OnboardingDTO>? onboardingList,
+    List<ExamCategoryDTO>? examCategoryList,
     bool? isLoading,
     String? errorMessage,
   }) {
     return OnboardingState(
-      onboardingList: onboardingList ?? this.onboardingList,
+      examCategoryList: examCategoryList ?? this.examCategoryList,
       isLoading: isLoading ?? this.isLoading,
       errorMessage: errorMessage ?? this.errorMessage,
     );
@@ -24,5 +25,5 @@ class OnboardingState {
 
   @override
   String toString() =>
-      'OnboardingState(onboardingList: $onboardingList, isLoading: $isLoading,errorMessage:$errorMessage)';
+      'OnboardingState(examCategoryList: $examCategoryList, isLoading: $isLoading,errorMessage:$errorMessage)';
 }
