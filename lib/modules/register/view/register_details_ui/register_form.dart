@@ -1,12 +1,12 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:prepowl/_utils/configs/theme_config.dart';
-import 'package:prepowl/_utils/constants/string_constants.dart';
-import 'package:prepowl/_utils/helpers/global.dart';
-import 'package:prepowl/_utils/res/dimen.dart';
-import 'package:prepowl/modules/register/controller/profile_bloc.dart';
-import 'package:prepowl/modules/register/view/register_details_ui/profile_pic.dart';
+import '../../../../_utils/configs/theme_config.dart';
+import '../../../../_utils/constants/string_constants.dart';
+import '../../../../_utils/helpers/global.dart';
+import '../../../../_utils/res/dimen.dart';
+import '../../controller/profile_bloc.dart';
+import 'profile_pic.dart';
 
 import '../../../../_utils/helpers/validation.dart';
 
@@ -30,6 +30,7 @@ class CompleteRegisterFormState extends State<CompleteRegisterForm> {
     bool isValidated = _formKey.currentState?.validate() ?? false;
     if (isValidated) {
       printDebug("object");
+      // Get.offAndToNamed(RouteNames.loginPage);
     }
   }
 
@@ -62,7 +63,7 @@ class CompleteRegisterFormState extends State<CompleteRegisterForm> {
             ],
             decoration: nameInputDecoration,
           ),
-          const SizedBox(height: 30),
+          const SizedBox(height: AppDimen.size30),
           TextFormField(
             cursorColor: AppTheme.primaryColorLight,
             keyboardType: TextInputType.emailAddress,
@@ -78,7 +79,7 @@ class CompleteRegisterFormState extends State<CompleteRegisterForm> {
             ],
             decoration: emailInputDecoration,
           ),
-          const SizedBox(height: 40),
+          const SizedBox(height: AppDimen.size30),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
               padding: const EdgeInsets.symmetric(
@@ -96,7 +97,6 @@ class CompleteRegisterFormState extends State<CompleteRegisterForm> {
             ),
             onPressed: () {
               _returnErrorText();
-              // Get.offAndToNamed(RouteNames.loginPage);
             },
           )
         ],

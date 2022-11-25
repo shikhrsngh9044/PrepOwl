@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:prepowl/_utils/configs/theme_config.dart';
-import 'package:prepowl/_utils/constants/string_constants.dart';
-import 'package:prepowl/_utils/res/dimen.dart';
+import '../../configs/theme_config.dart';
+import '../../constants/string_constants.dart';
+import '../../res/dimen.dart';
 
-import 'package:prepowl/modules/register/controller/profile_bloc.dart';
+import '../../../modules/register/controller/profile_bloc.dart';
 
 class BottomSheetScreen extends StatelessWidget {
   const BottomSheetScreen({Key? key}) : super(key: key);

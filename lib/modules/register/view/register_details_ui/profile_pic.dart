@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:prepowl/_utils/constants/asset_constants.dart';
-import 'package:prepowl/_utils/ui_components/custom_bottom_sheets.dart';
-import 'package:prepowl/modules/register/controller/profile_bloc.dart';
+import '../../../../_utils/constants/asset_constants.dart';
+import '../../../../_utils/ui_components/custom_bottom_sheets.dart';
+import '../../controller/profile_bloc.dart';
 
 class ProfilePic extends StatelessWidget {
   const ProfilePic({
