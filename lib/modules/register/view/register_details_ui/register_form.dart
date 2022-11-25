@@ -75,9 +75,6 @@ class CompleteRegisterFormState extends State<CompleteRegisterForm> {
             },
             inputFormatters: [
               LengthLimitingTextInputFormatter(50),
-              FilteringTextInputFormatter.allow(
-                RegExp(r'[A-Za-z0-9@._]'),
-              )
             ],
             decoration: emailInputDecoration,
           ),
