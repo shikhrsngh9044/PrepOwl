@@ -6,5 +6,5 @@ class Assets {
   static const String signIconImage = "assets/icons/signup.svg";
   static const String facebookLogin = "assets/icons/facebook.svg";
   static const String gmailLogin = "assets/icons/google-plus.svg";
-  static const String customprofileicon = "assets/images/profile_Image.png";
+  static const String customProfileIcon = "assets/images/profile_Image.png";
 }

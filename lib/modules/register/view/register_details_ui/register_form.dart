@@ -6,7 +6,7 @@ import '../../../../_utils/constants/string_constants.dart';
 import '../../../../_utils/helpers/global.dart';
 import '../../../../_utils/res/dimen.dart';
 import '../../controller/profile_bloc.dart';
-import 'profile_pic.dart';
+import 'package:prepowl/modules/register/view/register_details_ui/profile_pic.dart';
 
 import '../../../../_utils/helpers/validation.dart';
 

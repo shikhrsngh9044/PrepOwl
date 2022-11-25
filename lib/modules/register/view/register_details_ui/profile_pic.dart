@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:prepowl/_utils/ui_components/bottom_sheet/bottomsheet_ui.dart';
+
 import '../../../../_utils/constants/asset_constants.dart';
-import '../../../../_utils/ui_components/custom_bottom_sheets.dart';
+
 import '../../controller/profile_bloc.dart';
 
 class ProfilePic extends StatelessWidget {
@@ -20,7 +23,7 @@ class ProfilePic extends StatelessWidget {
         children: [
           state.filepath.path.isEmpty
               ? const CircleAvatar(
-                  backgroundImage: AssetImage(Assets.customprofileicon))
+                  backgroundImage: AssetImage(Assets.customProfileIcon))
               : CircleAvatar(
                   backgroundImage: FileImage(
                     state.filepath,
@@ -35,8 +38,14 @@ class ProfilePic extends StatelessWidget {
               child: CircleAvatar(
                 backgroundColor: Colors.white.withOpacity(0.5),
                 child: IconButton(
-                    onPressed: () {
-                      CustomBottomSheet.getProfilePic(context);
+                    onPressed: () async {
+                      final checkImage =
+                          await BottomSheetScreen.showSelectImageBottomSheet(
+                              context);
+                      context
+                          .read<ProfileBloc>()
+                          .add(UpdateFilePath(checkImage!));
+                      // CustomBottomSheet.getProfilePic(context);
                     },
                     iconSize: 30,
                     icon: const Icon(Icons.camera_alt_rounded)),

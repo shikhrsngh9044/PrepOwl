@@ -5,5 +5,6 @@ abstract class ProfileEvent {
 }
 
 class UpdateFilePath extends ProfileEvent {
-  const UpdateFilePath();
+  File imageFile;
+  UpdateFilePath(this.imageFile);
 }

@@ -1,12 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
-import 'bottom_sheet/bottomSheet_ui.dart';
 
 class CustomBottomSheet {
-  static getProfilePic(BuildContext context) {
-    showModalBottomSheet<void>(
-        context: context,
-        builder: (BuildContext mContext) {
-          return const BottomSheetScreen();
-        });
+  static Future<File?> getProfilePic(BuildContext context) async {
+    //await BottomSheetScreen.showSelectImageBottomSheet(context);
   }
 }
