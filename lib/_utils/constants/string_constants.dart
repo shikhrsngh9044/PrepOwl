@@ -38,4 +38,5 @@ class AppConst {
   static const fastEasyWayToPrepare = "Fast & easy way to prepare.";
   static const selectExamCategory = "Select exam category";
   static const submit = "Submit";
+  static const collectionName = "exam_list";
 }

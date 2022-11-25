@@ -1,4 +1,5 @@
 import 'package:get/get_navigation/get_navigation.dart';
+import '../../modules/onboarding/view/onboarding_view.dart';
 
 import '../../modules/dashboard/view/dashboard.dart';
 import '../../modules/login/view/login_screen.dart';
