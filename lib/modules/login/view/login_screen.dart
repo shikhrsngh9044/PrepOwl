@@ -32,16 +32,8 @@ class LoginPageScreen extends StatelessWidget {
       body: BlocConsumer<LoginBloc, LoginState>(
         listener: (context, state) {
           if (state.isAuthenticated) {
-            var data = {
-              'name': state.userDTO?.name,
-              'email': state.userDTO?.email,
-              'uid': state.userDTO?.uid,
-              'photoUrl': state.userDTO?.photoUrl,
-            };
-
             Get.offAndToNamed(
-              RouteNames.dashboard,
-              arguments: data,
+              RouteNames.onboarding,
             );
           } else if (state.isUnauthenticated) {
             Get.offAndToNamed(

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../controller/login_bloc.dart';
+
 import '../../../../_utils/configs/theme_config.dart';
+import '../../../../_utils/constants/string_constants.dart';
 import '../../../../_utils/helpers/validation.dart';
 import '../../../../_utils/res/dimen.dart';
-import '../../../../_utils/constants/string_constants.dart';
+import '../../controller/login_bloc.dart';
 
 class LoginForm extends StatelessWidget {
   LoginForm({

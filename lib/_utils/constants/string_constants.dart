@@ -35,4 +35,8 @@ class AppConst {
   static const hintText = "Enter Mobile Number";
   static const emptyMobileNumber = "Please enter mobile number.";
   static const mobileNumberCount = "Mobile number must be of 10 characters.";
+  static const fastEasyWayToPrepare = "Fast & easy way to prepare.";
+  static const selectExamCategory = "Select exam category";
+  static const submit = "Submit";
+  static const collectionName = "exam_list";
 }
