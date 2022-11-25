@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:prepowl/_utils/constants/string_constants.dart';
-import 'package:prepowl/_utils/res/dimen.dart';
-import 'package:prepowl/_utils/ui_components/buttons.dart';
+import '../../../_utils/constants/string_constants.dart';
+import '../../../_utils/res/dimen.dart';
+import '../../../_utils/ui_components/buttons.dart';
 import '../controller/onboarding_bloc.dart';
-import 'widgets/examcategory_chip.dart';
+import 'widgets/exam_category_chip.dart';
 
 class Onboarding extends StatelessWidget {
   const Onboarding({Key? key}) : super(key: key);
@@ -65,13 +65,18 @@ class OnboardingUI extends StatelessWidget {
                       height: MediaQuery.of(context).size.height - 175,
                       child: Wrap(
                         children: List<Widget>.generate(
-                          state.examCategoryList.length,
-                          (index) => ExamCategoryItemChip(
-                              examCategoryList: state.examCategoryList[index]),
+                          state.onboardingList.length,
+                          (index) => ExamCategoryChip(
+                              onboardingList: state.onboardingList[index],
+                              state: state),
                         ).toList(),
                       ),
                     ),
-                    PrimaryButton(btnText: AppConst.submit, onPressed: () {})
+                    if (state.selectedOnboardingList.isNotEmpty)
+                      PrimaryButton(
+                        btnText: AppConst.submit,
+                        onPressed: () {},
+                      ),
                   ],
                 ),
               ),
