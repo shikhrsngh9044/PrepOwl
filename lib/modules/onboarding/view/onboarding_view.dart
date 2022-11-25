@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:prepowl/_utils/constants/string_constants.dart';
-import 'package:prepowl/_utils/res/dimen.dart';
-import 'package:prepowl/_utils/ui_components/buttons.dart';
+import '../../../_utils/constants/string_constants.dart';
+import '../../../_utils/res/dimen.dart';
+import '../../../_utils/ui_components/buttons.dart';
 import '../controller/onboarding_bloc.dart';
 import 'widgets/exam_category_chip.dart';
 

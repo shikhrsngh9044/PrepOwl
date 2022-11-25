@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:prepowl/modules/onboarding/controller/onboarding_bloc.dart';
-import 'package:prepowl/modules/onboarding/model/exam_category_dto.dart';
+import '../../controller/onboarding_bloc.dart';
+import '../../model/exam_category_dto.dart';
 
 import '../../../../_utils/res/dimen.dart';
 
