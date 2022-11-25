@@ -5,3 +5,21 @@ abstract class OnboardingEvent {
 }
 
 class GetAllExamList extends OnboardingEvent {}
+
+class AddToSelectedList extends OnboardingEvent {
+  ExamCategoryDTO onboardingDTO;
+  AddToSelectedList(
+    this.onboardingDTO,
+  );
+}
+
+class DeleteFromSelectedList extends OnboardingEvent {
+  ExamCategoryDTO onboardingDTO;
+  DeleteFromSelectedList(
+    this.onboardingDTO,
+  );
+}
+
+class UpdateCount extends OnboardingEvent {
+  UpdateCount();
+}

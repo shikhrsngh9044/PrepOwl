@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../model/onboarding_dto.dart';
+import 'package:prepowl/modules/onboarding/model/exam_category_dto.dart';
 
 import '../repo/onboarding_repo.dart';
 
@@ -16,10 +16,27 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
             isLoading: false, errorMessage: l.response.toString()),
         (r) => state.copyWith(
           isLoading: false,
-          examCategoryList: r,
+          onboardingList: r,
         ),
       );
       emit(updatedState);
+    });
+
+    on<AddToSelectedList>((event, emit) async {
+      emit(
+        state.copyWith(
+          selectedOnboardingList: [
+            ...state.selectedOnboardingList,
+            event.onboardingDTO
+          ],
+        ),
+      );
+    });
+
+    on<DeleteFromSelectedList>((event, emit) async {
+      List<ExamCategoryDTO> onboardingList = state.selectedOnboardingList;
+      onboardingList.remove(event.onboardingDTO);
+      emit(state.copyWith(selectedOnboardingList: onboardingList));
     });
   }
 }
