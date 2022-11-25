@@ -282,16 +282,71 @@ extension TextStyleX on TextStyle {
   }
 }
 
+final nameInputDecoration = InputDecoration(
+    prefixIcon: prefixIconName(),
+    border: outlineInputBorder(),
+    focusedBorder: outlineFocusInputBorder(),
+    enabledBorder: outlineEnableInputBorder(),
+    errorBorder: focusedErrorBorder(),
+    focusedErrorBorder: focusedErrorBorder());
+
+final emailInputDecoration = InputDecoration(
+    prefixIcon: prefixIconEmail(),
+    border: outlineInputBorder(),
+    focusedBorder: outlineFocusInputBorder(),
+    enabledBorder: outlineEnableInputBorder(),
+    errorBorder: focusedErrorBorder(),
+    focusedErrorBorder: focusedErrorBorder());
+
 final otpInputDecoration = InputDecoration(
-  contentPadding: const EdgeInsets.symmetric(vertical: 15),
   border: outlineInputBorder(),
-  focusedBorder: outlineInputBorder(),
-  enabledBorder: outlineInputBorder(),
+  focusedBorder: outlineFocusInputBorder(),
+  enabledBorder: outlineEnableInputBorder(),
 );
+
+Icon prefixIconName() {
+  return const Icon(
+    Icons.person,
+    color: AppTheme.primaryColorLight,
+  );
+}
+
+Icon prefixIconEmail() {
+  return const Icon(
+    Icons.email,
+    color: AppTheme.primaryColorLight,
+  );
+}
 
 OutlineInputBorder outlineInputBorder() {
   return OutlineInputBorder(
     borderRadius: BorderRadius.circular(15),
     borderSide: const BorderSide(color: AppTheme.primaryColorLight),
+  );
+}
+
+OutlineInputBorder outlineEnableInputBorder() {
+  return OutlineInputBorder(
+    borderRadius: BorderRadius.circular(15.0),
+    borderSide: const BorderSide(
+      color: AppTheme.primaryColorLight,
+      width: 2.0,
+    ),
+  );
+}
+
+OutlineInputBorder outlineFocusInputBorder() {
+  return OutlineInputBorder(
+    borderRadius: BorderRadius.circular(15.0),
+    borderSide: const BorderSide(
+      color: AppTheme.primaryColorLight,
+    ),
+  );
+}
+
+OutlineInputBorder focusedErrorBorder() {
+  return OutlineInputBorder(
+    borderSide: const BorderSide(width: 3, color: AppTheme.primaryColorLight),
+    borderRadius: BorderRadius.circular(15),
   );
 }

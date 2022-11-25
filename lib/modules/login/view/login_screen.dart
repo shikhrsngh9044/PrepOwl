@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
-
 import '../../../_utils/constants/routes.dart';
 import '../../../_utils/res/dimen.dart';
 import '../controller/login_bloc.dart';
@@ -40,7 +39,7 @@ class LoginPageScreen extends StatelessWidget {
             };
 
             Get.offAndToNamed(
-              RouteNames.dashboard,
+              RouteNames.register,
               arguments: data,
             );
           } else if (state.isUnauthenticated) {
@@ -99,6 +98,23 @@ class MobileSignupScreen extends StatelessWidget {
             ),
           ],
         ),
+        // const SizedBox(
+        //   height: AppDimen.size30,
+        // ),
+        // state.isOtpGenerated
+        //     ? AlreadyHaveAnAccountCheck(
+        //         press: () {
+        //           Navigator.push(
+        //             context,
+        //             MaterialPageRoute(
+        //               builder: (context) {
+        //                 return const CompleteProfileScreen();
+        //               },
+        //             ),
+        //           );
+        //         },
+        //       )
+        //     :
         const SocalLogin()
       ],
     );

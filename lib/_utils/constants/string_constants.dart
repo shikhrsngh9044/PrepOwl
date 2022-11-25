@@ -35,4 +35,18 @@ class AppConst {
   static const hintText = "Enter Mobile Number";
   static const emptyMobileNumber = "Please enter mobile number.";
   static const mobileNumberCount = "Mobile number must be of 10 characters.";
+  static const accountlines = "Add New Profile? ";
+  static const signup = "Add Profile";
+  static const completeProfileHeading = "Complete Profile";
+  static const secondHeading =
+      "Complete your details and continue  \nwith Plateform";
+  static const nameEmpty = 'Please enter name.';
+  static const emailEmpty = 'Please enter email.';
+  static const emailHint = "Email";
+  static const nameHint = 'Name';
+  static const nameLength = "Name should not less than 2 characters.";
+  static const continuePage = "Continue";
+  static const camera = "Camera";
+  static const gallary = "Gallery";
+  static const cancel = "Cancel";
 }
