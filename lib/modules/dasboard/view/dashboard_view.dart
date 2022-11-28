@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:prepowl/_utils/constants/string_constants.dart';
-import 'package:prepowl/modules/dasboard/view/widgets/drawer_page.dart';
+import '../../../_utils/constants/string_constants.dart';
+import 'widgets/drawer_page.dart';
 import 'widgets/exam_category_list.dart';
 import 'widgets/bottom_navigator.dart';
 import '../../../_utils/res/dimen.dart';
