@@ -1,21 +1,23 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
-import '../model/exam_category_dto.dart';
+
 import '../../../_utils/constants/string_constants.dart';
 import '../../../_utils/entities/api_response.dart';
+import '../model/exam_category_dto.dart';
 
 abstract class OnboardingRepository {
-  Future<APIResponse<List<ExamCategoryDTO>>> getAllExamList();
+  Future<APIResponse<List<ExamCategoryDTO>>> getAllExamCategoryList();
 }
 
 class OnboardingRepositotyImpl implements OnboardingRepository {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
 
   @override
-  Future<APIResponse<List<ExamCategoryDTO>>> getAllExamList() async {
+  Future<APIResponse<List<ExamCategoryDTO>>> getAllExamCategoryList() async {
     List<ExamCategoryDTO> onboarding = [];
     try {
-      final results = await firestore.collection(AppConst.collectionName).get();
+      final results =
+          await firestore.collection(AppConst.examCategoryCollectionName).get();
       for (var snapshot in results.docs) {
         ExamCategoryDTO newOnboarding =
             ExamCategoryDTO.fromJson(snapshot.data());
