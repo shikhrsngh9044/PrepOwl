@@ -2,6 +2,8 @@ class LabelConstants {
   static const home = "Home";
   static const trips = "Trips";
   static const profile = "Profile";
+  static const search = "Search";
+  static const doubts = "Doubts";
 }
 
 class AlertMassages {
@@ -38,12 +40,11 @@ class AppConst {
   static const fastEasyWayToPrepare = "Fast & easy way to prepare.";
   static const selectExamCategory = "Select exam category";
   static const submit = "Submit";
-  static const examCategoryCollectionName = "exam_category_list";
-  static const examCollectionName = "exam_list";
   static const appName = "PrepOwlFork";
   static const getStarted = 'Get started with these amazing exam options.';
-  static const home = "Home";
-  static const search = "Search";
-  static const doubts = "Doubts";
-  static const profile = "Profile";
+}
+
+class DBConst {
+  static const examCategoryCollectionName = "exam_category_list";
+  static const examCollectionName = "exam_list";
 }

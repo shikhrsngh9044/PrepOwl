@@ -6,7 +6,9 @@ import '../../../_utils/entities/api_response.dart';
 import '../model/exam_list_dto.dart';
 
 abstract class DashboardRepository {
-  Future<APIResponse<List<ExamListDTO>>> getAllExamList(String parentId);
+  Future<APIResponse<List<ExamListDTO>>> getAllExamList(
+    String parentId,
+  );
 }
 
 class DashboardRepositotyImpl implements DashboardRepository {
@@ -15,19 +17,34 @@ class DashboardRepositotyImpl implements DashboardRepository {
   @override
   Future<APIResponse<List<ExamListDTO>>> getAllExamList(String parentId) async {
     List<ExamListDTO> examList = [];
+
     try {
       final results = await firestore
-          .collection(AppConst.examCollectionName)
-          .where('parent_id', isEqualTo: parentId)
+          .collection(
+            DBConst.examCollectionName,
+          )
+          .where(
+            'parent_id',
+            isEqualTo: parentId,
+          )
           .get();
+
       for (var snapshot in results.docs) {
-        ExamListDTO newExamList = ExamListDTO.fromJson(snapshot.data());
+        ExamListDTO newExamList = ExamListDTO.fromJson(
+          snapshot.data(),
+        );
 
         examList.add(newExamList);
       }
+
       return right(examList);
     } catch (e) {
-      return left(Failure(code: 500, response: e.toString()));
+      return left(
+        Failure(
+          code: 500,
+          response: e.toString(),
+        ),
+      );
     }
   }
 }

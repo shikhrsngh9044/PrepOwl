@@ -1,16 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../controller/dashboard_bloc.dart';
 
 import '../../../../_utils/res/dimen.dart';
+import '../../controller/dashboard_bloc.dart';
 
 class ExamCategoryList extends StatelessWidget {
-  const ExamCategoryList({Key? key, required this.state}) : super(key: key);
+  const ExamCategoryList({
+    Key? key,
+    required this.state,
+  }) : super(key: key);
 
   final DashboardState state;
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
       itemBuilder: ((context, index) {
         return Padding(
           padding: state.examList.isNotEmpty && index == 0
@@ -21,7 +26,6 @@ class ExamCategoryList extends StatelessWidget {
               // Header //
               GestureDetector(
                 onTap: () {
-                  // printDebug("Exam category ${index + 1} clicked");
                   context
                       .read<DashboardBloc>()
                       .add(GetAllExamList(state.examCategoryList[index].id));
@@ -47,8 +51,8 @@ class ExamCategoryList extends StatelessWidget {
                 ListView.builder(
                   scrollDirection: Axis.vertical,
                   shrinkWrap: true,
-                  itemCount: state.examList.length,
                   physics: const NeverScrollableScrollPhysics(),
+                  itemCount: state.examList.length,
                   itemBuilder: (context, index) {
                     return Text(state.examCategoryList[index].title);
                   },

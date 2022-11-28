@@ -8,5 +8,7 @@ class GetSelectedExamCategory extends DashboardEvent {}
 
 class GetAllExamList extends DashboardEvent {
   String parentId;
-  GetAllExamList(this.parentId);
+  GetAllExamList(
+    this.parentId,
+  );
 }

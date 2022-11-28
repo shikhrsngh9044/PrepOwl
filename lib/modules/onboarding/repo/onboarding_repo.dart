@@ -17,7 +17,7 @@ class OnboardingRepositotyImpl implements OnboardingRepository {
     List<ExamCategoryDTO> onboarding = [];
     try {
       final results =
-          await firestore.collection(AppConst.examCategoryCollectionName).get();
+          await firestore.collection(DBConst.examCategoryCollectionName).get();
       for (var snapshot in results.docs) {
         ExamCategoryDTO newOnboarding =
             ExamCategoryDTO.fromJson(snapshot.data());

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../_utils/constants/string_constants.dart';
-import 'widgets/drawer_page.dart';
-import 'widgets/exam_category_list.dart';
-import 'widgets/bottom_navigator.dart';
-import '../../../_utils/res/dimen.dart';
-import '../controller/dashboard_bloc.dart';
 
 import '../../../_utils/configs/theme_config.dart';
+import '../../../_utils/constants/string_constants.dart';
+import '../../../_utils/res/dimen.dart';
+import '../controller/dashboard_bloc.dart';
+import 'widgets/bottom_navigator.dart';
+import 'widgets/drawer_page.dart';
+import 'widgets/exam_category_list.dart';
 
 class Dashboard extends StatelessWidget {
   const Dashboard({Key? key}) : super(key: key);
@@ -15,7 +15,10 @@ class Dashboard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => DashboardBloc()..add(GetSelectedExamCategory()),
+      create: (context) => DashboardBloc()
+        ..add(
+          GetSelectedExamCategory(),
+        ),
       child: const DashboardUI(),
     );
   }
@@ -39,37 +42,32 @@ class DashboardUI extends StatelessWidget {
       ),
       body: BlocBuilder<DashboardBloc, DashboardState>(
         builder: (context, state) {
-          return SizedBox(
-            child: Padding(
-              padding: const EdgeInsets.all(AppDimen.size20),
-              child: ListView(
-                children: [
-                  const Text(
-                    'Hi User, Welcome to PrepOwlFork',
-                    style: TextStyle(
-                      fontSize: AppDimen.size22,
-                      fontWeight: FontWeight.w500,
-                    ),
+          return Padding(
+            padding: const EdgeInsets.all(AppDimen.size20),
+            child: ListView(
+              children: [
+                const Text(
+                  'Hi User, Welcome to PrepOwlFork',
+                  style: TextStyle(
+                    fontSize: AppDimen.size22,
+                    fontWeight: FontWeight.w500,
                   ),
-                  const Divider(
-                    thickness: 0,
-                    height: 20,
+                ),
+                const Divider(
+                  thickness: 0,
+                  height: 20,
+                ),
+                const Text(
+                  AppConst.getStarted,
+                  style: TextStyle(
+                    fontSize: AppDimen.size16,
                   ),
-                  const Text(
-                    AppConst.getStarted,
-                    style: TextStyle(
-                      fontSize: AppDimen.size16,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: AppDimen.size15,
-                  ),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height - 200,
-                    child: ExamCategoryList(state: state),
-                  ),
-                ],
-              ),
+                ),
+                const SizedBox(
+                  height: AppDimen.size15,
+                ),
+                ExamCategoryList(state: state),
+              ],
             ),
           );
         },

@@ -12,19 +12,19 @@ class BottomNavigator extends StatelessWidget {
       items: const <BottomNavigationBarItem>[
         BottomNavigationBarItem(
           icon: Icon(Icons.home_rounded),
-          label: AppConst.home,
+          label: LabelConstants.home,
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.search_rounded),
-          label: AppConst.search,
+          label: LabelConstants.search,
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.notes_rounded),
-          label: AppConst.doubts,
+          label: LabelConstants.doubts,
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.person_rounded),
-          label: AppConst.profile,
+          label: LabelConstants.profile,
         ),
       ],
       currentIndex: 0,

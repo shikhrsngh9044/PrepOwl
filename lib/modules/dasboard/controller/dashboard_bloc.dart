@@ -15,7 +15,9 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
             isLoading: true,
           ),
         );
+
         //Get data from Hive
+
         emit(
           state.copyWith(
             isLoading: false,
@@ -24,19 +26,27 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
       },
     );
 
-    on<GetAllExamList>((event, emit) async {
-      emit(state.copyWith(isLoading: true));
-      final result =
-          await DashboardRepositotyImpl().getAllExamList(event.parentId);
-      final updatedState = result.fold(
-        (l) => state.copyWith(
-            isLoading: false, errorMessage: l.response.toString()),
-        (r) => state.copyWith(
-          isLoading: false,
-          examList: r,
-        ),
-      );
-      emit(updatedState);
-    });
+    on<GetAllExamList>(
+      (event, emit) async {
+        emit(state.copyWith(isLoading: true));
+
+        final result = await DashboardRepositotyImpl().getAllExamList(
+          event.parentId,
+        );
+
+        final updatedState = result.fold(
+          (l) => state.copyWith(
+            isLoading: false,
+            errorMessage: l.response.toString(),
+          ),
+          (r) => state.copyWith(
+            isLoading: false,
+            examList: r,
+          ),
+        );
+
+        emit(updatedState);
+      },
+    );
   }
 }
