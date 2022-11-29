@@ -1,4 +1,4 @@
-// ignore_for_file: constant_identifier_names
+// ignore_for_file: constant_identifier_names, camel_case_types
 
 enum Flavor {
   dev,
@@ -20,4 +20,9 @@ enum SIZES {
   medium,
   large,
   extraLarge,
+}
+
+enum AUTH_STATE {
+  loggedIn,
+  signedUp,
 }

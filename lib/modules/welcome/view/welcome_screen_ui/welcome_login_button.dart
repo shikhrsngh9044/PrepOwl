@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hive/hive.dart';
 
 import '../../../../_utils/configs/theme_config.dart';
 import '../../../../_utils/constants/routes.dart';
@@ -30,7 +31,18 @@ class LoginButton extends StatelessWidget {
       ),
       onPressed: () {
         Get.offAndToNamed(RouteNames.loginPage);
+        // _navigateToRegisterScreen(context);
       },
     );
   }
+
+  // void _navigateToRegisterScreen(BuildContext context) {
+  //   final box = Hive.box("core");
+  //   bool isloggedIn = box.get("firstLogin");
+  //   if (!isloggedIn) {
+  //     Get.offAndToNamed(RouteNames.loginPage);
+  //   } else {
+  //     Get.offAndToNamed(RouteNames.register);
+  //   }
+  // }
 }

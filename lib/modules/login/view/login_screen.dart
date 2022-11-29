@@ -40,7 +40,8 @@ class LoginPageScreen extends StatelessWidget {
             };
 
             Get.offAndToNamed(
-              RouteNames.dashboard,
+              // RouteNames.dashboard,
+              RouteNames.register,
               arguments: data,
             );
           } else if (state.isUnauthenticated) {
