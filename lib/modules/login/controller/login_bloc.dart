@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../model/user_dto.dart';
@@ -8,6 +10,67 @@ part 'login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   LoginBloc() : super(LoginState()) {
+    // ignore: no_leading_underscores_for_local_identifiers
+    FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+
+    on<SendOtpToPhoneEvent>((event, emit) async {
+      emit(state.copyWith(isLoading: true));
+      try {
+        await LoginRepoImp().verifyPhone(
+          phoneNumber: event.phoneNumber,
+          verificationCompleted: (PhoneAuthCredential credential) async {
+            add(OnPhoneAuthVerificationCompleteEvent(credential: credential));
+          },
+          codeSent: (String verificationId, int? resendToken) {
+            add(OnPhoneOtpSent(
+                verificationId: verificationId, token: resendToken));
+          },
+          verificationFailed: (FirebaseAuthException e) {
+            add(OnPhoneAuthErrorEvent(error: e.code));
+          },
+          codeAutoRetrievalTimeout: (String verificationId) {},
+        );
+        emit(state.copyWith(isLoading: false));
+      } catch (e) {
+        emit(state.copyWith(errorMessage: e.toString(), isLoading: false));
+      }
+    });
+
+    on<VerifySentOtpEvent>((event, emit) {
+      try {
+        emit(state.copyWith(isLoading: true));
+
+        PhoneAuthCredential credential = PhoneAuthProvider.credential(
+          verificationId: event.verificationId,
+          smsCode: event.otpCode,
+        );
+        add(OnPhoneAuthVerificationCompleteEvent(credential: credential));
+        emit(state.copyWith(isLoading: false, isAuthenticated: true));
+      } catch (e) {
+        emit(state.copyWith(errorMessage: e.toString(), isLoading: false));
+      }
+    });
+
+    on<OnPhoneOtpSent>((event, emit) =>
+        emit(state.copyWith(verificationId: event.verificationId)));
+
+    on<OnPhoneAuthErrorEvent>(
+        (event, emit) => emit(state.copyWith(errorMessage: event.error)));
+
+    on<OnPhoneAuthVerificationCompleteEvent>((event, emit) async {
+      try {
+        await _firebaseAuth.signInWithCredential(event.credential).then((user) {
+          if (user.user != null) {
+            emit(state.copyWith(isAuthenticated: true));
+          }
+        });
+      } on FirebaseAuthException catch (e) {
+        emit(state.copyWith(errorMessage: e.code));
+      } catch (e) {
+        emit(state.copyWith(errorMessage: e.toString()));
+      }
+    });
+
     on<FacebookLogin>((event, emit) async {
       emit(state.copyWith(
         isLoading: true,
@@ -115,5 +178,15 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
       emit(updatedState);
     });
+
+    on<UpdateUserStatus>(
+      (event, emit) async {
+        final ref = FirebaseFirestore.instance
+            .collection("users")
+            .where("id", isEqualTo: event.uid);
+        final result = await ref.get();
+        emit(state.copyWith(isNewUser: result.size == 0 ? true : false));
+      },
+    );
   }
 }

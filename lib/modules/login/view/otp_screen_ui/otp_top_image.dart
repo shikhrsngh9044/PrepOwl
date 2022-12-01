@@ -5,6 +5,7 @@ import '../../../../_utils/constants/asset_constants.dart';
 import '../../../../_utils/constants/string_constants.dart';
 import '../../../../_utils/res/dimen.dart';
 
+// ignore: must_be_immutable
 class OTPScreenTopImage extends StatelessWidget {
   const OTPScreenTopImage({
     Key? key,
@@ -27,7 +28,7 @@ class OTPScreenTopImage extends StatelessWidget {
             ],
           ),
           const Text(
-            AppConst.otpScreen,
+            "We sent your code to ",
             style: TextStyle(
                 fontSize: AppDimen.size20, fontWeight: FontWeight.bold),
           ),
