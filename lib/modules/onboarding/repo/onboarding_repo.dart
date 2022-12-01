@@ -13,16 +13,19 @@ class OnboardingRepositotyImpl implements OnboardingRepository {
 
   @override
   Future<APIResponse<List<ExamCategoryDTO>>> getAllExamList() async {
-    List<ExamCategoryDTO> onboarding = [];
+    List<ExamCategoryDTO> examCategories = [];
+
     try {
       final results = await firestore.collection(AppConst.collectionName).get();
-      for (var snapshot in results.docs) {
-        ExamCategoryDTO newOnboarding =
+
+      for (final snapshot in results.docs) {
+        ExamCategoryDTO newexamCategories =
             ExamCategoryDTO.fromJson(snapshot.data());
 
-        onboarding.add(newOnboarding);
+        examCategories.add(newexamCategories);
       }
-      return right(onboarding);
+
+      return right(examCategories);
     } catch (e) {
       return left(Failure(code: 500, response: e.toString()));
     }

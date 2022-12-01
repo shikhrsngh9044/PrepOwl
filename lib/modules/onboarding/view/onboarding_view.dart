@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
+import 'package:hive/hive.dart';
+import 'package:prepowl/_utils/constants/routes.dart';
 import '../../../_utils/constants/string_constants.dart';
 import '../../../_utils/res/dimen.dart';
 import '../../../_utils/ui_components/buttons.dart';
+
 import '../controller/onboarding_bloc.dart';
+import '../model/exam_category_dto.dart';
 import 'widgets/exam_category_chip.dart';
 
 class Onboarding extends StatelessWidget {
@@ -18,8 +23,17 @@ class Onboarding extends StatelessWidget {
   }
 }
 
-class OnboardingUI extends StatelessWidget {
+class OnboardingUI extends StatefulWidget {
   const OnboardingUI({super.key});
+
+  @override
+  State<OnboardingUI> createState() => _OnboardingUIState();
+}
+
+class _OnboardingUIState extends State<OnboardingUI> {
+  List<ExamCategoryDTO> examCategories = [];
+  final coreBox = Hive.box("core");
+  // final coreBox = Hive.box<ExamCategoryDTO>("ExamBoxName");
 
   @override
   Widget build(BuildContext context) {
@@ -75,7 +89,18 @@ class OnboardingUI extends StatelessWidget {
                     if (state.selectedOnboardingList.isNotEmpty)
                       PrimaryButton(
                         btnText: AppConst.submit,
-                        onPressed: () {},
+                        onPressed: () {
+                          final categories = List<ExamCategoryDTO>.generate(
+                              state.selectedOnboardingList.length,
+                              (index) => ExamCategoryDTO(
+                                  id: state.selectedOnboardingList[index].id,
+                                  title: state.selectedOnboardingList[index]
+                                      .title)).toList();
+
+                          coreBox.put("exam_categories", categories);
+
+                          Get.offAndToNamed(RouteNames.dashboard);
+                        },
                       ),
                   ],
                 ),
