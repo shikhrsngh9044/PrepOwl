@@ -27,7 +27,7 @@ class CompleteRegisterFormState extends State<CompleteRegisterForm> {
   final _formKey = GlobalKey<FormState>();
   final FocusNode _emailFocus = FocusNode();
   final FocusNode _fullNameFocus = FocusNode();
-  late Map<String, dynamic> arguments;
+  Map<String, dynamic>? arguments = {};
 
   _returnErrorText() {
     bool isValidated = _formKey.currentState?.validate() ?? false;
@@ -43,10 +43,10 @@ class CompleteRegisterFormState extends State<CompleteRegisterForm> {
 
   @override
   void initState() {
-    if (mounted && (arguments == null || arguments.isEmpty)) {
+    if (mounted && (arguments == null || arguments!.isEmpty)) {
       arguments = Get.arguments;
-      _nameController.text = arguments['name'] ?? "";
-      _emailController.text = arguments['email'] ?? "";
+      _nameController.text = arguments?['name'] ?? "";
+      _emailController.text = arguments?['email'] ?? "";
     }
     super.initState();
   }

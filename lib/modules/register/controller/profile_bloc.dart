@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive/hive.dart';
 
 part 'profile_event.dart';
 part 'profile_state.dart';
@@ -36,6 +37,10 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
             isSuccess: false,
           ));
         }
+        emit(state.copyWith(
+          isLoading: false,
+          isSuccess: true,
+        ));
       },
     );
   }
