@@ -1,5 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive/hive.dart';
 
 import '../model/user_dto.dart';
 import '../repo/login_repo.dart';
@@ -9,6 +11,7 @@ part 'login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   LoginBloc() : super(LoginState()) {
+    // ignore: no_leading_underscores_for_local_identifiers
     FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
     on<SendOtpToPhoneEvent>((event, emit) async {
@@ -176,5 +179,15 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
       emit(updatedState);
     });
+
+    on<UpdateUserStatus>(
+      (event, emit) async {
+        final ref = FirebaseFirestore.instance
+            .collection("users")
+            .where("id", isEqualTo: event.uid);
+        final result = await ref.get();
+        emit(state.copyWith(isNewUser: result.size == 0 ? true : false));
+      },
+    );
   }
 }

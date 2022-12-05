@@ -39,4 +39,18 @@ class AppConst {
   static const selectExamCategory = "Select exam category";
   static const submit = "Submit";
   static const collectionName = "exam_list";
+  static const accountlines = "Add New Profile? ";
+  static const signup = "Add Profile";
+  static const completeProfileHeading = "Complete Profile";
+  static const secondHeading =
+      "Complete your details and continue  \nwith Plateform";
+  static const nameEmpty = 'Please enter name.';
+  static const emailEmpty = 'Please enter email.';
+  static const emailHint = "Email";
+  static const nameHint = 'Name';
+  static const nameLength = "Name should not less than 2 characters.";
+  static const continuePage = "Continue";
+  static const camera = "Camera";
+  static const gallary = "Gallery";
+  static const cancel = "Cancel";
 }
