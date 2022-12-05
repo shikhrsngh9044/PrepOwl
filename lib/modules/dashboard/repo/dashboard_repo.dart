@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
-import '../model/exam_list_dto.dart';
 
 import '../../../_utils/constants/string_constants.dart';
 import '../../../_utils/entities/api_response.dart';
+import '../model/exam_list_dto.dart';
 
 abstract class DashboardRepository {
   Future<APIResponse<List<ExamListDTO>>> getExamList(String parentId);

@@ -9,6 +9,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:sizer/sizer.dart';
+
 import '_utils/configs/app_config.dart';
 import '_utils/configs/app_state.dart';
 import '_utils/configs/env_config.dart';

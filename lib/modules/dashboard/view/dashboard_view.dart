@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../_utils/constants/string_constants.dart';
-import 'widgets/drawer_page.dart';
-import 'widgets/bottom_navigator.dart';
-import '../../../_utils/res/dimen.dart';
-import '../controller/dashboard_bloc.dart';
 
 import '../../../_utils/configs/theme_config.dart';
+import '../../../_utils/constants/string_constants.dart';
+import '../../../_utils/res/dimen.dart';
+import '../controller/dashboard_bloc.dart';
+import 'widgets/bottom_navigator.dart';
+import 'widgets/drawer_page.dart';
 
 class Dashboard extends StatelessWidget {
   const Dashboard({Key? key}) : super(key: key);
@@ -88,18 +88,21 @@ class DashboardUI extends StatelessWidget {
                     physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     itemBuilder: (context, index) {
-                      return Container(
-                        margin: const EdgeInsets.all(AppDimen.size5),
-                        padding: const EdgeInsets.all(AppDimen.size15),
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: const BorderRadius.all(
-                              Radius.circular(
-                                AppDimen.size10,
+                      return GestureDetector(
+                        onTap: () {},
+                        child: Container(
+                          margin: const EdgeInsets.all(AppDimen.size5),
+                          padding: const EdgeInsets.all(AppDimen.size15),
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: const BorderRadius.all(
+                                Radius.circular(
+                                  AppDimen.size10,
+                                ),
                               ),
-                            ),
-                            border: Border.all(color: Colors.black)),
-                        child: Text(state.examList[index].title),
+                              border: Border.all(color: Colors.black)),
+                          child: Text(state.examList[index].title),
+                        ),
                       );
                     },
                     itemCount: state.examList.length,
