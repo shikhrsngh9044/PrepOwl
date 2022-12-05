@@ -1,5 +1,5 @@
 import 'package:get/get_navigation/get_navigation.dart';
-import 'package:prepowl/modules/dashboard/view/dashboard_view.dart';
+import '../../modules/dashboard/view/dashboard_view.dart';
 import '../../modules/onboarding/view/onboarding_view.dart';
 
 import '../../modules/login/view/login_screen.dart';

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:prepowl/_utils/constants/string_constants.dart';
 
 import '../../../../_utils/configs/theme_config.dart';
+import '../../../../_utils/constants/string_constants.dart';
 
 class BottomNavigator extends StatelessWidget {
   const BottomNavigator({super.key});

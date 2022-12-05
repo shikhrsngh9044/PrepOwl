@@ -21,6 +21,10 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
         final box =
             Hive.box("core").get("exam_categories") as List<ExamCategoryDTO>;
 
+        final allBox = ExamCategoryDTO(id: "0", title: "All");
+
+        box.insert(0, allBox);
+
         emit(
           state.copyWith(
             isLoading: false,
@@ -30,10 +34,25 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
       },
     );
 
-    on<GetAllExamList>((event, emit) async {
+    on<GetExamList>((event, emit) async {
       emit(state.copyWith(isLoading: true));
       final result =
-          await DashboardRepositotyImpl().getAllExamList(event.parentId);
+          await DashboardRepositotyImpl().getExamList(event.parentId);
+      final updatedState = result.fold(
+        (l) => state.copyWith(
+            isLoading: false, errorMessage: l.response.toString()),
+        (r) => state.copyWith(
+          isLoading: false,
+          examList: r,
+          selectedIndex: event.selectedIndex,
+        ),
+      );
+      emit(updatedState);
+    });
+
+    on<GetAllExamList>((event, emit) async {
+      emit(state.copyWith(isLoading: true));
+      final result = await DashboardRepositotyImpl().getAllExamList();
       final updatedState = result.fold(
         (l) => state.copyWith(
             isLoading: false, errorMessage: l.response.toString()),
