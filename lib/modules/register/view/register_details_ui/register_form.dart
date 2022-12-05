@@ -1,6 +1,8 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 import '../../../../_utils/configs/theme_config.dart';
 import '../../../../_utils/constants/string_constants.dart';
 import '../../../../_utils/helpers/global.dart';
@@ -25,20 +27,32 @@ class CompleteRegisterFormState extends State<CompleteRegisterForm> {
   final _formKey = GlobalKey<FormState>();
   final FocusNode _emailFocus = FocusNode();
   final FocusNode _fullNameFocus = FocusNode();
+  Map<String, dynamic>? arguments = {};
 
   _returnErrorText() {
     bool isValidated = _formKey.currentState?.validate() ?? false;
     if (isValidated) {
-      printDebug("object");
-      // Get.offAndToNamed(RouteNames.loginPage);
+      context.read<ProfileBloc>().add(SubmitData(
+            Get.arguments['uid'],
+            _nameController.text,
+            _emailController.text,
+            widget.state.filepath.path,
+          ));
     }
   }
 
-  File? imageFile;
+  @override
+  void initState() {
+    if (mounted && (arguments == null || arguments!.isEmpty)) {
+      arguments = Get.arguments;
+      _nameController.text = arguments?['name'] ?? "";
+      _emailController.text = arguments?['email'] ?? "";
+    }
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    // _nameController.text = Get.arguments['name'] ?? "";
-    // _emailController.text = Get.arguments['email'] ?? "";
     return Form(
       key: _formKey,
       child: Column(

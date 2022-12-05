@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import 'package:hive/hive.dart';
 import '../../../_utils/constants/routes.dart';
 import '../../../_utils/res/dimen.dart';
 import '../controller/login_bloc.dart';
@@ -17,14 +18,13 @@ class Login extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => LoginBloc(),
-      child: const LoginPageScreen(),
+      child: LoginPageScreen(),
     );
   }
 }
 
 class LoginPageScreen extends StatelessWidget {
-  const LoginPageScreen({Key? key}) : super(key: key);
-
+  LoginPageScreen({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,11 +37,18 @@ class LoginPageScreen extends StatelessWidget {
               'uid': state.userDTO?.uid,
               'photoUrl': state.userDTO?.photoUrl,
             };
-
-            Get.offAndToNamed(
-              RouteNames.register,
-              arguments: data,
-            );
+            context.read<LoginBloc>().add(UpdateUserStatus(state.userDTO?.uid));
+            if (state.isNewUser) {
+              Get.offAndToNamed(
+                RouteNames.register,
+                arguments: data,
+              );
+            } else {
+              Get.offAndToNamed(
+                RouteNames.onboarding,
+                arguments: data,
+              );
+            }
           } else if (state.isUnauthenticated) {
             Get.offAndToNamed(
               RouteNames.loginPage,

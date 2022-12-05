@@ -26,14 +26,12 @@ class Validation {
   }
 
   static String? emailValidation(String? text) {
-    String email = text ?? '';
     String pattern =
-        "\ /^(?=[^@]*[A-Za-z])([a-zA-Z0-9])(([a-zA-Z0-9])*([\.-_-+])?([a-zA-Z0-9]))*@(([a-zA-Z0-9\-])+(.))+([a-zA-Z]{2,3})+/i;";
+        r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]"
+        r"{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]"
+        r"{0,253}[a-zA-Z0-9])?)*$";
     RegExp regex = RegExp(pattern);
-
-    if (email.trim().isEmpty) {
-      return AppConst.emailEmpty;
-    } else if (!regex.hasMatch(email)) {
+    if (text == null || text.isEmpty || !regex.hasMatch(text)) {
       return 'Enter a valid email address';
     } else {
       return null;

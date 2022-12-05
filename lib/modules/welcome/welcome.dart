@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 
 import 'view/welcome_screen_ui/background.dart';
 import 'view/welcome_screen_ui/welcome_login_button.dart';

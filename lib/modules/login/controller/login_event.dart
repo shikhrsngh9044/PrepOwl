@@ -60,3 +60,8 @@ class OnPhoneAuthVerificationCompleteEvent extends LoginEvent {
     required this.credential,
   });
 }
+
+class UpdateUserStatus extends LoginEvent {
+  String? uid;
+  UpdateUserStatus(this.uid);
+}
