@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
-
 import '../../../_utils/constants/routes.dart';
 import '../../../_utils/constants/string_constants.dart';
 import '../../../_utils/res/dimen.dart';
 import '../../../_utils/ui_components/buttons.dart';
+
 import '../controller/onboarding_bloc.dart';
 import '../model/exam_category_dto.dart';
 import 'widgets/exam_category_chip.dart';
@@ -90,7 +90,15 @@ class _OnboardingUIState extends State<OnboardingUI> {
                       PrimaryButton(
                         btnText: AppConst.submit,
                         onPressed: () {
-                          //Put data in Hive
+                          final categories = List<ExamCategoryDTO>.generate(
+                              state.selectedOnboardingList.length,
+                              (index) => ExamCategoryDTO(
+                                  id: state.selectedOnboardingList[index].id,
+                                  title: state.selectedOnboardingList[index]
+                                      .title)).toList();
+
+                          coreBox.put("exam_categories", categories);
+
                           Get.offAndToNamed(RouteNames.dashboard);
                         },
                       ),

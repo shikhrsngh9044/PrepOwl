@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:prepowl/_utils/constants/string_constants.dart';
-import 'package:prepowl/modules/dashboard/view/widgets/drawer_page.dart';
-import 'widgets/exam_category_list.dart';
+import '../../../_utils/constants/string_constants.dart';
+import 'widgets/drawer_page.dart';
 import 'widgets/bottom_navigator.dart';
 import '../../../_utils/res/dimen.dart';
 import '../controller/dashboard_bloc.dart';
@@ -15,7 +14,9 @@ class Dashboard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => DashboardBloc()..add(GetSelectedExamCategory()),
+      create: (context) => DashboardBloc()
+        ..add(GetSelectedExamCategory())
+        ..add(GetAllExamList(0)),
       child: const DashboardUI(),
     );
   }
@@ -39,38 +40,73 @@ class DashboardUI extends StatelessWidget {
       ),
       body: BlocBuilder<DashboardBloc, DashboardState>(
         builder: (context, state) {
-          return SizedBox(
-            child: Padding(
-              padding: const EdgeInsets.all(AppDimen.size20),
-              child: ListView(
-                children: [
-                  const Text(
-                    'Hi User, Welcome to PrepOwlFork',
-                    style: TextStyle(
-                      fontSize: AppDimen.size22,
-                      fontWeight: FontWeight.w500,
-                    ),
+          return ListView(
+            children: [
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: AppDimen.size10),
+                child: SizedBox(
+                  height: AppDimen.size70,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: state.examCategoryList.length,
+                    itemBuilder: (listViewContext, index) {
+                      return Padding(
+                        padding: const EdgeInsets.only(right: AppDimen.size10),
+                        child: ChoiceChip(
+                          label: Text(
+                            state.examCategoryList[index].title,
+                          ),
+                          selected: index == state.selectedIndex,
+                          selectedColor: AppTheme.secondaryColor,
+                          labelStyle: TextStyle(
+                            color: index == state.selectedIndex
+                                ? Colors.white
+                                : Colors.black,
+                          ),
+                          onSelected: (value) {
+                            if (index == 0) {
+                              context
+                                  .read<DashboardBloc>()
+                                  .add(GetAllExamList(index));
+                            } else {
+                              context.read<DashboardBloc>().add(GetExamList(
+                                  state.examCategoryList[index].id, index));
+                            }
+                          },
+                        ),
+                      );
+                    },
                   ),
-                  const Divider(
-                    thickness: 0,
-                    height: 20,
-                  ),
-                  const Text(
-                    AppConst.getStarted,
-                    style: TextStyle(
-                      fontSize: AppDimen.size16,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: AppDimen.size15,
-                  ),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height - 200,
-                    child: ExamCategoryList(state: state),
-                  ),
-                ],
+                ),
               ),
-            ),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: AppDimen.size15),
+                child: SizedBox(
+                  child: ListView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) {
+                      return Container(
+                        margin: const EdgeInsets.all(AppDimen.size5),
+                        padding: const EdgeInsets.all(AppDimen.size15),
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: const BorderRadius.all(
+                              Radius.circular(
+                                AppDimen.size10,
+                              ),
+                            ),
+                            border: Border.all(color: Colors.black)),
+                        child: Text(state.examList[index].title),
+                      );
+                    },
+                    itemCount: state.examList.length,
+                  ),
+                ),
+              ),
+            ],
           );
         },
       ),

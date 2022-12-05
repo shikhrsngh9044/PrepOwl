@@ -11,54 +11,49 @@ class ExamCategoryList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
+      scrollDirection: Axis.horizontal,
       itemBuilder: ((context, index) {
-        return Padding(
-          padding: state.examList.isNotEmpty && index == state.selectedIndex
-              ? const EdgeInsets.only(bottom: AppDimen.size14)
-              : const EdgeInsets.only(bottom: AppDimen.size5),
-          child: Column(
-            children: [
-              // Header //
-              GestureDetector(
-                onTap: () {
-                  // printDebug("Exam category ${index + 1} clicked");
-                  context.read<DashboardBloc>().add(
-                      GetAllExamList(state.examCategoryList[index].id, index));
-                },
-                child: Container(
-                    height: state.examList.isNotEmpty &&
-                            index == state.selectedIndex
-                        ? 50
-                        : 100,
-                    margin: const EdgeInsets.only(bottom: AppDimen.size10),
-                    alignment: Alignment.center,
-                    decoration: const BoxDecoration(
-                      color: Colors.amber,
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(
-                          AppDimen.size10,
-                        ),
+        return Column(
+          children: [
+            // Header //
+            GestureDetector(
+              onTap: () {
+                context
+                    .read<DashboardBloc>()
+                    .add(GetExamList(state.examCategoryList[index].id, index));
+              },
+              child: Container(
+                  margin: const EdgeInsets.only(right: AppDimen.size15),
+                  padding: const EdgeInsets.all(AppDimen.size15),
+                  alignment: Alignment.center,
+                  decoration: const BoxDecoration(
+                    color: Colors.amber,
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(
+                        AppDimen.size10,
                       ),
                     ),
-                    child: Text(
-                      state.examCategoryList[index].title,
-                    )),
-              ),
-              if (state.examList.isNotEmpty && index == state.selectedIndex)
-                ListView.builder(
-                  scrollDirection: Axis.vertical,
-                  shrinkWrap: true,
-                  itemCount: state.examList.length,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemBuilder: (context, index) {
-                    return Text(state.examList[index].title);
-                  },
-                ),
-            ],
-          ),
+                  ),
+                  child: Text(
+                    state.examCategoryList[index].title,
+                  )),
+            ),
+          ],
         );
       }),
       itemCount: state.examCategoryList.length,
     );
   }
 }
+
+
+// if (state.examList.isNotEmpty && index == state.selectedIndex)
+//               ListView.builder(
+//                 scrollDirection: Axis.vertical,
+//                 shrinkWrap: true,
+//                 itemCount: state.examList.length,
+//                 physics: const NeverScrollableScrollPhysics(),
+//                 itemBuilder: (context, index) {
+//                   return Text(state.examList[index].title);
+//                 },
+//               ),
