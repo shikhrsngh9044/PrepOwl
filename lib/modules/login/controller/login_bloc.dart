@@ -9,7 +9,7 @@ part 'login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   LoginBloc() : super(LoginState()) {
-    FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+    FirebaseAuth firebaseAuth = FirebaseAuth.instance;
 
     on<SendOtpToPhoneEvent>((event, emit) async {
       emit(state.copyWith(isLoading: true));
@@ -57,7 +57,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
     on<OnPhoneAuthVerificationCompleteEvent>((event, emit) async {
       try {
-        await _firebaseAuth.signInWithCredential(event.credential).then((user) {
+        await firebaseAuth.signInWithCredential(event.credential).then((user) {
           if (user.user != null) {
             emit(state.copyWith(isAuthenticated: true));
           }

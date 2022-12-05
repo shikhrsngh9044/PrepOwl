@@ -1,11 +1,9 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../controller/onboarding_bloc.dart';
-import '../../model/exam_category_dto.dart';
 
 import '../../../../_utils/res/dimen.dart';
+import '../../controller/onboarding_bloc.dart';
+import '../../model/exam_category_dto.dart';
 
 class ExamCategoryChip extends StatelessWidget {
   const ExamCategoryChip(

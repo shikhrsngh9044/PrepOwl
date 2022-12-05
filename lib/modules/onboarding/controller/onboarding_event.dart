@@ -4,7 +4,7 @@ abstract class OnboardingEvent {
   const OnboardingEvent();
 }
 
-class GetAllExamList extends OnboardingEvent {}
+class GetAllExamCategoryList extends OnboardingEvent {}
 
 class AddToSelectedList extends OnboardingEvent {
   ExamCategoryDTO onboardingDTO;

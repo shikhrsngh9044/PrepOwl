@@ -1,12 +1,12 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
-import 'package:prepowl/_utils/helpers/global.dart';
+
+import '../../onboarding/model/exam_category_dto.dart';
 import '../model/exam_list_dto.dart';
 import '../repo/dashboard_repo.dart';
-import '../../onboarding/model/exam_category_dto.dart';
 
-part 'dashboard_state.dart';
 part 'dashboard_event.dart';
+part 'dashboard_state.dart';
 
 class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
   DashboardBloc() : super(DashboardState()) {
