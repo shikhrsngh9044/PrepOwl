@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
-import 'package:hive/hive.dart';
+
 import '../../../_utils/constants/routes.dart';
 import '../../../_utils/res/dimen.dart';
 import '../controller/login_bloc.dart';
@@ -18,13 +18,13 @@ class Login extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => LoginBloc(),
-      child: LoginPageScreen(),
+      child: const LoginPageScreen(),
     );
   }
 }
 
 class LoginPageScreen extends StatelessWidget {
-  LoginPageScreen({Key? key}) : super(key: key);
+  const LoginPageScreen({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(

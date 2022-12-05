@@ -1,16 +1,14 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+
 import '../../../../_utils/configs/theme_config.dart';
 import '../../../../_utils/constants/string_constants.dart';
-import '../../../../_utils/helpers/global.dart';
+import '../../../../_utils/helpers/validation.dart';
 import '../../../../_utils/res/dimen.dart';
 import '../../controller/profile_bloc.dart';
-import 'package:prepowl/modules/register/view/register_details_ui/profile_pic.dart';
-
-import '../../../../_utils/helpers/validation.dart';
+import 'profile_pic.dart';
 
 class CompleteRegisterForm extends StatefulWidget {
   const CompleteRegisterForm({Key? key, required this.state}) : super(key: key);

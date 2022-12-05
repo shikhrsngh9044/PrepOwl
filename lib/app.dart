@@ -17,6 +17,7 @@ import '_utils/configs/theme_config.dart';
 import '_utils/constants/app_constants.dart';
 import '_utils/constants/routes.dart';
 import '_utils/services/network_service.dart';
+import 'modules/onboarding/model/exam_category_dto.dart';
 
 class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -144,8 +145,7 @@ Future appInitializer(EnvConfig envConfig) async {
   final appDocumentDir = await getApplicationDocumentsDirectory();
   Hive.init(appDocumentDir.path);
   await Hive.initFlutter();
-  // Hive.registerAdapter(UserEntityAdapter());
-
+  Hive.registerAdapter(ExamCategoryDTOAdapter());
   final coreBox = await Hive.openBox('core');
   coreBox.put('firstLogin', true);
   token = coreBox.get('token', defaultValue: '') as String;

@@ -1,8 +1,17 @@
 import 'dart:convert';
 
+import 'package:hive_flutter/hive_flutter.dart';
+
+part 'exam_category_dto.g.dart';
+
+@HiveType(typeId: 1)
 class ExamCategoryDTO {
+  @HiveField(0)
   final String id;
+
+  @HiveField(1)
   final String title;
+
   ExamCategoryDTO({
     required this.id,
     required this.title,
@@ -40,6 +49,6 @@ class ExamCategoryDTO {
         title: json['title'],
       );
 
-  // @override
-  // String toString() => 'ExamCategoryDTO(id: $id, title: $title)';
+  @override
+  String toString() => 'ExamCategoryDTO(id: $id, title: $title)';
 }

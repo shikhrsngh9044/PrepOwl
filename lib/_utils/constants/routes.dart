@@ -1,8 +1,8 @@
 import 'package:get/get_navigation/get_navigation.dart';
-import '../../modules/onboarding/view/onboarding_view.dart';
-import 'package:prepowl/modules/onboarding/view/onboarding_view.dart';
 
+import '../../modules/dashboard/view/dashboard_view.dart';
 import '../../modules/login/view/login_screen.dart';
+import '../../modules/onboarding/view/onboarding_view.dart';
 import '../../modules/register/view/register_page.dart';
 import '../../modules/welcome/welcome.dart';
 
@@ -13,6 +13,7 @@ class RouteNames {
   static const String homePage = "/home_page";
   static const String onboarding = "/onboarding";
   static const String register = "/register";
+  static const String dashboard = "/dashboard";
 }
 
 final publicPages = [
@@ -20,6 +21,7 @@ final publicPages = [
   GetPage(name: RouteNames.loginPage, page: () => const Login()),
   GetPage(name: RouteNames.register, page: () => const RegisterScreen()),
   GetPage(name: RouteNames.onboarding, page: () => const Onboarding()),
+  GetPage(name: RouteNames.dashboard, page: () => const Dashboard()),
 ];
 
 final authorizedPages = [

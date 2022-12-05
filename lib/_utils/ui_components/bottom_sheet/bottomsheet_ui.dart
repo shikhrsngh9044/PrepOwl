@@ -3,7 +3,6 @@ import 'dart:io';
 
 // Flutter imports:
 import 'package:flutter/material.dart';
-
 // Package imports:
 import 'package:image_picker/image_picker.dart';
 import 'package:mime/mime.dart';

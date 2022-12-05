@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:prepowl/_utils/ui_components/bottom_sheet/bottomsheet_ui.dart';
+import '../../../../_utils/ui_components/bottom_sheet/bottomsheet_ui.dart';
 
 import '../../../../_utils/constants/asset_constants.dart';
 

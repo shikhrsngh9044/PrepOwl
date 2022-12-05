@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hive/hive.dart';
 
 import '../model/user_dto.dart';
 import '../repo/login_repo.dart';
@@ -11,8 +10,7 @@ part 'login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   LoginBloc() : super(LoginState()) {
-    // ignore: no_leading_underscores_for_local_identifiers
-    FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+    FirebaseAuth firebaseAuth = FirebaseAuth.instance;
 
     on<SendOtpToPhoneEvent>((event, emit) async {
       emit(state.copyWith(isLoading: true));
@@ -60,7 +58,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
     on<OnPhoneAuthVerificationCompleteEvent>((event, emit) async {
       try {
-        await _firebaseAuth.signInWithCredential(event.credential).then((user) {
+        await firebaseAuth.signInWithCredential(event.credential).then((user) {
           if (user.user != null) {
             emit(state.copyWith(isAuthenticated: true));
           }
