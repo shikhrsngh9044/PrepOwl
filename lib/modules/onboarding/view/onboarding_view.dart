@@ -90,7 +90,15 @@ class _OnboardingUIState extends State<OnboardingUI> {
                       PrimaryButton(
                         btnText: AppConst.submit,
                         onPressed: () {
-                          //Put data in Hive
+                          final categories = List<ExamCategoryDTO>.generate(
+                              state.selectedOnboardingList.length,
+                              (index) => ExamCategoryDTO(
+                                  id: state.selectedOnboardingList[index].id,
+                                  title: state.selectedOnboardingList[index]
+                                      .title)).toList();
+
+                          coreBox.put("exam_categories", categories);
+
                           Get.offAndToNamed(RouteNames.dashboard);
                         },
                       ),
