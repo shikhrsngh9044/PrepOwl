@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 
 import '../../../_utils/configs/theme_config.dart';
+import '../../../_utils/constants/routes.dart';
 import '../../../_utils/constants/string_constants.dart';
 import '../../../_utils/res/dimen.dart';
 import '../controller/dashboard_bloc.dart';
@@ -89,7 +91,9 @@ class DashboardUI extends StatelessWidget {
                     shrinkWrap: true,
                     itemBuilder: (context, index) {
                       return GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          Get.toNamed(RouteNames.instructionAndTest);
+                        },
                         child: Container(
                           margin: const EdgeInsets.all(AppDimen.size5),
                           padding: const EdgeInsets.all(AppDimen.size15),

@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -176,5 +177,15 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
       emit(updatedState);
     });
+
+    on<UpdateUserStatus>(
+      (event, emit) async {
+        final ref = FirebaseFirestore.instance
+            .collection("users")
+            .where("id", isEqualTo: event.uid);
+        final result = await ref.get();
+        emit(state.copyWith(isNewUser: result.size == 0 ? true : false));
+      },
+    );
   }
 }

@@ -40,14 +40,34 @@ class AppConst {
   static const fastEasyWayToPrepare = "Fast & easy way to prepare.";
   static const selectExamCategory = "Select exam category";
   static const submit = "Submit";
-  static const collectionName = "exam_category_list";
-  static const examCollectionName = "exam_list";
+  static const collectionName = "exam_list";
+  static const accountlines = "Add New Profile? ";
+  static const signup = "Add Profile";
+  static const completeProfileHeading = "Complete Profile";
+  static const secondHeading =
+      "Complete your details and continue  \nwith Plateform";
+  static const nameEmpty = 'Please enter name.';
+  static const emailEmpty = 'Please enter email.';
+  static const emailHint = "Email";
+  static const nameHint = 'Name';
+  static const nameLength = "Name should not less than 2 characters.";
+  static const continuePage = "Continue";
+  static const camera = "Camera";
+  static const gallary = "Gallery";
+  static const cancel = "Cancel";
   static const home = "Home";
   static const search = "Search";
   static const doubts = "Doubts";
   static const profile = "Profile";
   static const appName = "PrepOwlFork";
   static const getStarted = 'Get started with these amazing exam options.';
+  static const instructions = 'Instructions';
+  static const readAboveInstructions = 'I have read the above instructions.';
+  static const proceed = 'Proceed';
+  static const congratulations = 'Congratulations!';
+  static const betterLuckNextTime = 'Better Luck Next Time!';
+  static const yourScore = "Your score";
+  static const viewAllAnswers = "View all answers";
 }
 
 class DBConst {

@@ -19,7 +19,7 @@ class DashboardRepositotyImpl implements DashboardRepository {
 
     try {
       final results = await firestore
-          .collection(AppConst.examCollectionName)
+          .collection(DBConst.examCollectionName)
           .where('parent_id', isEqualTo: parentId)
           .get();
 
@@ -40,7 +40,7 @@ class DashboardRepositotyImpl implements DashboardRepository {
 
     try {
       final results =
-          await firestore.collection(AppConst.examCollectionName).get();
+          await firestore.collection(DBConst.examCollectionName).get();
 
       for (var snapshot in results.docs) {
         ExamListDTO newExamList = ExamListDTO.fromJson(snapshot.data());
