@@ -17,6 +17,7 @@ class AppDimen {
   static const double size60 = 60.0;
   static const double size70 = 70.0;
   static const double size100 = 100.0;
+  static const double size120 = 120.0;
 }
 
 const double defaultPadding = 16.0;

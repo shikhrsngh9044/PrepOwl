@@ -1,5 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../_utils/constants/enums.dart';
+
 part 'instruction_and_test_event.dart';
 part 'instruction_and_test_state.dart';
 
@@ -25,7 +27,7 @@ class InstructionAndTestBloc
     on<UpdateSelectedQuestionIndex>((event, emit) {
       emit(
         state.copyWith(
-          selectedQuestionIndex: event.direction == 'backward'
+          selectedQuestionIndex: event.direction == DIRECTION.backward
               ? event.currentIndex - 1
               : event.currentIndex + 1,
         ),

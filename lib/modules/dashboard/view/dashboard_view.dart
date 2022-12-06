@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
-import 'package:prepowl/_utils/constants/routes.dart';
 
 import '../../../_utils/configs/theme_config.dart';
+import '../../../_utils/constants/routes.dart';
 import '../../../_utils/constants/string_constants.dart';
 import '../../../_utils/res/dimen.dart';
 import '../controller/dashboard_bloc.dart';

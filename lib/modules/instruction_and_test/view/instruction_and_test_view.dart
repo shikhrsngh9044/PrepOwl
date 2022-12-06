@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../_utils/configs/theme_config.dart';
+import '../../../_utils/constants/string_constants.dart';
 import '../../../_utils/res/dimen.dart';
 import '../controller/instruction_and_test_bloc.dart';
 import 'widgets/instructions_view.dart';
@@ -27,7 +28,7 @@ class InstructionAndTestUI extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          "Instructions",
+          AppConst.instructions,
           style: TextStyle(
             color: Colors.white,
           ),

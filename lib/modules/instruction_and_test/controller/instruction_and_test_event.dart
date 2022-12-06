@@ -13,7 +13,7 @@ class StartTest extends InstructionAndTestEvent {
 }
 
 class UpdateSelectedQuestionIndex extends InstructionAndTestEvent {
-  String direction;
+  DIRECTION direction;
   int currentIndex;
   UpdateSelectedQuestionIndex(this.direction, this.currentIndex);
 }

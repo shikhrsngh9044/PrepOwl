@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../_utils/configs/theme_config.dart';
+import '../../../../_utils/constants/string_constants.dart';
 import '../../../../_utils/res/dimen.dart';
 import '../../../../_utils/ui_components/buttons.dart';
 import '../../controller/instruction_and_test_bloc.dart';
@@ -33,7 +34,7 @@ class InstructionView extends StatelessWidget {
             ),
             const Expanded(
               child: Text(
-                'I have read the above instructions.',
+                AppConst.readAboveInstructions,
                 style: TextStyle(
                   fontSize: AppDimen.size15,
                 ),
@@ -47,7 +48,7 @@ class InstructionView extends StatelessWidget {
           onPressed: () {
             context.read<InstructionAndTestBloc>().add(const StartTest());
           },
-          btnText: 'Proceed',
+          btnText: AppConst.proceed,
           buttonColor:
               state.readInstructions ? AppTheme.secondaryColor : Colors.white,
           customTextStyle: TextStyle(
