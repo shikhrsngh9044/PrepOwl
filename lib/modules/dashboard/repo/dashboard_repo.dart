@@ -3,53 +3,102 @@ import 'package:dartz/dartz.dart';
 
 import '../../../_utils/constants/string_constants.dart';
 import '../../../_utils/entities/api_response.dart';
-import '../model/exam_list_dto.dart';
+import '../../onboarding/model/exam_category_dto.dart';
+import '../model/test_list_dto.dart';
 
 abstract class DashboardRepository {
-  Future<APIResponse<List<ExamListDTO>>> getExamList(String parentId);
-  Future<APIResponse<List<ExamListDTO>>> getAllExamList();
+  Future<APIResponse<List<TestListDTO>>> getTestList(
+    String parentId,
+  );
+  Future<APIResponse<List<TestListDTO>>> getAllTestList(
+    List<ExamCategoryDTO> examCategoryList,
+  );
 }
 
 class DashboardRepositotyImpl implements DashboardRepository {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
 
   @override
-  Future<APIResponse<List<ExamListDTO>>> getExamList(String parentId) async {
-    List<ExamListDTO> examList = [];
+  Future<APIResponse<List<TestListDTO>>> getTestList(
+    String examCategoryId,
+  ) async {
+    List<TestListDTO> testList = [];
 
     try {
       final results = await firestore
-          .collection(DBConst.examCollectionName)
-          .where('parent_id', isEqualTo: parentId)
+          .collection(
+            DBConst.testCollectionName,
+          )
+          .where(
+            'exam_category_id',
+            isEqualTo: examCategoryId,
+          )
           .get();
 
       for (var snapshot in results.docs) {
-        ExamListDTO newExamList = ExamListDTO.fromJson(snapshot.data());
+        TestListDTO newTestList = TestListDTO.fromJson(
+          snapshot.data(),
+        );
 
-        examList.add(newExamList);
+        testList.add(
+          newTestList,
+        );
       }
-      return right(examList);
+      return right(
+        testList,
+      );
     } catch (e) {
-      return left(Failure(code: 500, response: e.toString()));
+      return left(
+        Failure(
+          code: 500,
+          response: e.toString(),
+        ),
+      );
     }
   }
 
   @override
-  Future<APIResponse<List<ExamListDTO>>> getAllExamList() async {
-    List<ExamListDTO> examList = [];
+  Future<APIResponse<List<TestListDTO>>> getAllTestList(
+    List<ExamCategoryDTO> examCategoryList,
+  ) async {
+    List<TestListDTO> testList = [];
 
     try {
-      final results =
-          await firestore.collection(DBConst.examCollectionName).get();
+      final examCategoryIds = [];
+      for (var item in examCategoryList) {
+        examCategoryIds.add(
+          item.id,
+        );
+      }
+      final results = await firestore
+          .collection(
+            DBConst.testCollectionName,
+          )
+          .where(
+            'exam_category_id',
+            whereIn: examCategoryIds,
+          )
+          .get();
 
       for (var snapshot in results.docs) {
-        ExamListDTO newExamList = ExamListDTO.fromJson(snapshot.data());
+        TestListDTO newTestList = TestListDTO.fromJson(
+          snapshot.data(),
+        );
 
-        examList.add(newExamList);
+        testList.add(
+          newTestList,
+        );
       }
-      return right(examList);
+      return right(
+        testList,
+      );
     } catch (e) {
-      return left(Failure(code: 500, response: e.toString()));
+      return left(
+        Failure(
+          code: 500,
+          response: e.toString(),
+        ),
+      );
     }
   }
 }

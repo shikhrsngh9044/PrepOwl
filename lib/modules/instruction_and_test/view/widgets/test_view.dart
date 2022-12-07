@@ -11,23 +11,35 @@ import '../../../../_utils/ui_components/buttons.dart';
 import '../../controller/instruction_and_test_bloc.dart';
 
 class TestView extends StatelessWidget {
-  TestView({Key? key, required this.state}) : super(key: key);
+  TestView({
+    Key? key,
+    required this.state,
+  }) : super(
+          key: key,
+        );
 
   final InstructionAndTestState state;
 
   final PageController _pageViewController = PageController(
     initialPage: 0,
   );
+  final ScrollController _controller = ScrollController();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(
+    BuildContext context,
+  ) {
     return SafeArea(
       child: PageView.builder(
         physics: const NeverScrollableScrollPhysics(),
-        itemBuilder: (context, index) {
+        itemBuilder: (
+          context,
+          index,
+        ) {
           return Stack(
             children: [
               ListView(
+                controller: _controller,
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -55,7 +67,8 @@ class TestView extends StatelessWidget {
                     "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
                   ),
                   Image.network(
-                      "https://iim-cat-questions-answers.2iim.com/quant/arithmetic/set-theory/figa/set-13.PNG"),
+                    "https://iim-cat-questions-answers.2iim.com/quant/arithmetic/set-theory/figa/set-13.PNG",
+                  ),
                   const SizedBox(
                     height: AppDimen.size20,
                   ),
@@ -63,7 +76,10 @@ class TestView extends StatelessWidget {
                     child: ListView.builder(
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
-                      itemBuilder: (listViewContext, listViewIndex) {
+                      itemBuilder: (
+                        listViewContext,
+                        listViewIndex,
+                      ) {
                         return RadioListTile(
                           title: Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
@@ -83,7 +99,9 @@ class TestView extends StatelessWidget {
                           ),
                           dense: true,
                           value: true,
-                          onChanged: (bool? value) {},
+                          onChanged: (
+                            bool? value,
+                          ) {},
                           groupValue: false,
                           toggleable: true,
                           activeColor: AppTheme.secondaryColor,
@@ -93,7 +111,7 @@ class TestView extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(
-                    height: AppDimen.size40,
+                    height: AppDimen.size50,
                   ),
                 ],
               ),
@@ -129,6 +147,13 @@ class TestView extends StatelessWidget {
                                               state.selectedQuestionIndex,
                                             ),
                                           );
+                                      _controller.animateTo(
+                                        _controller.position.minScrollExtent,
+                                        duration: const Duration(
+                                          microseconds: 1,
+                                        ),
+                                        curve: Curves.fastOutSlowIn,
+                                      );
                                     },
                                     icon: const Icon(
                                       Icons.arrow_back_ios_new_rounded,
@@ -147,6 +172,13 @@ class TestView extends StatelessWidget {
                                         state.selectedQuestionIndex,
                                       ),
                                     );
+                                _controller.animateTo(
+                                  _controller.position.minScrollExtent,
+                                  duration: const Duration(
+                                    microseconds: 1,
+                                  ),
+                                  curve: Curves.fastOutSlowIn,
+                                );
                               },
                               icon: const Icon(
                                 Icons.arrow_forward_ios_rounded,
@@ -160,7 +192,9 @@ class TestView extends StatelessWidget {
           );
         },
         controller: _pageViewController,
-        onPageChanged: (int index) {},
+        onPageChanged: (
+          int index,
+        ) {},
         itemCount: 10,
       ),
     );
