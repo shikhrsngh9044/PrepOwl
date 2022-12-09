@@ -9,22 +9,35 @@ import 'widgets/instructions_view.dart';
 import 'widgets/test_view.dart';
 
 class InstructionAndTest extends StatelessWidget {
-  const InstructionAndTest({Key? key}) : super(key: key);
+  const InstructionAndTest({
+    Key? key,
+  }) : super(
+          key: key,
+        );
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(
+    BuildContext context,
+  ) {
     return BlocProvider(
-      create: (context) => InstructionAndTestBloc(),
+      create: (
+        context,
+      ) =>
+          InstructionAndTestBloc(),
       child: const InstructionAndTestUI(),
     );
   }
 }
 
 class InstructionAndTestUI extends StatelessWidget {
-  const InstructionAndTestUI({super.key});
+  const InstructionAndTestUI({
+    super.key,
+  });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(
+    BuildContext context,
+  ) {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -33,18 +46,32 @@ class InstructionAndTestUI extends StatelessWidget {
             color: Colors.white,
           ),
         ),
-        iconTheme: const IconThemeData(color: Colors.white),
+        iconTheme: const IconThemeData(
+          color: Colors.white,
+        ),
         backgroundColor: AppTheme.secondaryColor,
       ),
       body: BlocConsumer<InstructionAndTestBloc, InstructionAndTestState>(
-        listener: (context, state) {},
-        builder: (context, state) {
+        listener: (
+          context,
+          state,
+        ) {},
+        builder: (
+          context,
+          state,
+        ) {
           return Padding(
             padding: const EdgeInsets.symmetric(
-                horizontal: AppDimen.size20, vertical: AppDimen.size15),
+              horizontal: AppDimen.size20,
+              vertical: AppDimen.size15,
+            ),
             child: state.proceedToStartTest
-                ? TestView(state: state)
-                : InstructionView(state: state),
+                ? TestView(
+                    state: state,
+                  )
+                : InstructionView(
+                    state: state,
+                  ),
           );
         },
       ),

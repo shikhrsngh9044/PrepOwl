@@ -11,24 +11,43 @@ import 'widgets/bottom_navigator.dart';
 import 'widgets/drawer_page.dart';
 
 class Dashboard extends StatelessWidget {
-  const Dashboard({Key? key}) : super(key: key);
+  const Dashboard({
+    Key? key,
+  }) : super(
+          key: key,
+        );
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(
+    BuildContext context,
+  ) {
     return BlocProvider(
-      create: (context) => DashboardBloc()
-        ..add(GetSelectedExamCategory())
-        ..add(GetAllExamList(0)),
+      create: (
+        context,
+      ) =>
+          DashboardBloc()
+            ..add(
+              GetSelectedExamCategory(),
+            )
+            ..add(
+              GetAllTestList(0),
+            ),
       child: const DashboardUI(),
     );
   }
 }
 
 class DashboardUI extends StatelessWidget {
-  const DashboardUI({Key? key}) : super(key: key);
+  const DashboardUI({
+    Key? key,
+  }) : super(
+          key: key,
+        );
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(
+    BuildContext context,
+  ) {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -37,24 +56,35 @@ class DashboardUI extends StatelessWidget {
             color: Colors.white,
           ),
         ),
-        iconTheme: const IconThemeData(color: Colors.white),
+        iconTheme: const IconThemeData(
+          color: Colors.white,
+        ),
         backgroundColor: AppTheme.secondaryColor,
       ),
       body: BlocBuilder<DashboardBloc, DashboardState>(
-        builder: (context, state) {
+        builder: (
+          context,
+          state,
+        ) {
           return ListView(
             children: [
               Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: AppDimen.size10),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: AppDimen.size10,
+                ),
                 child: SizedBox(
                   height: AppDimen.size70,
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
                     itemCount: state.examCategoryList.length,
-                    itemBuilder: (listViewContext, index) {
+                    itemBuilder: (
+                      listViewContext,
+                      index,
+                    ) {
                       return Padding(
-                        padding: const EdgeInsets.only(right: AppDimen.size10),
+                        padding: const EdgeInsets.only(
+                          right: AppDimen.size10,
+                        ),
                         child: ChoiceChip(
                           label: Text(
                             state.examCategoryList[index].title,
@@ -66,14 +96,22 @@ class DashboardUI extends StatelessWidget {
                                 ? Colors.white
                                 : Colors.black,
                           ),
-                          onSelected: (value) {
+                          onSelected: (
+                            value,
+                          ) {
                             if (index == 0) {
-                              context
-                                  .read<DashboardBloc>()
-                                  .add(GetAllExamList(index));
+                              context.read<DashboardBloc>().add(
+                                    GetAllTestList(
+                                      index,
+                                    ),
+                                  );
                             } else {
-                              context.read<DashboardBloc>().add(GetExamList(
-                                  state.examCategoryList[index].id, index));
+                              context.read<DashboardBloc>().add(
+                                    GetTestList(
+                                      state.examCategoryList[index].id,
+                                      index,
+                                    ),
+                                  );
                             }
                           },
                         ),
@@ -83,35 +121,54 @@ class DashboardUI extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: AppDimen.size15),
-                child: SizedBox(
-                  child: ListView.builder(
-                    physics: const NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    itemBuilder: (context, index) {
-                      return GestureDetector(
-                        onTap: () {
-                          Get.toNamed(RouteNames.instructionAndTest);
-                        },
-                        child: Container(
-                          margin: const EdgeInsets.all(AppDimen.size5),
-                          padding: const EdgeInsets.all(AppDimen.size15),
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: const BorderRadius.all(
-                                Radius.circular(
-                                  AppDimen.size10,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: AppDimen.size15,
+                ),
+                child: state.testList.isEmpty
+                    ? const Center(
+                        child: Text(
+                          AppConst.noTestsFound,
+                        ),
+                      )
+                    : ListView.builder(
+                        physics: const NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemBuilder: (
+                          context,
+                          index,
+                        ) {
+                          return GestureDetector(
+                            onTap: () {
+                              Get.toNamed(
+                                RouteNames.instructionAndTest,
+                              );
+                            },
+                            child: Container(
+                              margin: const EdgeInsets.all(
+                                AppDimen.size5,
+                              ),
+                              padding: const EdgeInsets.all(
+                                AppDimen.size15,
+                              ),
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: const BorderRadius.all(
+                                  Radius.circular(
+                                    AppDimen.size10,
+                                  ),
+                                ),
+                                border: Border.all(
+                                  color: Colors.black,
                                 ),
                               ),
-                              border: Border.all(color: Colors.black)),
-                          child: Text(state.examList[index].title),
-                        ),
-                      );
-                    },
-                    itemCount: state.examList.length,
-                  ),
-                ),
+                              child: Text(
+                                state.testList[index].testName,
+                              ),
+                            ),
+                          );
+                        },
+                        itemCount: state.testList.length,
+                      ),
               ),
             ],
           );

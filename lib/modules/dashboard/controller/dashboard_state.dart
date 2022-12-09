@@ -1,14 +1,14 @@
 part of 'dashboard_bloc.dart';
 
 class DashboardState {
-  final List<ExamListDTO> examList;
+  final List<TestListDTO> testList;
   final List<ExamCategoryDTO> examCategoryList;
   final bool isLoading;
   final String errorMessage;
   final int selectedIndex;
 
   DashboardState({
-    this.examList = const [],
+    this.testList = const [],
     this.examCategoryList = const [],
     this.isLoading = false,
     this.errorMessage = '',
@@ -16,14 +16,14 @@ class DashboardState {
   });
 
   DashboardState copyWith({
-    List<ExamListDTO>? examList,
+    List<TestListDTO>? testList,
     List<ExamCategoryDTO>? examCategoryList,
     bool? isLoading,
     String? errorMessage,
     int? selectedIndex,
   }) {
     return DashboardState(
-      examList: examList ?? this.examList,
+      testList: testList ?? this.testList,
       examCategoryList: examCategoryList ?? this.examCategoryList,
       isLoading: isLoading ?? this.isLoading,
       errorMessage: errorMessage ?? this.errorMessage,
@@ -33,5 +33,5 @@ class DashboardState {
 
   @override
   String toString() =>
-      'DashboardState(examList: $examList, examCategoryList: $examCategoryList, isLoading: $isLoading, errorMessage:$errorMessage,selectedIndex:$selectedIndex)';
+      'DashboardState(testList: $testList, examCategoryList: $examCategoryList, isLoading: $isLoading, errorMessage:$errorMessage,selectedIndex:$selectedIndex)';
 }

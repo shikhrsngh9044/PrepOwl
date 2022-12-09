@@ -6,13 +6,20 @@ abstract class DashboardEvent {
 
 class GetSelectedExamCategory extends DashboardEvent {}
 
-class GetExamList extends DashboardEvent {
-  String parentId;
+class GetTestList extends DashboardEvent {
+  String examCategoryId;
   int selectedIndex;
-  GetExamList(this.parentId, this.selectedIndex);
+
+  GetTestList(
+    this.examCategoryId,
+    this.selectedIndex,
+  );
 }
 
-class GetAllExamList extends DashboardEvent {
+class GetAllTestList extends DashboardEvent {
   int selectedIndex;
-  GetAllExamList(this.selectedIndex);
+
+  GetAllTestList(
+    this.selectedIndex,
+  );
 }

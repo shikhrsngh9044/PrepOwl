@@ -15,5 +15,9 @@ class StartTest extends InstructionAndTestEvent {
 class UpdateSelectedQuestionIndex extends InstructionAndTestEvent {
   DIRECTION direction;
   int currentIndex;
-  UpdateSelectedQuestionIndex(this.direction, this.currentIndex);
+
+  UpdateSelectedQuestionIndex(
+    this.direction,
+    this.currentIndex,
+  );
 }

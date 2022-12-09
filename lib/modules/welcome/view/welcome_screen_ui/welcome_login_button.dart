@@ -29,7 +29,7 @@ class LoginButton extends StatelessWidget {
         ),
       ),
       onPressed: () {
-        Get.offAndToNamed(RouteNames.loginPage);
+        Get.offAndToNamed(RouteNames.onboarding);
       },
     );
   }

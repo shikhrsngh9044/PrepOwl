@@ -8,11 +8,18 @@ import '../../../../_utils/ui_components/buttons.dart';
 import '../../controller/instruction_and_test_bloc.dart';
 
 class InstructionView extends StatelessWidget {
-  const InstructionView({Key? key, required this.state}) : super(key: key);
+  const InstructionView({
+    Key? key,
+    required this.state,
+  }) : super(
+          key: key,
+        );
 
   final InstructionAndTestState state;
   @override
-  Widget build(BuildContext context) {
+  Widget build(
+    BuildContext context,
+  ) {
     return Column(
       children: [
         const Text(
@@ -27,9 +34,9 @@ class InstructionView extends StatelessWidget {
               activeColor: AppTheme.secondaryColor,
               value: state.readInstructions,
               onChanged: (value) {
-                context
-                    .read<InstructionAndTestBloc>()
-                    .add(const ReadInstructions());
+                context.read<InstructionAndTestBloc>().add(
+                      const ReadInstructions(),
+                    );
               },
             ),
             const Expanded(
@@ -46,7 +53,9 @@ class InstructionView extends StatelessWidget {
         PrimaryButton(
           isDisabled: !state.readInstructions,
           onPressed: () {
-            context.read<InstructionAndTestBloc>().add(const StartTest());
+            context.read<InstructionAndTestBloc>().add(
+                  const StartTest(),
+                );
           },
           btnText: AppConst.proceed,
           buttonColor:
