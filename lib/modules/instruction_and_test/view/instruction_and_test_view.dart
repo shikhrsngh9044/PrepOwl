@@ -60,19 +60,25 @@ class InstructionAndTestUI extends StatelessWidget {
           context,
           state,
         ) {
-          return Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: AppDimen.size20,
-              vertical: AppDimen.size15,
-            ),
-            child: state.proceedToStartTest
-                ? TestView(
-                    state: state,
-                  )
-                : InstructionView(
-                    state: state,
+          return state.instructionAndQuestionsList.isEmpty
+              ? const Center(
+                  child: Text(
+                    AppConst.noTestsFound,
                   ),
-          );
+                )
+              : Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: AppDimen.size20,
+                    vertical: AppDimen.size15,
+                  ),
+                  child: state.proceedToStartTest
+                      ? TestView(
+                          state: state,
+                        )
+                      : InstructionView(
+                          state: state,
+                        ),
+                );
         },
       ),
     );

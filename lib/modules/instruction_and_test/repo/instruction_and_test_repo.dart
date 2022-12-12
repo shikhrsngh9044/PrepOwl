@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
+import 'package:prepowl/_utils/helpers/global.dart';
 
 import '../../../_utils/constants/string_constants.dart';
 import '../../../_utils/entities/api_response.dart';
@@ -29,15 +30,18 @@ class InstructionAndTestRepositotyImpl implements InstructionAndTestRepository {
             isEqualTo: testId,
           )
           .get();
-
       for (var snapshot in results.docs) {
-        TestDTO newInstructionAndQuestionsList = TestDTO.fromJson(
-          snapshot.data(),
-        );
+        try {
+          TestDTO newInstructionAndQuestionsList = TestDTO.fromMap(
+            snapshot.data(),
+          );
 
-        instructionAndQuestionsList.add(
-          newInstructionAndQuestionsList,
-        );
+          instructionAndQuestionsList.add(
+            newInstructionAndQuestionsList,
+          );
+        } catch (e) {
+          printDebug(snapshot.data());
+        }
       }
       return right(
         instructionAndQuestionsList,

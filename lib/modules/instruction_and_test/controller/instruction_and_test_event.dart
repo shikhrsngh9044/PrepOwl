@@ -29,3 +29,13 @@ class GetTestQuestions extends InstructionAndTestEvent {
     this.testId,
   );
 }
+
+class UpdateAnsweredOption extends InstructionAndTestEvent {
+  String questionId;
+  String selectedOptionId;
+
+  UpdateAnsweredOption(
+    this.questionId,
+    this.selectedOptionId,
+  );
+}

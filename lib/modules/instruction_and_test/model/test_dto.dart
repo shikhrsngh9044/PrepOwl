@@ -9,12 +9,14 @@ class TestDTO {
   final String testId;
   final String instructions;
   final List<TestQuestionsDTO> questions;
+  final String timeDuration;
 
   TestDTO({
     required this.id,
     required this.testId,
     required this.instructions,
     required this.questions,
+    required this.timeDuration,
   });
 
   TestDTO copyWith({
@@ -22,12 +24,14 @@ class TestDTO {
     String? testId,
     String? instructions,
     List<TestQuestionsDTO>? questions,
+    String? timeDuration,
   }) {
     return TestDTO(
       id: id ?? this.id,
       testId: testId ?? this.testId,
       instructions: instructions ?? this.instructions,
       questions: questions ?? this.questions,
+      timeDuration: timeDuration ?? this.timeDuration,
     );
   }
 
@@ -35,12 +39,13 @@ class TestDTO {
     return <String, dynamic>{
       'id': id,
       'test_id': testId,
-      'instructions': instructions,
+      'instruction': instructions,
       'questions': questions
           .map(
             (x) => x.toMap(),
           )
           .toList(),
+      'time_duration': timeDuration,
     };
   }
 
@@ -50,14 +55,15 @@ class TestDTO {
     return TestDTO(
       id: map['id'] as String,
       testId: map['test_id'] as String,
-      instructions: map['instructions'] as String,
+      instructions: map['instruction'] as String,
       questions: List<TestQuestionsDTO>.from(
-        (map['questions'] as List<TestQuestionsDTO>).map<TestQuestionsDTO>(
+        (map['questions'] as List<dynamic>).map<TestQuestionsDTO>(
           (x) => TestQuestionsDTO.fromMap(
             x as Map<String, dynamic>,
           ),
         ),
       ),
+      timeDuration: map['time_duration'] as String,
     );
   }
 
@@ -68,13 +74,14 @@ class TestDTO {
   factory TestDTO.fromJson(Map<String, dynamic> json) => TestDTO(
         id: json['id'],
         testId: json['test_id'],
-        instructions: json['instructions'],
+        instructions: json['instruction'],
         questions: json['questions'],
+        timeDuration: json['time_duration'],
       );
 
   @override
   String toString() =>
-      'TestDTO(id: $id,test_id: $testId, instructions: $instructions, questions: $questions)';
+      'TestDTO(id: $id,test_id: $testId, instruction: $instructions, questions: $questions, time_duration: $timeDuration,)';
 
   @override
   bool operator ==(
@@ -91,7 +98,8 @@ class TestDTO {
         listEquals(
           other.questions,
           questions,
-        );
+        ) &&
+        other.timeDuration == timeDuration;
   }
 
   @override
@@ -99,5 +107,6 @@ class TestDTO {
       id.hashCode ^
       testId.hashCode ^
       instructions.hashCode ^
-      questions.hashCode;
+      questions.hashCode ^
+      timeDuration.hashCode;
 }

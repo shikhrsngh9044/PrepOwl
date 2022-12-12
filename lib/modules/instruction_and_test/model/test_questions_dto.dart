@@ -52,11 +52,11 @@ class TestQuestionsDTO {
       question: map['question'] as String,
       images: map['images'] != null
           ? List<String>.from(
-              (map['images'] as List<String>),
+              (map['images'] as List<dynamic>),
             )
           : null,
       options: List<TestOptionsDTO>.from(
-        (map['options'] as List<int>).map<TestOptionsDTO>(
+        (map['options'] as List<dynamic>).map<TestOptionsDTO>(
           (x) => TestOptionsDTO.fromMap(
             x as Map<String, dynamic>,
           ),

@@ -68,14 +68,21 @@ class InstructionAndTestBloc
           (l) => state.copyWith(
             instructionAndQuestionsList: [],
           ),
-          (r) => state.copyWith(
-            instructionAndQuestionsList: r,
-          ),
+          (r) {
+            return state.copyWith(
+              instructionAndQuestionsList: r,
+            );
+          },
         );
         emit(
           updatedState,
         );
       },
     );
+
+    on<UpdateAnsweredOption>((event, emit) {
+      //state.instructionAndQuestionsList[0].questions[event.questionId]
+      //.options[event.selectedOptionId].isSelectedAnswer
+    });
   }
 }

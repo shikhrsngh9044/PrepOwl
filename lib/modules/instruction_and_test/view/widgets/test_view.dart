@@ -29,6 +29,8 @@ class TestView extends StatelessWidget {
   Widget build(
     BuildContext context,
   ) {
+    final questionList = state.instructionAndQuestionsList[0].questions;
+
     return SafeArea(
       child: PageView.builder(
         physics: const NeverScrollableScrollPhysics(),
@@ -41,34 +43,48 @@ class TestView extends StatelessWidget {
               ListView(
                 controller: _controller,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Question ${state.selectedQuestionIndex + 1}",
-                        style: const TextStyle(
-                          fontSize: AppDimen.size18,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      const Text(
-                        "01:00",
-                        style: TextStyle(
-                          fontSize: AppDimen.size18,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ],
+                  Text(
+                    "Question ${state.selectedQuestionIndex + 1}",
+                    style: const TextStyle(
+                      fontSize: AppDimen.size18,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   const SizedBox(
                     height: AppDimen.size20,
                   ),
-                  const Text(
-                    "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-                  ),
-                  Image.network(
-                    "https://iim-cat-questions-answers.2iim.com/quant/arithmetic/set-theory/figa/set-13.PNG",
-                  ),
+                  Text(questionList[state.selectedQuestionIndex].question),
+                  if (questionList[state.selectedQuestionIndex]
+                      .images!
+                      .isNotEmpty)
+                    SizedBox(
+                      height: questionList[state.selectedQuestionIndex]
+                                  .images!
+                                  .length <=
+                              2
+                          ? AppDimen.size150
+                          : AppDimen.size350,
+                      child: GridView.builder(
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemBuilder: (context, index) {
+                          return Image.network(
+                            questionList[state.selectedQuestionIndex]
+                                .images![index],
+                            height: AppDimen.size25,
+                            width: AppDimen.size25,
+                          );
+                        },
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          crossAxisSpacing: 1.0,
+                          mainAxisSpacing: 1.0,
+                        ),
+                        itemCount: questionList[state.selectedQuestionIndex]
+                            .images
+                            ?.length,
+                      ),
+                    ),
                   const SizedBox(
                     height: AppDimen.size20,
                   ),
@@ -84,30 +100,61 @@ class TestView extends StatelessWidget {
                           title: Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              Text(
-                                'Option ${listViewIndex + 1}',
-                                style: const TextStyle(
-                                  fontSize: AppDimen.size15,
-                                  fontWeight: FontWeight.w400,
+                              if (questionList[state.selectedQuestionIndex]
+                                  .options[listViewIndex]
+                                  .optionTitle!
+                                  .isNotEmpty)
+                                Expanded(
+                                  child: Text(
+                                    questionList[state.selectedQuestionIndex]
+                                            .options[listViewIndex]
+                                            .optionTitle ??
+                                        "",
+                                    style: const TextStyle(
+                                      fontSize: AppDimen.size15,
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                                  ),
                                 ),
-                              ),
-                              // Image.network(
-                              //   "https://iim-cat-questions-answers.2iim.com/quant/arithmetic/set-theory/figa/set-13.PNG",
-                              //   scale: 2,
-                              // ),
+                              if (questionList[state.selectedQuestionIndex]
+                                  .options[listViewIndex]
+                                  .optionImage!
+                                  .isNotEmpty)
+                                Image.network(
+                                  questionList[state.selectedQuestionIndex]
+                                          .options[listViewIndex]
+                                          .optionImage ??
+                                      "",
+                                  height: AppDimen.size50,
+                                  width: AppDimen.size50,
+                                ),
                             ],
                           ),
                           dense: true,
                           value: true,
                           onChanged: (
                             bool? value,
-                          ) {},
-                          groupValue: false,
+                          ) {
+                            context.read<InstructionAndTestBloc>().add(
+                                  UpdateAnsweredOption(
+                                    questionList[state.selectedQuestionIndex]
+                                        .id,
+                                    questionList[state.selectedQuestionIndex]
+                                        .options[listViewIndex]
+                                        .id,
+                                  ),
+                                );
+                          },
+                          groupValue: questionList[state.selectedQuestionIndex]
+                              .options[listViewIndex]
+                              .isSelectedAnswer,
                           toggleable: true,
                           activeColor: AppTheme.secondaryColor,
                         );
                       },
-                      itemCount: 4,
+                      itemCount: questionList[state.selectedQuestionIndex]
+                          .options
+                          .length,
                     ),
                   ),
                   const SizedBox(
@@ -117,7 +164,7 @@ class TestView extends StatelessWidget {
               ),
               Align(
                 alignment: Alignment.bottomCenter,
-                child: state.selectedQuestionIndex == 9
+                child: state.selectedQuestionIndex == questionList.length - 1
                     ? PrimaryButton(
                         btnText: AppConst.submit,
                         onPressed: () {
@@ -192,10 +239,7 @@ class TestView extends StatelessWidget {
           );
         },
         controller: _pageViewController,
-        onPageChanged: (
-          int index,
-        ) {},
-        itemCount: 10,
+        itemCount: questionList.length,
       ),
     );
   }
