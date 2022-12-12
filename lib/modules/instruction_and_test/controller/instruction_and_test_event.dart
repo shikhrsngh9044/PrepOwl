@@ -21,3 +21,11 @@ class UpdateSelectedQuestionIndex extends InstructionAndTestEvent {
     this.currentIndex,
   );
 }
+
+class GetTestQuestions extends InstructionAndTestEvent {
+  String testId;
+
+  GetTestQuestions(
+    this.testId,
+  );
+}

@@ -1,6 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../_utils/constants/enums.dart';
+import '../model/test_dto.dart';
+import '../repo/instruction_and_test_repo.dart';
 
 part 'instruction_and_test_event.dart';
 part 'instruction_and_test_state.dart';
@@ -48,6 +50,30 @@ class InstructionAndTestBloc
                 ? event.currentIndex - 1
                 : event.currentIndex + 1,
           ),
+        );
+      },
+    );
+
+    on<GetTestQuestions>(
+      (
+        event,
+        emit,
+      ) async {
+        final result =
+            await InstructionAndTestRepositotyImpl().getInstructionsAndQuestion(
+          event.testId,
+        );
+
+        final updatedState = result.fold(
+          (l) => state.copyWith(
+            instructionAndQuestionsList: [],
+          ),
+          (r) => state.copyWith(
+            instructionAndQuestionsList: r,
+          ),
+        );
+        emit(
+          updatedState,
         );
       },
     );

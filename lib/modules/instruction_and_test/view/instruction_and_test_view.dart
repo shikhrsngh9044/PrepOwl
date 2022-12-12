@@ -23,7 +23,7 @@ class InstructionAndTest extends StatelessWidget {
       create: (
         context,
       ) =>
-          InstructionAndTestBloc(),
+          InstructionAndTestBloc()..add(GetTestQuestions("1")),
       child: const InstructionAndTestUI(),
     );
   }
