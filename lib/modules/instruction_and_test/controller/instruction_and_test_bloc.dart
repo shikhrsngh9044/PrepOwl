@@ -92,5 +92,16 @@ class InstructionAndTestBloc
       emit(state.copyWith(
           instructionAndQuestionsList: newInstructionAndQuestionsList));
     });
+
+    on<SubmitTest>((event, emit) {
+      int count = 0;
+      var newInstructionAndQuestionsList = state.instructionAndQuestionsList;
+      for (var questionItem in newInstructionAndQuestionsList[0].questions) {
+        if (questionItem.selectedOptionID == questionItem.answerId) {
+          count++;
+        }
+      }
+      emit(state.copyWith(correctAnswers: count));
+    });
   }
 }

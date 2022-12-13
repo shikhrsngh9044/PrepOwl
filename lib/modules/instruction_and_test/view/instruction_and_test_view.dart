@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 
 import '../../../_utils/configs/theme_config.dart';
+import '../../../_utils/constants/routes.dart';
 import '../../../_utils/constants/string_constants.dart';
 import '../../../_utils/res/dimen.dart';
 import '../controller/instruction_and_test_bloc.dart';
@@ -23,7 +25,7 @@ class InstructionAndTest extends StatelessWidget {
       create: (
         context,
       ) =>
-          InstructionAndTestBloc()..add(GetTestQuestions("1")),
+          InstructionAndTestBloc()..add(GetTestQuestions(Get.arguments)),
       child: const InstructionAndTestUI(),
     );
   }
@@ -55,7 +57,19 @@ class InstructionAndTestUI extends StatelessWidget {
         listener: (
           context,
           state,
-        ) {},
+        ) {
+          if (state.correctAnswers != -1) {
+            var data = {
+              'answerCount': state.correctAnswers,
+              'questionsLength':
+                  state.instructionAndQuestionsList[0].questions.length,
+            };
+            Get.offAndToNamed(
+              RouteNames.testReport,
+              arguments: data,
+            );
+          }
+        },
         builder: (
           context,
           state,

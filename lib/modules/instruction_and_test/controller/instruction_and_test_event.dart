@@ -39,3 +39,7 @@ class UpdateAnsweredOption extends InstructionAndTestEvent {
     this.selectedOptionId,
   );
 }
+
+class SubmitTest extends InstructionAndTestEvent {
+  const SubmitTest();
+}

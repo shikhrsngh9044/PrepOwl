@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get.dart';
 
 import '../../../../_utils/configs/theme_config.dart';
 import '../../../../_utils/constants/enums.dart';
-import '../../../../_utils/constants/routes.dart';
 import '../../../../_utils/constants/string_constants.dart';
 import '../../../../_utils/res/dimen.dart';
 import '../../../../_utils/ui_components/buttons.dart';
@@ -223,9 +221,12 @@ class TestView extends StatelessWidget {
                         onPressed: () {
                           if (state.selectedQuestionIndex ==
                               questionList.length - 1) {
-                            Get.offAndToNamed(
-                              RouteNames.testReport,
-                            );
+                            // Get.offAndToNamed(
+                            //   RouteNames.testReport,
+                            // );
+                            context.read<InstructionAndTestBloc>().add(
+                                  const SubmitTest(),
+                                );
                           }
                         },
                         customTextStyle: const TextStyle(
