@@ -20,53 +20,75 @@ class InstructionView extends StatelessWidget {
   Widget build(
     BuildContext context,
   ) {
-    return Column(
-      children: [
-        Text(
-          state.instructionAndQuestionsList[0].instructions,
-          style: const TextStyle(
-            fontSize: AppDimen.size15,
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          AppConst.instructions,
+          style: TextStyle(
+            color: Colors.white,
           ),
         ),
-        Row(
+        iconTheme: const IconThemeData(
+          color: Colors.white,
+        ),
+        backgroundColor: AppTheme.secondaryColor,
+      ),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(
+          horizontal: AppDimen.size20,
+          vertical: AppDimen.size15,
+        ),
+        child: Column(
           children: [
-            Checkbox(
-              activeColor: AppTheme.secondaryColor,
-              value: state.readInstructions,
-              onChanged: (value) {
+            Text(
+              state.instructionAndQuestionsList[0].instructions,
+              style: const TextStyle(
+                fontSize: AppDimen.size15,
+              ),
+            ),
+            Row(
+              children: [
+                Checkbox(
+                  activeColor: AppTheme.secondaryColor,
+                  value: state.readInstructions,
+                  onChanged: (value) {
+                    context.read<InstructionAndTestBloc>().add(
+                          const ReadInstructions(),
+                        );
+                  },
+                ),
+                const Expanded(
+                  child: Text(
+                    AppConst.readAboveInstructions,
+                    style: TextStyle(
+                      fontSize: AppDimen.size15,
+                    ),
+                  ),
+                )
+              ],
+            ),
+            const Spacer(),
+            PrimaryButton(
+              isDisabled: !state.readInstructions,
+              onPressed: () {
                 context.read<InstructionAndTestBloc>().add(
-                      const ReadInstructions(),
+                      const StartTest(),
                     );
               },
-            ),
-            const Expanded(
-              child: Text(
-                AppConst.readAboveInstructions,
-                style: TextStyle(
-                  fontSize: AppDimen.size15,
-                ),
+              btnText: AppConst.proceed,
+              buttonColor: state.readInstructions
+                  ? AppTheme.secondaryColor
+                  : Colors.white,
+              customTextStyle: TextStyle(
+                fontSize: AppDimen.size20,
+                color: state.readInstructions
+                    ? Colors.white
+                    : AppTheme.secondaryColor,
               ),
-            )
+            ),
           ],
         ),
-        const Spacer(),
-        PrimaryButton(
-          isDisabled: !state.readInstructions,
-          onPressed: () {
-            context.read<InstructionAndTestBloc>().add(
-                  const StartTest(),
-                );
-          },
-          btnText: AppConst.proceed,
-          buttonColor:
-              state.readInstructions ? AppTheme.secondaryColor : Colors.white,
-          customTextStyle: TextStyle(
-            fontSize: AppDimen.size20,
-            color:
-                state.readInstructions ? Colors.white : AppTheme.secondaryColor,
-          ),
-        ),
-      ],
+      ),
     );
   }
 }

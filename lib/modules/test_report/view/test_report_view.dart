@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
-import '../controller/test_report_bloc.dart';
 
 import '../../../_utils/configs/theme_config.dart';
 import '../../../_utils/constants/string_constants.dart';
 import '../../../_utils/res/dimen.dart';
+import '../controller/test_report_bloc.dart';
 
 class TestReport extends StatelessWidget {
   const TestReport({

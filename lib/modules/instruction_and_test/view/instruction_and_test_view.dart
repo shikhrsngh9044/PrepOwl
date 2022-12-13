@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 
-import '../../../_utils/configs/theme_config.dart';
 import '../../../_utils/constants/routes.dart';
 import '../../../_utils/constants/string_constants.dart';
-import '../../../_utils/res/dimen.dart';
 import '../controller/instruction_and_test_bloc.dart';
 import 'widgets/instructions_view.dart';
 import 'widgets/test_view.dart';
@@ -41,18 +39,6 @@ class InstructionAndTestUI extends StatelessWidget {
     BuildContext context,
   ) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          AppConst.instructions,
-          style: TextStyle(
-            color: Colors.white,
-          ),
-        ),
-        iconTheme: const IconThemeData(
-          color: Colors.white,
-        ),
-        backgroundColor: AppTheme.secondaryColor,
-      ),
       body: BlocConsumer<InstructionAndTestBloc, InstructionAndTestState>(
         listener: (
           context,
@@ -80,19 +66,13 @@ class InstructionAndTestUI extends StatelessWidget {
                     AppConst.noTestsFound,
                   ),
                 )
-              : Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: AppDimen.size20,
-                    vertical: AppDimen.size15,
-                  ),
-                  child: state.proceedToStartTest
-                      ? TestView(
-                          state: state,
-                        )
-                      : InstructionView(
-                          state: state,
-                        ),
-                );
+              : state.proceedToStartTest
+                  ? TestView(
+                      state: state,
+                    )
+                  : InstructionView(
+                      state: state,
+                    );
         },
       ),
     );
