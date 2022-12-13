@@ -25,6 +25,29 @@ class TestView extends StatelessWidget {
   );
   final ScrollController _controller = ScrollController();
 
+  void _navigateToQuestions(
+    BuildContext context,
+    DIRECTION direction,
+  ) {
+    context.read<InstructionAndTestBloc>().add(
+          UpdateSelectedQuestionIndex(
+            direction,
+            state.selectedQuestionIndex,
+          ),
+        );
+    _scrollToTopOnNavigating();
+  }
+
+  void _scrollToTopOnNavigating() {
+    _controller.animateTo(
+      _controller.position.minScrollExtent,
+      duration: const Duration(
+        microseconds: 1,
+      ),
+      curve: Curves.fastOutSlowIn,
+    );
+  }
+
   @override
   Widget build(
     BuildContext context,
@@ -146,8 +169,10 @@ class TestView extends StatelessWidget {
                                 );
                           },
                           groupValue: questionList[state.selectedQuestionIndex]
-                              .options[listViewIndex]
-                              .isSelectedAnswer,
+                                  .options[listViewIndex]
+                                  .id ==
+                              questionList[state.selectedQuestionIndex]
+                                  .selectedOptionID,
                           toggleable: true,
                           activeColor: AppTheme.secondaryColor,
                         );
@@ -164,76 +189,77 @@ class TestView extends StatelessWidget {
               ),
               Align(
                 alignment: Alignment.bottomCenter,
-                child: state.selectedQuestionIndex == questionList.length - 1
-                    ? PrimaryButton(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Opacity(
+                      opacity: state.selectedQuestionIndex != 0 ? 1 : 0.0,
+                      child: CircleAvatar(
+                        backgroundColor: AppTheme.secondaryColor,
+                        child: IconButton(
+                          color: Colors.white,
+                          onPressed: () {
+                            if (state.selectedQuestionIndex != 0) {
+                              _navigateToQuestions(
+                                context,
+                                DIRECTION.backward,
+                              );
+                            }
+                          },
+                          icon: const Icon(
+                            Icons.arrow_back_ios_new_rounded,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Opacity(
+                      opacity:
+                          state.selectedQuestionIndex == questionList.length - 1
+                              ? 1
+                              : 0,
+                      child: PrimaryButton(
+                        size: SIZES.extraSmall,
                         btnText: AppConst.submit,
                         onPressed: () {
-                          Get.offAndToNamed(
-                            RouteNames.testReport,
-                          );
+                          if (state.selectedQuestionIndex ==
+                              questionList.length - 1) {
+                            Get.offAndToNamed(
+                              RouteNames.testReport,
+                            );
+                          }
                         },
                         customTextStyle: const TextStyle(
                           fontSize: AppDimen.size20,
                           color: Colors.white,
                         ),
-                      )
-                    : Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          state.selectedQuestionIndex != 0
-                              ? CircleAvatar(
-                                  backgroundColor: AppTheme.secondaryColor,
-                                  child: IconButton(
-                                    color: Colors.white,
-                                    onPressed: () {
-                                      context
-                                          .read<InstructionAndTestBloc>()
-                                          .add(
-                                            UpdateSelectedQuestionIndex(
-                                              DIRECTION.backward,
-                                              state.selectedQuestionIndex,
-                                            ),
-                                          );
-                                      _controller.animateTo(
-                                        _controller.position.minScrollExtent,
-                                        duration: const Duration(
-                                          microseconds: 1,
-                                        ),
-                                        curve: Curves.fastOutSlowIn,
-                                      );
-                                    },
-                                    icon: const Icon(
-                                      Icons.arrow_back_ios_new_rounded,
-                                    ),
-                                  ),
-                                )
-                              : const Text(""),
-                          CircleAvatar(
-                            backgroundColor: AppTheme.secondaryColor,
-                            child: IconButton(
-                              color: Colors.white,
-                              onPressed: () {
-                                context.read<InstructionAndTestBloc>().add(
-                                      UpdateSelectedQuestionIndex(
-                                        DIRECTION.forward,
-                                        state.selectedQuestionIndex,
-                                      ),
-                                    );
-                                _controller.animateTo(
-                                  _controller.position.minScrollExtent,
-                                  duration: const Duration(
-                                    microseconds: 1,
-                                  ),
-                                  curve: Curves.fastOutSlowIn,
-                                );
-                              },
-                              icon: const Icon(
-                                Icons.arrow_forward_ios_rounded,
-                              ),
-                            ),
-                          ),
-                        ],
                       ),
+                    ),
+                    Opacity(
+                      opacity:
+                          state.selectedQuestionIndex != questionList.length - 1
+                              ? 1
+                              : 0,
+                      child: CircleAvatar(
+                        backgroundColor: AppTheme.secondaryColor,
+                        child: IconButton(
+                          color: Colors.white,
+                          onPressed: () {
+                            if (state.selectedQuestionIndex !=
+                                questionList.length - 1) {
+                              _navigateToQuestions(
+                                context,
+                                DIRECTION.forward,
+                              );
+                            }
+                          },
+                          icon: const Icon(
+                            Icons.arrow_forward_ios_rounded,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               )
             ],
           );

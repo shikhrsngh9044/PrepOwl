@@ -81,8 +81,16 @@ class InstructionAndTestBloc
     );
 
     on<UpdateAnsweredOption>((event, emit) {
-      //state.instructionAndQuestionsList[0].questions[event.questionId]
-      //.options[event.selectedOptionId].isSelectedAnswer
+      var newInstructionAndQuestionsList = state.instructionAndQuestionsList;
+
+      for (var questionItem in newInstructionAndQuestionsList[0].questions) {
+        if (questionItem.id == event.questionId) {
+          questionItem.selectedOptionID = event.selectedOptionId;
+        }
+      }
+
+      emit(state.copyWith(
+          instructionAndQuestionsList: newInstructionAndQuestionsList));
     });
   }
 }

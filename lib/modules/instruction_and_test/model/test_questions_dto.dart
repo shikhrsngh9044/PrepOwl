@@ -9,25 +9,32 @@ class TestQuestionsDTO {
   final String question;
   final List<String>? images;
   final List<TestOptionsDTO> options;
+  final String answerId;
+  String? selectedOptionID;
 
   TestQuestionsDTO({
     required this.id,
     required this.question,
     this.images,
     required this.options,
+    required this.answerId,
+    this.selectedOptionID,
   });
 
-  TestQuestionsDTO copyWith({
-    String? id,
-    String? question,
-    List<String>? images,
-    List<TestOptionsDTO>? options,
-  }) {
+  TestQuestionsDTO copyWith(
+      {String? id,
+      String? question,
+      List<String>? images,
+      List<TestOptionsDTO>? options,
+      String? answerId,
+      String? selectedOptionID}) {
     return TestQuestionsDTO(
       id: id ?? this.id,
       question: question ?? this.question,
       images: images ?? this.images,
       options: options ?? this.options,
+      answerId: answerId ?? this.answerId,
+      selectedOptionID: selectedOptionID ?? this.selectedOptionID,
     );
   }
 
@@ -41,6 +48,7 @@ class TestQuestionsDTO {
             (x) => x.toMap(),
           )
           .toList(),
+      'answer_id': answerId,
     };
   }
 
@@ -62,6 +70,7 @@ class TestQuestionsDTO {
           ),
         ),
       ),
+      answerId: map['answer_id'] as String,
     );
   }
 
@@ -75,11 +84,12 @@ class TestQuestionsDTO {
         question: json['question'],
         images: json['images'],
         options: json['options'],
+        answerId: json['answer_id'],
       );
 
   @override
   String toString() {
-    return 'TestQuestionsDTO(id: $id, question: $question, images: $images, options: $options)';
+    return 'TestQuestionsDTO(id: $id, question: $question, images: $images, options: $options, answer_id: $answerId)';
   }
 
   @override
@@ -100,11 +110,18 @@ class TestQuestionsDTO {
         listEquals(
           other.options,
           options,
-        );
+        ) &&
+        other.answerId == answerId &&
+        other.selectedOptionID == selectedOptionID;
   }
 
   @override
   int get hashCode {
-    return id.hashCode ^ question.hashCode ^ images.hashCode ^ options.hashCode;
+    return id.hashCode ^
+        question.hashCode ^
+        images.hashCode ^
+        options.hashCode ^
+        answerId.hashCode ^
+        selectedOptionID.hashCode;
   }
 }

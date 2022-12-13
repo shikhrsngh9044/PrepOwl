@@ -4,14 +4,12 @@ class InstructionAndTestState {
   final bool readInstructions;
   final bool proceedToStartTest;
   final int selectedQuestionIndex;
-  final List<bool> answeredList;
   final List<TestDTO> instructionAndQuestionsList;
 
   InstructionAndTestState({
     this.readInstructions = false,
     this.proceedToStartTest = false,
     this.selectedQuestionIndex = 0,
-    this.answeredList = const [],
     this.instructionAndQuestionsList = const [],
   });
 
@@ -19,7 +17,6 @@ class InstructionAndTestState {
     bool? readInstructions,
     bool? proceedToStartTest,
     int? selectedQuestionIndex,
-    List<bool>? answeredList,
     List<TestDTO>? instructionAndQuestionsList,
   }) {
     return InstructionAndTestState(
@@ -27,7 +24,6 @@ class InstructionAndTestState {
       proceedToStartTest: proceedToStartTest ?? this.proceedToStartTest,
       selectedQuestionIndex:
           selectedQuestionIndex ?? this.selectedQuestionIndex,
-      answeredList: answeredList ?? this.answeredList,
       instructionAndQuestionsList:
           instructionAndQuestionsList ?? this.instructionAndQuestionsList,
     );
@@ -35,5 +31,5 @@ class InstructionAndTestState {
 
   @override
   String toString() =>
-      'InstructionAndTestState(readInstructions: $readInstructions, proceedToStartTest: $proceedToStartTest, selectedQuestionIndex: $selectedQuestionIndex, answeredList: $answeredList, instructionAndQuestionsList: $instructionAndQuestionsList,)';
+      'InstructionAndTestState(readInstructions: $readInstructions, proceedToStartTest: $proceedToStartTest, selectedQuestionIndex: $selectedQuestionIndex, instructionAndQuestionsList: $instructionAndQuestionsList,)';
 }
