@@ -12,7 +12,7 @@ abstract class InstructionAndTestRepository {
   );
 }
 
-class InstructionAndTestRepositotyImpl implements InstructionAndTestRepository {
+class InstructionAndTestRepositoryImpl implements InstructionAndTestRepository {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
 
   @override

@@ -60,7 +60,7 @@ class InstructionAndTestBloc
         emit,
       ) async {
         final result =
-            await InstructionAndTestRepositotyImpl().getInstructionsAndQuestion(
+            await InstructionAndTestRepositoryImpl().getInstructionsAndQuestion(
           event.testId,
         );
 
