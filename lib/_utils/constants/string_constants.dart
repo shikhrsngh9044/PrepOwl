@@ -61,6 +61,16 @@ class AppConst {
   static const profile = "Profile";
   static const appName = "PrepOwlFork";
   static const getStarted = 'Get started with these amazing exam options.';
+  static const all = 'All';
+  static const myDoubts = "My Doubts";
+  static const name = "Name";
+  static const topic = "Topic ";
+  static const time = "● 1 min ago";
+  static const loremIpsum =
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
+  static const title = "Title";
+  static const description = "Description";
+  static const add = "Add";
 }
 
 class DBConst {

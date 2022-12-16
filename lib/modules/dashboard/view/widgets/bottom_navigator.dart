@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:prepowl/_utils/constants/enums.dart';
+import 'package:prepowl/modules/dashboard/controller/dashboard_bloc.dart';
 
 import '../../../../_utils/configs/theme_config.dart';
 import '../../../../_utils/constants/string_constants.dart';
 
 class BottomNavigator extends StatelessWidget {
-  const BottomNavigator({super.key});
+  final DashboardState state;
+  const BottomNavigator({super.key, required this.state});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +31,20 @@ class BottomNavigator extends StatelessWidget {
           label: AppConst.profile,
         ),
       ],
-      currentIndex: 0,
+      currentIndex: state.bottomIndex,
+      onTap: (index) {
+        if (index == 0) {
+          context
+              .read<DashboardBloc>()
+              .add(GetBottomIndex(NavbarItem.dashboard));
+        } else if (index == 1) {
+          context.read<DashboardBloc>().add(GetBottomIndex(NavbarItem.search));
+        } else if (index == 2) {
+          context.read<DashboardBloc>().add(GetBottomIndex(NavbarItem.doubt));
+        } else if (index == 3) {
+          context.read<DashboardBloc>().add(GetBottomIndex(NavbarItem.profile));
+        }
+      },
       selectedItemColor: Colors.amber[800],
       unselectedItemColor: AppTheme.secondaryColor,
       selectedLabelStyle:

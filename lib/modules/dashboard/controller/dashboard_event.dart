@@ -16,3 +16,8 @@ class GetAllExamList extends DashboardEvent {
   int selectedIndex;
   GetAllExamList(this.selectedIndex);
 }
+
+class GetBottomIndex extends DashboardEvent {
+  NavbarItem navbarItem;
+  GetBottomIndex(this.navbarItem);
+}

@@ -6,6 +6,8 @@ class DashboardState {
   final bool isLoading;
   final String errorMessage;
   final int selectedIndex;
+  final int bottomIndex;
+  final NavbarItem navbarItem;
 
   DashboardState({
     this.examList = const [],
@@ -13,6 +15,8 @@ class DashboardState {
     this.isLoading = false,
     this.errorMessage = '',
     this.selectedIndex = -1,
+    this.bottomIndex = 0,
+    this.navbarItem = NavbarItem.dashboard,
   });
 
   DashboardState copyWith({
@@ -21,6 +25,8 @@ class DashboardState {
     bool? isLoading,
     String? errorMessage,
     int? selectedIndex,
+    int? bottomIndex,
+    NavbarItem? navbarItem,
   }) {
     return DashboardState(
       examList: examList ?? this.examList,
@@ -28,10 +34,12 @@ class DashboardState {
       isLoading: isLoading ?? this.isLoading,
       errorMessage: errorMessage ?? this.errorMessage,
       selectedIndex: selectedIndex ?? this.selectedIndex,
+      bottomIndex: bottomIndex ?? this.bottomIndex,
+      navbarItem: navbarItem ?? this.navbarItem,
     );
   }
 
   @override
   String toString() =>
-      'DashboardState(examList: $examList, examCategoryList: $examCategoryList, isLoading: $isLoading, errorMessage:$errorMessage,selectedIndex:$selectedIndex)';
+      'DashboardState(examList: $examList, examCategoryList: $examCategoryList, isLoading: $isLoading, errorMessage:$errorMessage,selectedIndex:$selectedIndex, bottomIndex:$bottomIndex, navbarItem:$navbarItem)';
 }
