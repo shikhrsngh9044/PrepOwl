@@ -21,3 +21,25 @@ class UpdateSelectedQuestionIndex extends InstructionAndTestEvent {
     this.currentIndex,
   );
 }
+
+class GetTestQuestions extends InstructionAndTestEvent {
+  String testId;
+
+  GetTestQuestions(
+    this.testId,
+  );
+}
+
+class UpdateAnsweredOption extends InstructionAndTestEvent {
+  String questionId;
+  String selectedOptionId;
+
+  UpdateAnsweredOption(
+    this.questionId,
+    this.selectedOptionId,
+  );
+}
+
+class SubmitTest extends InstructionAndTestEvent {
+  const SubmitTest();
+}

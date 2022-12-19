@@ -75,4 +75,5 @@ class DBConst {
   static const examCategoryCollectionName = "exam_category_list";
   static const examCollectionName = "exam_list";
   static const testCollectionName = "test_list";
+  static const examTestCollectionName = "exam_test";
 }

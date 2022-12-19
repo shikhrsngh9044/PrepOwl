@@ -139,9 +139,8 @@ class DashboardUI extends StatelessWidget {
                         ) {
                           return GestureDetector(
                             onTap: () {
-                              Get.toNamed(
-                                RouteNames.instructionAndTest,
-                              );
+                              Get.toNamed(RouteNames.instructionAndTest,
+                                  arguments: state.testList[index].id);
                             },
                             child: Container(
                               margin: const EdgeInsets.all(

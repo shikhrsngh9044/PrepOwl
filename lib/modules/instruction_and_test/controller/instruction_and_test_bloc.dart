@@ -1,6 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../_utils/constants/enums.dart';
+import '../model/test_dto.dart';
+import '../repo/instruction_and_test_repo.dart';
 
 part 'instruction_and_test_event.dart';
 part 'instruction_and_test_state.dart';
@@ -51,5 +53,55 @@ class InstructionAndTestBloc
         );
       },
     );
+
+    on<GetTestQuestions>(
+      (
+        event,
+        emit,
+      ) async {
+        final result =
+            await InstructionAndTestRepositoryImpl().getInstructionsAndQuestion(
+          event.testId,
+        );
+
+        final updatedState = result.fold(
+          (l) => state.copyWith(
+            instructionAndQuestionsList: [],
+          ),
+          (r) {
+            return state.copyWith(
+              instructionAndQuestionsList: r,
+            );
+          },
+        );
+        emit(
+          updatedState,
+        );
+      },
+    );
+
+    on<UpdateAnsweredOption>((event, emit) {
+      var newInstructionAndQuestionsList = state.instructionAndQuestionsList;
+
+      for (var questionItem in newInstructionAndQuestionsList[0].questions) {
+        if (questionItem.id == event.questionId) {
+          questionItem.selectedOptionID = event.selectedOptionId;
+        }
+      }
+
+      emit(state.copyWith(
+          instructionAndQuestionsList: newInstructionAndQuestionsList));
+    });
+
+    on<SubmitTest>((event, emit) {
+      int count = 0;
+      var newInstructionAndQuestionsList = state.instructionAndQuestionsList;
+      for (var questionItem in newInstructionAndQuestionsList[0].questions) {
+        if (questionItem.selectedOptionID == questionItem.answerId) {
+          count++;
+        }
+      }
+      emit(state.copyWith(correctAnswers: count));
+    });
   }
 }

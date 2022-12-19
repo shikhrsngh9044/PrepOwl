@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 
-import '../../../_utils/configs/theme_config.dart';
+import '../../../_utils/constants/routes.dart';
 import '../../../_utils/constants/string_constants.dart';
-import '../../../_utils/res/dimen.dart';
 import '../controller/instruction_and_test_bloc.dart';
 import 'widgets/instructions_view.dart';
 import 'widgets/test_view.dart';
@@ -23,7 +23,7 @@ class InstructionAndTest extends StatelessWidget {
       create: (
         context,
       ) =>
-          InstructionAndTestBloc(),
+          InstructionAndTestBloc()..add(GetTestQuestions(Get.arguments)),
       child: const InstructionAndTestUI(),
     );
   }
@@ -39,40 +39,40 @@ class InstructionAndTestUI extends StatelessWidget {
     BuildContext context,
   ) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          AppConst.instructions,
-          style: TextStyle(
-            color: Colors.white,
-          ),
-        ),
-        iconTheme: const IconThemeData(
-          color: Colors.white,
-        ),
-        backgroundColor: AppTheme.secondaryColor,
-      ),
       body: BlocConsumer<InstructionAndTestBloc, InstructionAndTestState>(
         listener: (
           context,
           state,
-        ) {},
+        ) {
+          if (state.correctAnswers != -1) {
+            var data = {
+              'answerCount': state.correctAnswers,
+              'questionsLength':
+                  state.instructionAndQuestionsList[0].questions.length,
+            };
+            Get.offAndToNamed(
+              RouteNames.testReport,
+              arguments: data,
+            );
+          }
+        },
         builder: (
           context,
           state,
         ) {
-          return Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: AppDimen.size20,
-              vertical: AppDimen.size15,
-            ),
-            child: state.proceedToStartTest
-                ? TestView(
-                    state: state,
-                  )
-                : InstructionView(
-                    state: state,
+          return state.instructionAndQuestionsList.isEmpty
+              ? const Center(
+                  child: Text(
+                    AppConst.noTestsFound,
                   ),
-          );
+                )
+              : state.proceedToStartTest
+                  ? TestView(
+                      state: state,
+                    )
+                  : InstructionView(
+                      state: state,
+                    );
         },
       ),
     );
