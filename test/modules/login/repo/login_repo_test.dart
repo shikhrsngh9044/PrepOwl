@@ -37,14 +37,8 @@ void main() {
 
       final result = await mockLoginRepo.googleLogin();
 
-      expect(
-        result,
-        isRight,
-      );
-      expect(
-        result,
-        response,
-      );
+      expect(result, isRight);
+      expect(result, response);
     });
 
     test("Google login failed", () async {
@@ -63,14 +57,8 @@ void main() {
 
       final result = await mockLoginRepo.googleLogin();
 
-      expect(
-        result,
-        isLeft,
-      );
-      expect(
-        result,
-        response,
-      );
+      expect(result, isLeft);
+      expect(result, response);
     });
   });
 }

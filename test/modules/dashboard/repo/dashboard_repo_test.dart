@@ -3,6 +3,7 @@ import 'package:dartz_test/dartz_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+
 import 'package:prepowl/_utils/entities/api_response.dart';
 import 'package:prepowl/modules/dashboard/model/test_list_dto.dart';
 import 'package:prepowl/modules/dashboard/repo/dashboard_repo.dart';
@@ -48,14 +49,8 @@ void main() {
         examCategoryId,
       );
 
-      expect(
-        result,
-        isRight,
-      );
-      expect(
-        result,
-        response,
-      );
+      expect(result, isRight);
+      expect(result, response);
     });
 
     test("Failure", () async {
@@ -81,14 +76,8 @@ void main() {
         examCategoryId,
       );
 
-      expect(
-        result,
-        isLeft,
-      );
-      expect(
-        result,
-        response,
-      );
+      expect(result, isLeft);
+      expect(result, response);
     });
   });
 
@@ -126,14 +115,8 @@ void main() {
         examCategoryDTO,
       );
 
-      expect(
-        result,
-        isRight,
-      );
-      expect(
-        result,
-        response,
-      );
+      expect(result, isRight);
+      expect(result, response);
     });
 
     test("Failure", () async {
@@ -158,14 +141,8 @@ void main() {
         examCategoryDTO,
       );
 
-      expect(
-        result,
-        isLeft,
-      );
-      expect(
-        result,
-        response,
-      );
+      expect(result, isLeft);
+      expect(result, response);
     });
   });
 }

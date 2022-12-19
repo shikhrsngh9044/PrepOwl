@@ -67,14 +67,8 @@ void main() {
         testId,
       );
 
-      expect(
-        result,
-        isRight,
-      );
-      expect(
-        result,
-        response,
-      );
+      expect(result, isRight);
+      expect(result, response);
     });
 
     test("Failure", () async {
@@ -98,14 +92,8 @@ void main() {
         testId,
       );
 
-      expect(
-        result,
-        isLeft,
-      );
-      expect(
-        result,
-        response,
-      );
+      expect(result, isLeft);
+      expect(result, response);
     });
   });
 }
