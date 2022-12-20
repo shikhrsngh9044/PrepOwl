@@ -26,3 +26,10 @@ enum AUTH_STATE {
   loggedIn,
   signedUp,
 }
+
+enum NavbarItem {
+  dashboard,
+  search,
+  doubt,
+  profile,
+}

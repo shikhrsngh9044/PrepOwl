@@ -1,6 +1,8 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
 
+import '../../../_utils/constants/enums.dart';
 import '../../onboarding/model/exam_category_dto.dart';
 import '../model/exam_list_dto.dart';
 import '../repo/dashboard_repo.dart';
@@ -64,5 +66,30 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
       );
       emit(updatedState);
     });
+
+    on<GetBottomIndex>(((event, emit) {
+      emit(state.copyWith(isLoading: true));
+      try {
+        switch (event.navbarItem) {
+          case NavbarItem.dashboard:
+            emit(state.copyWith(
+                navbarItem: NavbarItem.dashboard, bottomIndex: 0));
+            break;
+          case NavbarItem.search:
+            emit(state.copyWith(navbarItem: NavbarItem.search, bottomIndex: 1));
+            break;
+          case NavbarItem.doubt:
+            emit(state.copyWith(navbarItem: NavbarItem.doubt, bottomIndex: 2));
+            break;
+          case NavbarItem.profile:
+            emit(
+                state.copyWith(navbarItem: NavbarItem.profile, bottomIndex: 3));
+            break;
+        }
+        emit(state.copyWith(isLoading: false));
+      } catch (e) {
+        debugPrint(e.toString());
+      }
+    }));
   }
 }

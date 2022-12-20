@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:prepowl/_utils/constants/enums.dart';
+import 'package:prepowl/modules/dashboard/view/widgets/exam_list.dart';
+import 'package:prepowl/modules/doubt/view/doubt_ui.dart';
+import 'package:prepowl/modules/profile/view/profile_ui.dart';
+import 'package:prepowl/modules/search/view/search_ui.dart';
 
 import '../../../_utils/configs/theme_config.dart';
 import '../../../_utils/constants/string_constants.dart';
-import '../../../_utils/res/dimen.dart';
 import '../controller/dashboard_bloc.dart';
 import 'widgets/bottom_navigator.dart';
 import 'widgets/drawer_page.dart';
@@ -16,7 +20,8 @@ class Dashboard extends StatelessWidget {
     return BlocProvider(
       create: (context) => DashboardBloc()
         ..add(GetSelectedExamCategory())
-        ..add(GetAllExamList(0)),
+        ..add(GetAllExamList(0))
+        ..add(GetBottomIndex(NavbarItem.dashboard)),
       child: const DashboardUI(),
     );
   }
@@ -40,81 +45,25 @@ class DashboardUI extends StatelessWidget {
       ),
       body: BlocBuilder<DashboardBloc, DashboardState>(
         builder: (context, state) {
-          return ListView(
-            children: [
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: AppDimen.size10),
-                child: SizedBox(
-                  height: AppDimen.size70,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: state.examCategoryList.length,
-                    itemBuilder: (listViewContext, index) {
-                      return Padding(
-                        padding: const EdgeInsets.only(right: AppDimen.size10),
-                        child: ChoiceChip(
-                          label: Text(
-                            state.examCategoryList[index].title,
-                          ),
-                          selected: index == state.selectedIndex,
-                          selectedColor: AppTheme.secondaryColor,
-                          labelStyle: TextStyle(
-                            color: index == state.selectedIndex
-                                ? Colors.white
-                                : Colors.black,
-                          ),
-                          onSelected: (value) {
-                            if (index == 0) {
-                              context
-                                  .read<DashboardBloc>()
-                                  .add(GetAllExamList(index));
-                            } else {
-                              context.read<DashboardBloc>().add(GetExamList(
-                                  state.examCategoryList[index].id, index));
-                            }
-                          },
-                        ),
-                      );
-                    },
-                  ),
-                ),
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: AppDimen.size15),
-                child: SizedBox(
-                  child: ListView.builder(
-                    physics: const NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    itemBuilder: (context, index) {
-                      return GestureDetector(
-                        onTap: () {},
-                        child: Container(
-                          margin: const EdgeInsets.all(AppDimen.size5),
-                          padding: const EdgeInsets.all(AppDimen.size15),
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: const BorderRadius.all(
-                                Radius.circular(
-                                  AppDimen.size10,
-                                ),
-                              ),
-                              border: Border.all(color: Colors.black)),
-                          child: Text(state.examList[index].title),
-                        ),
-                      );
-                    },
-                    itemCount: state.examList.length,
-                  ),
-                ),
-              ),
-            ],
-          );
+          if (state.navbarItem == NavbarItem.dashboard) {
+            return ExamListUI(
+              state: state,
+            );
+          } else if (state.navbarItem == NavbarItem.search) {
+            return const SearchScreen();
+          } else if (state.navbarItem == NavbarItem.doubt) {
+            return const DoubtScreen();
+          } else {
+            return const ProfileScreen();
+          }
         },
       ),
       drawer: const DrawerPage(),
-      bottomNavigationBar: const BottomNavigator(),
+      bottomNavigationBar: BlocBuilder<DashboardBloc, DashboardState>(
+        builder: (context, state) {
+          return BottomNavigator(state: state);
+        },
+      ),
     );
   }
 }
