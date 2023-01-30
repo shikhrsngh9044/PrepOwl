@@ -20,7 +20,7 @@ class AlertMassages {
 }
 
 class AppConst {
-  static const appThemeName = "Welocme To PrepOwl";
+  static const appThemeName = "Welcome To PrepOwl";
   static const login = "Login";
   static const phoneNumberText = "Enter your Phone Number";
   static const verfivationCodeText =
@@ -76,4 +76,5 @@ class AppConst {
 class DBConst {
   static const examCategoryCollectionName = "exam_category_list";
   static const examCollectionName = "exam_list";
+  static const doubtCollectionName = "doubt_list";
 }
