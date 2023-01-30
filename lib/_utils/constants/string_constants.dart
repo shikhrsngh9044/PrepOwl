@@ -61,9 +61,19 @@ class AppConst {
   static const profile = "Profile";
   static const appName = "PrepOwlFork";
   static const getStarted = 'Get started with these amazing exam options.';
+  static const instructions = 'Instructions';
+  static const readAboveInstructions = 'I have read the above instructions.';
+  static const proceed = 'Proceed';
+  static const congratulations = 'Congratulations!';
+  static const betterLuckNextTime = 'Better Luck Next Time!';
+  static const yourScore = "Your score";
+  static const viewAllAnswers = "View all answers";
+  static const noTestsFound = "No test(s) found";
 }
 
 class DBConst {
   static const examCategoryCollectionName = "exam_category_list";
   static const examCollectionName = "exam_list";
+  static const testCollectionName = "test_list";
+  static const examTestCollectionName = "exam_test";
 }
