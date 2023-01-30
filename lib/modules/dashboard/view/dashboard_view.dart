@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 
 import '../../../_utils/configs/theme_config.dart';
+import '../../../_utils/constants/enums.dart';
 import '../../../_utils/constants/routes.dart';
 import '../../../_utils/constants/string_constants.dart';
 import '../../../_utils/res/dimen.dart';
@@ -22,16 +23,10 @@ class Dashboard extends StatelessWidget {
     BuildContext context,
   ) {
     return BlocProvider(
-      create: (
-        context,
-      ) =>
-          DashboardBloc()
-            ..add(
-              GetSelectedExamCategory(),
-            )
-            ..add(
-              GetAllTestList(0),
-            ),
+      create: (context) => DashboardBloc()
+        ..add(GetSelectedExamCategory())
+        ..add(GetAllTestList(0))
+        ..add(GetBottomIndex(NavbarItem.dashboard)),
       child: const DashboardUI(),
     );
   }
@@ -174,7 +169,11 @@ class DashboardUI extends StatelessWidget {
         },
       ),
       drawer: const DrawerPage(),
-      bottomNavigationBar: const BottomNavigator(),
+      bottomNavigationBar: BlocBuilder<DashboardBloc, DashboardState>(
+        builder: (context, state) {
+          return BottomNavigator(state: state);
+        },
+      ),
     );
   }
 }

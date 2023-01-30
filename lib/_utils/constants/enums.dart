@@ -31,3 +31,10 @@ enum DIRECTION {
   backward,
   forward,
 }
+
+enum NavbarItem {
+  dashboard,
+  search,
+  doubt,
+  profile,
+}

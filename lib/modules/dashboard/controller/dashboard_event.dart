@@ -23,3 +23,8 @@ class GetAllTestList extends DashboardEvent {
     this.selectedIndex,
   );
 }
+
+class GetBottomIndex extends DashboardEvent {
+  NavbarItem navbarItem;
+  GetBottomIndex(this.navbarItem);
+}
