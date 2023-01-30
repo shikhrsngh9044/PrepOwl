@@ -145,8 +145,12 @@ Future appInitializer(EnvConfig envConfig) async {
   final appDocumentDir = await getApplicationDocumentsDirectory();
   Hive.init(appDocumentDir.path);
   await Hive.initFlutter();
+
   Hive.registerAdapter(ExamCategoryDTOAdapter());
+
   final coreBox = await Hive.openBox('core');
+  Hive.openBox("api_responses");
+
   coreBox.put('firstLogin', true);
   token = coreBox.get('token', defaultValue: '') as String;
 

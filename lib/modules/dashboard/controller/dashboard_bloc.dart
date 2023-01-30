@@ -18,17 +18,15 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
           ),
         );
         //Get data from Hive
-        final box =
-            Hive.box("core").get("exam_categories") as List<ExamCategoryDTO>;
+        final box = Hive.box("api_responses");
 
-        final allBox = ExamCategoryDTO(id: "0", title: "All");
-
-        box.insert(0, allBox);
+        final List<ExamCategoryDTO> categories =
+            box.get("exam_categories") as List<ExamCategoryDTO>;
 
         emit(
           state.copyWith(
             isLoading: false,
-            examCategoryList: box,
+            examCategoryList: categories,
           ),
         );
       },

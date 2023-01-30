@@ -89,15 +89,18 @@ class _OnboardingUIState extends State<OnboardingUI> {
                     if (state.selectedOnboardingList.isNotEmpty)
                       PrimaryButton(
                         btnText: AppConst.submit,
-                        onPressed: () {
-                          final categories = List<ExamCategoryDTO>.generate(
-                              state.selectedOnboardingList.length,
-                              (index) => ExamCategoryDTO(
-                                  id: state.selectedOnboardingList[index].id,
-                                  title: state.selectedOnboardingList[index]
-                                      .title)).toList();
+                        onPressed: () async {
+                          final box = await Hive.openBox("api_responses");
 
-                          coreBox.put("exam_categories", categories);
+                          final categories = List<ExamCategoryDTO>.generate(
+                            state.selectedOnboardingList.length,
+                            (index) => ExamCategoryDTO(
+                              id: state.selectedOnboardingList[index].id,
+                              title: state.selectedOnboardingList[index].title,
+                            ),
+                          ).toList();
+
+                          box.put("exam_categories", categories);
 
                           Get.offAndToNamed(RouteNames.dashboard);
                         },
