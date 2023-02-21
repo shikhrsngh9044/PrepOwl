@@ -10,10 +10,10 @@
             "request": "launch",
             "type": "dart",
             "flutterMode": "debug",
-            "args": [
-                "--flavor",
-                "dev",
-            ]
+            // "args": [
+            //     "--flavor",
+            //     "dev",
+            // ]
         },
         {
             "name": "Staging",

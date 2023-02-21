@@ -4,126 +4,65 @@ import 'package:get/get.dart';
 
 import '../../../_utils/constants/routes.dart';
 import '../../../_utils/res/dimen.dart';
-import '../controller/login_bloc.dart';
-import 'login_screen_ui/login_top_image.dart';
-import 'login_screen_ui/mobile_login_form.dart';
-import 'otp_screen_ui/otp_form.dart';
-import 'otp_screen_ui/otp_top_image.dart';
+import '../controller/auth_bloc.dart';
 import 'social_screen_ui/socal_sign_up.dart';
+import 'widgets/login_top_image.dart';
+import 'widgets/otp_top_image.dart';
+import 'widgets/otp_ui.dart';
+import 'widgets/phone_number_ui.dart';
 
-class Login extends StatelessWidget {
-  const Login({Key? key}) : super(key: key);
+class LoginPage extends StatelessWidget {
+  const LoginPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => LoginBloc(),
-      child: const LoginPageScreen(),
+      create: (context) => AuthBloc(),
+      child: const LoginPageUI(),
     );
   }
 }
 
-class LoginPageScreen extends StatelessWidget {
-  const LoginPageScreen({Key? key}) : super(key: key);
+class LoginPageUI extends StatelessWidget {
+  const LoginPageUI({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocConsumer<LoginBloc, LoginState>(
+      body: BlocConsumer<AuthBloc, AuthState>(
         listener: (context, state) {
           if (state.isAuthenticated) {
-            var data = {
-              'name': state.userDTO?.name,
-              'email': state.userDTO?.email,
-              'uid': state.userDTO?.uid,
-              'photoUrl': state.userDTO?.photoUrl,
-            };
-            context.read<LoginBloc>().add(UpdateUserStatus(state.userDTO?.uid));
             if (state.isNewUser) {
               Get.offAndToNamed(
                 RouteNames.register,
-                arguments: data,
               );
             } else {
               Get.offAndToNamed(
-                RouteNames.onboarding,
-                arguments: data,
+                RouteNames.homePage,
               );
             }
-          } else if (state.isUnauthenticated) {
-            Get.offAndToNamed(
-              RouteNames.loginPage,
-            );
           }
         },
         builder: (context, state) {
-          if (state.isLoading) {
-            return const Center(
-              child: CircularProgressIndicator(
-                valueColor: AlwaysStoppedAnimation<Color>(
-                  Colors.red,
+          return Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              if (state.isOtpGenerated)
+                const OTPHeader()
+              else
+                const PhoneHeader(),
+              Flexible(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                  child: state.isOtpGenerated
+                      ? const OtpUI()
+                      : const PhoneNumberUI(),
                 ),
               ),
-            );
-          } else {
-            return SingleChildScrollView(
-              child: MobileSignupScreen(state: state),
-            );
-          }
+              const SocalLogin()
+            ],
+          );
         },
       ),
-    );
-  }
-}
-
-class MobileSignupScreen extends StatelessWidget {
-  const MobileSignupScreen({
-    Key? key,
-    required this.state,
-  }) : super(key: key);
-
-  final LoginState state;
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        state.isOtpGenerated
-            ? const OTPScreenTopImage()
-            : const LoginScreenTopImage(),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            const SizedBox(
-              width: AppDimen.size30,
-            ),
-            Expanded(
-              flex: 8,
-              child: state.isOtpGenerated ? OtpForm(state: state) : LoginForm(),
-            ),
-            const SizedBox(
-              width: AppDimen.size30,
-            ),
-          ],
-        ),
-        // const SizedBox(
-        //   height: AppDimen.size30,
-        // ),
-        // state.isOtpGenerated
-        //     ? AlreadyHaveAnAccountCheck(
-        //         press: () {
-        //           Navigator.push(
-        //             context,
-        //             MaterialPageRoute(
-        //               builder: (context) {
-        //                 return const CompleteProfileScreen();
-        //               },
-        //             ),
-        //           );
-        //         },
-        //       )
-        //     :
-        const SocalLogin()
-      ],
     );
   }
 }

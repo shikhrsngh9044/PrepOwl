@@ -5,8 +5,8 @@ import '../../../../_utils/constants/asset_constants.dart';
 import '../../../../_utils/constants/string_constants.dart';
 import '../../../../_utils/res/dimen.dart';
 
-class LoginScreenTopImage extends StatelessWidget {
-  const LoginScreenTopImage({
+class PhoneHeader extends StatelessWidget {
+  const PhoneHeader({
     Key? key,
   }) : super(key: key);
 
@@ -15,6 +15,7 @@ class LoginScreenTopImage extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.fromLTRB(3, 25, 6, 8),
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
           Row(
             children: [
@@ -29,7 +30,9 @@ class LoginScreenTopImage extends StatelessWidget {
           const Text(
             AppConst.phoneNumberText,
             style: TextStyle(
-                fontSize: AppDimen.size20, fontWeight: FontWeight.bold),
+              fontSize: AppDimen.size20,
+              fontWeight: FontWeight.bold,
+            ),
           ),
           const SizedBox(height: defaultPadding),
           const Text(

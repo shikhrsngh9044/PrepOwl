@@ -90,6 +90,16 @@ extension WidgetExtensionsX on Widget {
     );
   }
 
+  Widget addSymmetricPadding({double? vertical, double? horizontal}) {
+    return Padding(
+      padding: EdgeInsets.symmetric(
+        vertical: vertical ?? 0.0,
+        horizontal: horizontal ?? 0.0,
+      ),
+      child: this,
+    );
+  }
+
   Widget addMargin({
     double left = 0.0,
     double right = 0.0,

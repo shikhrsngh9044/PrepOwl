@@ -3,6 +3,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:sizer/sizer.dart';
 
 final appThemeData = {
   'light': AppTheme.lightTheme,
@@ -87,6 +88,7 @@ class AppTheme {
   static final ThemeData lightTheme = ThemeData(
     scaffoldBackgroundColor: Colors.white,
     brightness: Brightness.light,
+    typography: Typography.material2021(colorScheme: const ColorScheme.light()),
     textTheme: lightTextTheme,
     primaryColor: primaryColor,
     primaryColorLight: primaryColor,
@@ -108,6 +110,19 @@ class AppTheme {
       systemOverlayStyle: SystemUiOverlayStyle.light,
       backgroundColor: primaryColor,
     ),
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ButtonStyle(
+        minimumSize: const Size(250.0, 50.0).wrapMatProp(),
+        padding: EdgeInsets.symmetric(
+          vertical: 1.5.h,
+          horizontal: 20.w,
+        ).wrapMatProp(),
+        backgroundColor:
+            primaryColorLight.wrapMatButtonColor(disabledColor: grey3),
+        foregroundColor: whiteColor.wrapMatButtonColor(disabledColor: black),
+        shape: const StadiumBorder().wrapMatProp(),
+      ),
+    ),
     textButtonTheme: TextButtonThemeData(
       style: ButtonStyle(
         minimumSize: const Size(250.0, 50.0).wrapMatProp(),
@@ -119,8 +134,12 @@ class AppTheme {
         ).wrapMatProp(),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(60.0))
             .wrapMatProp(),
-        foregroundColor: black.wrapMatProp(),
-        backgroundColor: secondaryColor.wrapMatProp(),
+        foregroundColor: black.wrapMatButtonColor(
+          disabledColor: AppTheme.grey1,
+        ),
+        backgroundColor: primaryColorLight.wrapMatButtonColor(
+          disabledColor: AppTheme.grey1,
+        ),
         overlayColor: Colors.black12.wrapMatProp(),
       ),
     ),
@@ -150,6 +169,7 @@ class AppTheme {
   static final ThemeData darkTheme = ThemeData(
     scaffoldBackgroundColor: Colors.black,
     brightness: Brightness.dark,
+    typography: Typography.material2021(colorScheme: const ColorScheme.dark()),
     textTheme: darkTextTheme,
     primaryColor: primaryColor,
     primaryColorLight: primaryColor,
@@ -173,88 +193,152 @@ class AppTheme {
     ),
     textButtonTheme: TextButtonThemeData(
       style: ButtonStyle(
-        foregroundColor:
-            MaterialStateProperty.resolveWith((states) => secondaryColor),
-        backgroundColor:
-            MaterialStateProperty.resolveWith((states) => secondaryColor),
+        foregroundColor: secondaryColor.wrapMatProp(),
+        backgroundColor: secondaryColor.wrapMatProp(),
       ),
     ),
   );
 
   static const TextTheme lightTextTheme = TextTheme(
-    headline1: _headline1,
-    headline2: _headline2,
-    headline3: _headline3,
-    subtitle1: _subtitle1,
-    subtitle2: _subtitle2,
-    bodyText1: _bodyText1,
-    bodyText2: _bodyText2,
-    caption: _caption,
-    button: _buttonText,
+    displayLarge: _displayLarge,
+    displayMedium: _displayMedium,
+    displaySmall: _displaySmall,
+    headlineLarge: _headlineLarge,
+    headlineMedium: _headlineMedium,
+    headlineSmall: _headlineSmall,
+    titleLarge: _titleLarge,
+    titleMedium: _titleMedium,
+    titleSmall: _titleSmall,
+    labelLarge: _labelLarge,
+    labelMedium: _labelMedium,
+    labelSmall: _labelSmall,
+    bodyLarge: _bodyLarge,
+    bodyMedium: _bodyMedium,
+    bodySmall: _bodySmall,
   );
 
   static const TextTheme darkTextTheme = TextTheme(
-    headline1: _headline1,
-    headline2: _headline2,
-    headline3: _headline3,
-    subtitle1: _subtitle1,
-    subtitle2: _subtitle2,
-    bodyText1: _bodyText1,
-    bodyText2: _bodyText2,
-    caption: _caption,
-    button: _buttonText,
+    displayLarge: _displayLarge,
+    displayMedium: _displayMedium,
+    displaySmall: _displaySmall,
+    headlineLarge: _headlineLarge,
+    headlineMedium: _headlineMedium,
+    headlineSmall: _headlineSmall,
+    titleLarge: _titleLarge,
+    titleMedium: _titleMedium,
+    titleSmall: _titleSmall,
+    labelLarge: _labelLarge,
+    labelMedium: _labelMedium,
+    labelSmall: _labelSmall,
+    bodyLarge: _bodyLarge,
+    bodyMedium: _bodyMedium,
+    bodySmall: _bodySmall,
   );
 
-  static const TextStyle _headline1 = TextStyle(
+  static const TextStyle _displayLarge = TextStyle(
+    color: black,
+    fontSize: 57.0,
+    // height: 64.0,
+    fontWeight: FontWeight.w400,
+  );
+
+  static const TextStyle _displayMedium = TextStyle(
+    color: black,
+    fontSize: 45.0,
+    // height: 53.0,
+    fontWeight: FontWeight.w400,
+  );
+
+  static const TextStyle _displaySmall = TextStyle(
     color: black,
     fontSize: 36.0,
-    letterSpacing: 0,
+    // height: 44.0,
     fontWeight: FontWeight.w400,
   );
 
-  static const TextStyle _headline2 = TextStyle(
+  static const TextStyle _headlineLarge = TextStyle(
     color: black,
-    fontSize: 30.0,
+    fontSize: 32.0,
+    // height: 40.0,
     fontWeight: FontWeight.w400,
   );
 
-  static const TextStyle _headline3 = TextStyle(
+  static const TextStyle _headlineMedium = TextStyle(
     color: black,
-    fontSize: 23.0,
+    fontSize: 28.0,
+    // height: 36.0,
     fontWeight: FontWeight.w400,
   );
 
-  static const TextStyle _subtitle1 = TextStyle(
+  static const TextStyle _headlineSmall = TextStyle(
     color: black,
-    fontSize: 21.0,
+    fontSize: 24.0,
+    // height: 32.0,
     fontWeight: FontWeight.w400,
   );
 
-  static const TextStyle _subtitle2 = TextStyle(
+  static const TextStyle _titleLarge = TextStyle(
     color: black,
+    // height: 28.0,
+    fontSize: 22.0,
+    fontWeight: FontWeight.w400,
+  );
+
+  static const TextStyle _titleMedium = TextStyle(
+    color: black,
+    // height: 24.0,
     fontSize: 16.0,
     fontWeight: FontWeight.w400,
   );
 
-  static const TextStyle _bodyText1 = TextStyle(
+  static const TextStyle _titleSmall = TextStyle(
     color: black,
-    fontSize: 15.0,
-    fontWeight: FontWeight.w400,
-  );
-
-  static const TextStyle _bodyText2 = TextStyle(
-    color: black,
-    fontSize: 15.0,
-    fontWeight: FontWeight.w400,
-  );
-
-  static const TextStyle _caption = TextStyle(
-    color: black,
+    // height: 20.0,
     fontSize: 14.0,
     fontWeight: FontWeight.w400,
   );
 
-  static const TextStyle _buttonText = _bodyText1;
+  static const TextStyle _labelLarge = TextStyle(
+    color: black,
+    // height: 20.0,
+    fontSize: 14.0,
+    fontWeight: FontWeight.w400,
+  );
+  static const TextStyle _labelMedium = TextStyle(
+    color: black,
+    // height: 16.0,
+    fontSize: 12.0,
+    fontWeight: FontWeight.w400,
+  );
+  static const TextStyle _labelSmall = TextStyle(
+    color: black,
+    // height: 16.0,
+    fontSize: 11.0,
+    fontWeight: FontWeight.w400,
+  );
+
+  static const TextStyle _bodyLarge = TextStyle(
+    color: black,
+    // height: 24.sp,
+    fontSize: 16.0,
+    fontWeight: FontWeight.w400,
+  );
+
+  static const TextStyle _bodyMedium = TextStyle(
+    color: black,
+    // height: 20.0,
+    fontSize: 14.0,
+    fontWeight: FontWeight.w400,
+  );
+
+  static const TextStyle _bodySmall = TextStyle(
+    color: black,
+    // height: 16.0,
+    fontSize: 12.0,
+    fontWeight: FontWeight.w400,
+  );
+
+  static const TextStyle _buttonText = _bodyMedium;
 
   static const TextStyle iosAlert = TextStyle(
     color: black,
@@ -266,6 +350,20 @@ class AppTheme {
 extension MaterialPropX<T> on T {
   MaterialStateProperty<T> wrapMatProp() =>
       MaterialStateProperty.resolveWith<T>((states) => this);
+}
+
+extension MaterialColorPropX<Color> on Color {
+  MaterialStateProperty<Color> wrapMatButtonColor(
+          {required Color disabledColor}) =>
+      MaterialStateProperty.resolveWith<Color>(
+        (states) {
+          if (states.contains(MaterialState.disabled)) {
+            return disabledColor;
+          } else {
+            return this;
+          }
+        },
+      );
 }
 
 extension TextStyleX on TextStyle {

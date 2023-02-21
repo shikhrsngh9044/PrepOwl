@@ -13,11 +13,11 @@ typedef APIResponse<T> = Either<Failure, T>;
 // }
 
 class Failure {
-  final int code;
+  final int? code;
   final Object response;
 
   Failure({
-    required this.code,
+    this.code,
     required this.response,
   });
 }

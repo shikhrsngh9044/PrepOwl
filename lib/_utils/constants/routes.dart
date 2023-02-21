@@ -1,6 +1,6 @@
 import 'package:get/get_navigation/get_navigation.dart';
-import 'package:prepowl/modules/doubt/view/widget/doubt_detail.dart';
-import 'package:prepowl/modules/doubt/view/widget/edit_doubt.dart';
+import '../../modules/doubt/view/widget/doubt_detail.dart';
+import '../../modules/doubt/view/widget/edit_doubt.dart';
 
 import '../../modules/dashboard/view/dashboard_view.dart';
 import '../../modules/instruction_and_test/view/instruction_and_test_view.dart';
@@ -13,6 +13,7 @@ import '../../modules/test_report/view/test_report_view.dart';
 import '../../modules/welcome/welcome.dart';
 
 class RouteNames {
+  static const String welcomePage = "/welcome";
   static const String loginPage = "/login";
   static const String signupPage = "/signup";
   static const String mainHome = "/main_home";
@@ -30,8 +31,12 @@ class RouteNames {
 
 final publicPages = [
   GetPage(name: '/', page: () => const Welcome()),
-  GetPage(name: RouteNames.loginPage, page: () => const Login()),
+  GetPage(name: RouteNames.welcomePage, page: () => const Welcome()),
+  GetPage(name: RouteNames.loginPage, page: () => const LoginPage()),
   GetPage(name: RouteNames.register, page: () => const RegisterScreen()),
+];
+
+final authorizedPages = [
   GetPage(name: RouteNames.onboarding, page: () => const Onboarding()),
   GetPage(name: RouteNames.dashboard, page: () => const Dashboard()),
   GetPage(
@@ -46,8 +51,4 @@ final publicPages = [
   GetPage(name: RouteNames.addmydoubt, page: () => const AddMyDoubt()),
   GetPage(name: RouteNames.editDoubt, page: () => const EditDoubt()),
   GetPage(name: RouteNames.doubtPage, page: () => const DoubtScreen()),
-];
-
-final authorizedPages = [
-  GetPage(name: RouteNames.homePage, page: () => const Welcome()),
 ];

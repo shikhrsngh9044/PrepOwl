@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>701131617654-rtvh5gfh9n6mptmpgkfv4hvglknofsr2.apps.googleusercontent.com</string>
+	<string>965134533152-135gdgd3ucj6auo3tisn5jqjc4cqd1io.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.701131617654-rtvh5gfh9n6mptmpgkfv4hvglknofsr2</string>
+	<string>com.googleusercontent.apps.965134533152-135gdgd3ucj6auo3tisn5jqjc4cqd1io</string>
 	<key>API_KEY</key>
-	<string>AIzaSyBGv6HkCki1YhOJPXEQSV7OYbh2Gz_Ioos</string>
+	<string>AIzaSyAkdaT4ynChni3E2kY0yzeRJP8qs16tHhQ</string>
 	<key>GCM_SENDER_ID</key>
-	<string>701131617654</string>
+	<string>965134533152</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.shikhar.prepowl</string>
+	<string>com.shikhar.prepowl.dev</string>
 	<key>PROJECT_ID</key>
-	<string>prepowl-dev</string>
+	<string>prepowl-dev-1fc4d</string>
 	<key>STORAGE_BUCKET</key>
-	<string>prepowl-dev.appspot.com</string>
+	<string>prepowl-dev-1fc4d.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:701131617654:ios:de84b6ea47acd08818b657</string>
+	<string>1:965134533152:ios:41fa151edf74e18f4d3245</string>
 </dict>
 </plist>

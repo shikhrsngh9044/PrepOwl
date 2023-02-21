@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:another_flushbar/flushbar.dart';
 import 'package:device_info_plus/device_info_plus.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -112,16 +113,11 @@ class _MyAppState extends State<MyApp> {
           Hive.box('core').listenable(keys: ['theme', 'token', 'current_user']),
       builder: (context, Box coreBox, widget) {
         final themeValue = coreBox.get('theme', defaultValue: 'light');
-        final currentUser =
-            coreBox.get('current_user', defaultValue: {}) as Map;
 
-        token = coreBox.get('token', defaultValue: '') as String;
-
-        final authenticated = token.isNotEmpty && currentUser.isEmpty;
+        final authenticated = FirebaseAuth.instance.currentUser != null;
 
         return Sizer(
-          builder: (BuildContext context, Orientation orientation,
-              DeviceType deviceType) {
+          builder: (context, orientation, deviceType) {
             return GetMaterialApp(
               navigatorKey: mainNavigatorKey,
               supportedLocales: const [Locale("en", "IN")],
@@ -132,7 +128,7 @@ class _MyAppState extends State<MyApp> {
               navigatorObservers: [SentryNavigatorObserver()],
               getPages: authenticated ? authorizedPages : publicPages,
               initialRoute:
-                  authenticated ? RouteNames.homePage : RouteNames.signupPage,
+                  authenticated ? RouteNames.dashboard : RouteNames.welcomePage,
             );
           },
         );

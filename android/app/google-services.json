@@ -1,37 +1,37 @@
 {
   "project_info": {
-    "project_number": "701131617654",
-    "project_id": "prepowl-dev",
-    "storage_bucket": "prepowl-dev.appspot.com"
+    "project_number": "965134533152",
+    "project_id": "prepowl-dev-1fc4d",
+    "storage_bucket": "prepowl-dev-1fc4d.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:701131617654:android:8161f46ae7a672ab18b657",
+        "mobilesdk_app_id": "1:965134533152:android:0a1d6304922a5f024d3245",
         "android_client_info": {
           "package_name": "com.shikhar.prepowl.dev"
         }
       },
       "oauth_client": [
         {
-          "client_id": "701131617654-91he5nbaummgpuu6qkjkcuvdg07g3atl.apps.googleusercontent.com",
+          "client_id": "965134533152-kvmjnedq6c6r19p6r75t6llh2i3daoac.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAgftcAPxfzfZ1-CTg9zpDv62m9bBa6ARU"
+          "current_key": "AIzaSyBZMLC0bI52m32oN3FC_YXQlaJbisxwWQ0"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "701131617654-91he5nbaummgpuu6qkjkcuvdg07g3atl.apps.googleusercontent.com",
+              "client_id": "965134533152-8bksib631kcbo5gc07abjiief7n2uh9o.apps.googleusercontent.com",
               "client_type": 3
             },
             {
-              "client_id": "701131617654-p7m2v05iuk3g9biqebsdn9clvtqlrbn4.apps.googleusercontent.com",
+              "client_id": "965134533152-135gdgd3ucj6auo3tisn5jqjc4cqd1io.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
                 "bundle_id": "com.shikhar.prepowl.dev"

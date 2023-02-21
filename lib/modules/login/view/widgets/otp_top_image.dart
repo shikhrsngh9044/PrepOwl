@@ -5,17 +5,15 @@ import '../../../../_utils/constants/asset_constants.dart';
 import '../../../../_utils/constants/string_constants.dart';
 import '../../../../_utils/res/dimen.dart';
 
-// ignore: must_be_immutable
-class OTPScreenTopImage extends StatelessWidget {
-  const OTPScreenTopImage({
-    Key? key,
-  }) : super(key: key);
+class OTPHeader extends StatelessWidget {
+  const OTPHeader({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 30),
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
           Row(
             children: [
